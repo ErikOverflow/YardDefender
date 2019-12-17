@@ -1,38 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
-    RigidBody2D rb2d = null;
-    int fingerId;
-    bool active = false;
+    Rigidbody2D rb2d = null;
+    [Header("Finger to listen to")]
+#pragma warning disable 414
+    [SerializeField]
+    int touchNum = 1;
+
+    Camera mainCamera = null;
+    Vector3 moveDir = Vector3.zero;
     // Start is called before the first frame update
     void Awake()
     {
-        rb2d = GetComponent<RigidBody2D>();
-    }
+        rb2d = GetComponent<Rigidbody2D>();
+        mainCamera = Camera.main;
 #if UNITY_IOS || UNITY_ANDROID
-    void Update()
+        TouchManager.TouchInput += HandleTouch;
+#endif
+    }
+
+#if UNITY_IOS || UNITY_ANDROID
+    void HandleTouch(int fingerNum, Touch touch)
     {
-        foreach(Touch touch in Input.touches)
+        if(touchNum == fingerNum)
         {
-            if (touch.phase == TouchPhase.Began)
+            Vector3 tapPosition = mainCamera.ScreenToWorldPoint(touch.position);
+            moveDir = (tapPosition - transform.position).normalized;
+            if(touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended)
             {
-                // Construct a ray from the current touch coordinates
-                Ray ray = __Camera__.main.ScreenPointToRay(touch.position);
-                if (Physics.Raycast(ray))
-                {
-                    // Create a particle if hit
-                    Instantiate(particle, transform.position, transform.rotation);
-                }
+                moveDir = Vector3.zero;
             }
         }
     }
-#else
+#endif
+
+#if !UNITY_IOS && !UNITY_ANDROID
     void Update()
     {
-        
+        moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 #endif
+
+    private void FixedUpdate()
+    {
+        rb2d.velocity = moveDir;
+    }
 }

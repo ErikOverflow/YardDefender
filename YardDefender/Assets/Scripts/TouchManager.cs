@@ -1,12 +1,10 @@
-#if UNITY_IOS || UNITY_ANDROID
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TouchManager : MonoBehaviour
 {
-    RigidBody2D rb2d = null;
-    
+#if UNITY_IOS || UNITY_ANDROID
     //Finger ID to finger number (tracks current finger and when it was placed)
     Dictionary<int, int> activeTouches = new Dictionary<int, int>();
     
@@ -34,20 +32,20 @@ public class TouchManager : MonoBehaviour
                     }
                 }
             }
-            
             //Broadcast touch input to all listeners
-            TouchInput(activeTouches[touch.fingerId]);
+            TouchInput(activeTouches[touch.fingerId], touch);
             
             //Remove from managed finger information
             if(touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
-                touchNums.Remove(activeFingers[touch.fingerId]);
+                touchNums.Remove(activeTouches[touch.fingerId]);
                 activeTouches.Remove(touch.fingerId);
             }
         }
     }
+#endif
 }
 
-public delegate void TouchInputHandler(int fingerNum);
+public delegate void TouchInputHandler(int fingerNum, Touch touch);
 //Something that wants to subscribe to this would use TouchManger.instance.TouchInput += MethodToProcess; MethodToProcess should take in 1 parameter for finger number
-#endif
+
