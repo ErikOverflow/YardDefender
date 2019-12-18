@@ -26,14 +26,13 @@ public class PlayerMovementController : MonoBehaviour
 #if UNITY_IOS || UNITY_ANDROID
     void HandleTouch(int fingerNum, Touch touch)
     {
-        if(touchNum == fingerNum)
+        if(touchNum != fingerNum)
+            return;
+        Vector3 tapPosition = mainCamera.ScreenToWorldPoint(touch.position);
+        moveDir = (tapPosition - transform.position).normalized;
+        if(touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended)
         {
-            Vector3 tapPosition = mainCamera.ScreenToWorldPoint(touch.position);
-            moveDir = (tapPosition - transform.position).normalized;
-            if(touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended)
-            {
-                moveDir = Vector3.zero;
-            }
+            moveDir = Vector3.zero;
         }
     }
 #endif
@@ -49,4 +48,11 @@ public class PlayerMovementController : MonoBehaviour
     {
         rb2d.velocity = moveDir;
     }
+
+#if UNITY_IOS || UNITY_ANDROID
+    void OnDestroy()
+    {
+        TouchManager.TouchInput -= HandleTouch;
+    }
+#endif
 }
