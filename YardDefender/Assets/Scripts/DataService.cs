@@ -41,6 +41,7 @@ public class DataService : MonoBehaviour
     {
         //Create all relavant tables if they don't exist yet
         _connection.CreateTable<SaveData>();
+        _connection.CreateTable<PlayerData>();
     }
 
     public IEnumerable<SaveData> GetGameDatas()
@@ -51,6 +52,22 @@ public class DataService : MonoBehaviour
     public void SaveGameData(SaveData gameData)
     {
         _connection.Insert(gameData);
+    }
+
+    public void SavePlayerData(PlayerData playerData)
+    {
+        _connection.Insert(playerData);
+    }
+
+    public PlayerData GetPlayerData(int gameId)
+    {
+        PlayerData pd = _connection.Table<PlayerData>().Where(cd => cd.GameId == gameId).FirstOrDefault();
+        if (pd == null)
+        {
+            pd = new PlayerData() { GameId = gameId };
+            SavePlayerData(pd);
+        }
+        return pd;
     }
 
     public SaveData GetGameData()

@@ -9,8 +9,6 @@ public class SelectGameController : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI saveName = null;
     [SerializeField]
-    TextMeshProUGUI level = null;
-    [SerializeField]
     TextMeshProUGUI gold = null;
     [SerializeField]
     Object gameScene = null;
@@ -21,7 +19,6 @@ public class SelectGameController : MonoBehaviour
     {
         gameData = _gameData;
         saveName.text = gameData.Name;
-        level.text = gameData.Level.ToString();
         gold.text = gameData.Gold.ToString();
     }
 

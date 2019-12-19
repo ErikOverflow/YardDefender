@@ -5,13 +5,14 @@ using UnityEngine;
 public class ActiveGame : MonoBehaviour
 {
     public static ActiveGame instance;
-    public SaveData gameData;
+    public SaveData saveData;
+    public PlayerData playerData;
 
     private void Awake()
     {
         if(instance != null)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         else
         {
@@ -20,8 +21,9 @@ public class ActiveGame : MonoBehaviour
         }
     }
 
-    public void LoadGame(SaveData _gameData)
+    public void LoadGame(SaveData _saveData)
     {
-        gameData = _gameData;
+        saveData = _saveData;
+        playerData = DataService.instance.GetPlayerData(saveData.Id);
     }
 }

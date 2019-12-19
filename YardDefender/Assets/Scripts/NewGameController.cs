@@ -25,8 +25,6 @@ public class NewGameController : MonoBehaviour
         SaveData newGameData = new SaveData
         {
             Name = nameField.text,
-            Level = 1,
-            Experience = 0,
             Gold = 100,
             NewGamePlus = ngPlus.isOn
         };

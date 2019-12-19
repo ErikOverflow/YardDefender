@@ -5,18 +5,15 @@ using UnityEngine;
 public class Bark : MonoBehaviour
 {
     int damage = 1;
-    float barkStartingSize = 0.25f;
     float barkFinalSize = 3f;
-    float barkTime = 1f;
+    private const float BarkTime = 0.2f;
     Vector3 barkPos = Vector3.zero;
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
-    public void Initialize(int _damage, float _barkStartingSize, float _barkFinalSize, float _barkTime, Vector3 _barkPos)
+    public void Initialize(int _damage, float _barkFinalSize, Vector3 _barkPos)
     {
         damage = _damage;
-        barkStartingSize = _barkStartingSize;
         barkFinalSize = _barkFinalSize;
-        barkTime = _barkTime;
         barkPos = _barkPos;
     }
 
@@ -30,12 +27,14 @@ public class Bark : MonoBehaviour
     IEnumerator Barking()
     {
         float time = 0f;
-        transform.localScale = Vector3.one * barkStartingSize;
+        transform.localScale = Vector3.zero;
         yield return waitForFixedUpdate;
-        while (time < barkTime)
+        while (time < BarkTime)
         {
             time += Time.fixedDeltaTime;
-            transform.localScale = Vector3.one * (barkStartingSize + time * (barkFinalSize - barkStartingSize) / barkTime);
+            if (time > BarkTime)
+                time = BarkTime;
+            transform.localScale = Vector3.one * (time * (barkFinalSize) / BarkTime);
             yield return waitForFixedUpdate;
         }
         transform.gameObject.SetActive(false);

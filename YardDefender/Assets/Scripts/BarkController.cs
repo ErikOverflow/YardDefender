@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BarkController : MonoBehaviour
 {
+    private const float DefaultAttackSpeed = 0.5f; //Number of attacks per second
+    private const float DefaultBarkSize = 2f;
+    private const float BarkSizeGrowth = 1.1f; //Percentage increase in size per level
+
 #pragma warning disable 414
     [SerializeField]
     int touchNum = 2;
-
-    [SerializeField]
-    PlayerStats playerStats = null;
 
     [SerializeField]
     GameObject barkPrefab = null;
@@ -48,9 +49,9 @@ public class BarkController : MonoBehaviour
         active = true;
         GameObject barkObj = ObjectPooler.instance.GetPooledObject(barkPrefab);
         Bark bark = barkObj.GetComponent<Bark>();
-        bark.Initialize(playerStats.Damage, playerStats.BarkStartingSize, playerStats.BarkSize, playerStats.BarkTime, transform.position);
+        bark.Initialize(CalculateBarkDamage(), CalculateBarkSize(), transform.position);
         bark.Activate();
-        yield return new WaitForSeconds(playerStats.BarkDelay);
+        yield return new WaitForSeconds(CalculateBarkDelay());
         active = false;
     }
 
@@ -60,4 +61,19 @@ public class BarkController : MonoBehaviour
         TouchManager.TouchInput -= HandleTouch;
     }
 #endif
+
+    float CalculateBarkDelay()
+    {
+        return 1f / (DefaultAttackSpeed * ActiveGame.instance.playerData.SpeedLevel);
+    }
+
+    int CalculateBarkDamage()
+    {
+        return ActiveGame.instance.playerData.DamageLevel;
+    }
+
+    float CalculateBarkSize()
+    {
+        return DefaultBarkSize * Mathf.Pow(BarkSizeGrowth, ActiveGame.instance.playerData.Level - 1);
+    }
 }
