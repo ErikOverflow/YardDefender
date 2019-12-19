@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class HealthController : MonoBehaviour
     int health = 10;
     bool alive = true;
 
+    public Action OnDeath;
+
     public void TakeDamage(int damage)
     {
         if (!alive)
@@ -16,6 +19,7 @@ public class HealthController : MonoBehaviour
         if(health <= 0)
         {
             health = 0;
+            OnDeath?.Invoke();
             alive = false;
         }
     }
