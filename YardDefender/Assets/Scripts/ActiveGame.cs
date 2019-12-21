@@ -23,6 +23,11 @@ public class ActiveGame : MonoBehaviour
         }
     }
 
+    public void IncreaseExperience(int experience)
+    {
+        playerData.Experience += experience;
+    }
+
     public void LoadGame(SaveData _saveData)
     {
         saveData = _saveData;

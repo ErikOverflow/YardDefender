@@ -11,6 +11,12 @@ public class HealthController : MonoBehaviour
 
     public Action OnDeath;
 
+    private void OnEnable()
+    {
+        MobStats mobStats = GetComponent<MobStats>();
+        health = mobStats.BaseHealth;
+    }
+
     public void TakeDamage(int damage)
     {
         if (!alive)
