@@ -18,7 +18,7 @@ public class LoadGameController : MonoBehaviour
         {
             Destroy(t.gameObject);
         }
-        IEnumerable<SaveData> gameDatas = DataService.instance.GetGameDatas();
+        IEnumerable<SaveData> gameDatas = DataService.instance.ReadSaveDatas();
         foreach(SaveData gameData in gameDatas)
         {
             GameObject gObj = Instantiate(saveSlotPrefab, saveSlotLayoutGroup);

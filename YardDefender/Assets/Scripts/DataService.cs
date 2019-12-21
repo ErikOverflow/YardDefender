@@ -44,38 +44,38 @@ public class DataService : MonoBehaviour
         _connection.CreateTable<PlayerData>();
     }
 
-    public IEnumerable<SaveData> GetGameDatas()
+    public IEnumerable<SaveData> ReadSaveDatas()
     {
         return _connection.Table<SaveData>();
     }
 
-    public void SaveGameData(SaveData gameData)
+    public void WriteSaveData(SaveData saveData)
     {
-        _connection.Insert(gameData);
+        _connection.Insert(saveData);
     }
 
-    public void SavePlayerData(PlayerData playerData)
+    public void WritePlayerData(PlayerData playerData)
     {
         _connection.Insert(playerData);
     }
 
-    public PlayerData GetPlayerData(int gameId)
+    public PlayerData ReadPlayerData(int gameId)
     {
         PlayerData pd = _connection.Table<PlayerData>().Where(cd => cd.GameId == gameId).FirstOrDefault();
         if (pd == null)
         {
             pd = new PlayerData() { GameId = gameId };
-            SavePlayerData(pd);
+            WritePlayerData(pd);
         }
         return pd;
     }
 
-    public SaveData GetGameData()
+    public SaveData ReadSaveData()
     {
         return _connection.Table<SaveData>().FirstOrDefault();
     }
 
-    public SaveData GetGameData(int id)
+    public SaveData ReadGameData(int id)
     {
         return _connection.Table<SaveData>().Where(gd => gd.Id == id).FirstOrDefault();
     }

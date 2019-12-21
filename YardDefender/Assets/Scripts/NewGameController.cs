@@ -28,7 +28,7 @@ public class NewGameController : MonoBehaviour
             Gold = 100,
             NewGamePlus = ngPlus.isOn
         };
-        DataService.instance.SaveGameData(newGameData);
+        DataService.instance.WriteSaveData(newGameData);
         //Load newGameData here
         SceneManager.LoadSceneAsync(gameScene.name);
     }

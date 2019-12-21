@@ -8,6 +8,8 @@ public class ActiveGame : MonoBehaviour
     public SaveData saveData;
     public PlayerData playerData;
 
+    DataService dataService= DataService.instance;
+
     private void Awake()
     {
         if(instance != null)
@@ -24,6 +26,12 @@ public class ActiveGame : MonoBehaviour
     public void LoadGame(SaveData _saveData)
     {
         saveData = _saveData;
-        playerData = DataService.instance.GetPlayerData(saveData.Id);
+        playerData = dataService.ReadPlayerData(saveData.Id);
+    }
+
+    public void SaveGame()
+    {
+        dataService.WriteSaveData(saveData);
+        dataService.WritePlayerData(playerData);
     }
 }

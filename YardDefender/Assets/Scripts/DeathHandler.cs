@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class DeathHandler : MonoBehaviour
 {
-    HealthController hc = null;
+    HealthController healthController = null;
+    MobStats mobStats = null;
     //Have an EnemyDetail script that has loot table and exp amount
 
     void Awake()
     {
-        hc = GetComponent<HealthController>();
-        hc.OnDeath += HandleDeath;
+        healthController = GetComponent<HealthController>();
+        mobStats = GetComponent<MobStats>();
+        healthController.OnDeath += HandleDeath;
     }
 
     void HandleDeath()
     {
         Debug.Log("Kaput! Enemy died.");
+    }
+
+    void OnDestroy()
+    {
+        healthController.OnDeath -= HandleDeath;
     }
 }
