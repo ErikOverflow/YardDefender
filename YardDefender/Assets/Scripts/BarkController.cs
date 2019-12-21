@@ -15,7 +15,6 @@ public class BarkController : MonoBehaviour
     [SerializeField]
     GameObject barkPrefab = null;
 
-    ActiveGame activeGame = ActiveGame.instance;
     bool active = false;
 
     // Start is called before the first frame update
@@ -65,16 +64,16 @@ public class BarkController : MonoBehaviour
 
     float CalculateBarkDelay()
     {
-        return 1f / (DefaultAttackSpeed * activeGame.playerData.SpeedLevel);
+        return 1f / (DefaultAttackSpeed * ActiveGame.instance.playerData.SpeedLevel);
     }
 
     int CalculateBarkDamage()
     {
-        return activeGame.playerData.DamageLevel;
+        return ActiveGame.instance.playerData.DamageLevel;
     }
 
     float CalculateBarkSize()
     {
-        return DefaultBarkSize * Mathf.Pow(BarkSizeGrowth, activeGame.playerData.Level - 1);
+        return DefaultBarkSize * Mathf.Pow(BarkSizeGrowth, ActiveGame.instance.playerData.Level - 1);
     }
 }

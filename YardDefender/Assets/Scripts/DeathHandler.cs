@@ -18,7 +18,7 @@ public class DeathHandler : MonoBehaviour
     void HandleDeath()
     {
         ActiveGame.instance.IncreaseExperience(mobStats.Experience);
-        Debug.Log("Kaput! Enemy died.");
+        gameObject.SetActive(false);
     }
 
     void OnDestroy()
