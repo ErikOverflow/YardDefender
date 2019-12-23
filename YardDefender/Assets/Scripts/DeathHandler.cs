@@ -21,7 +21,7 @@ public class DeathHandler : MonoBehaviour
 
     void HandleDeath()
     {
-        ActiveGame.instance.IncreaseExperience(mobStats.Experience);
+        healthController.LastAttacker?.IncreaseExperience(mobStats.Experience);
         audioSource.Play();
         animator.SetBool("Alive", false);
         StartCoroutine(DisableAfterAnimation());

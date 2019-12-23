@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerStats))]
 public class BarkController : MonoBehaviour
 {
     private const float DefaultAttackSpeed = 0.5f; //Number of attacks per second
@@ -16,10 +17,11 @@ public class BarkController : MonoBehaviour
     GameObject barkPrefab = null;
 
     bool active = false;
-
+    PlayerStats playerStats = null;
     // Start is called before the first frame update
     void Awake()
     {
+        playerStats = GetComponent<PlayerStats>();
 #if UNITY_IOS || UNITY_ANDROID
         TouchManager.TouchInput += HandleTouch;
 #endif
@@ -49,7 +51,7 @@ public class BarkController : MonoBehaviour
         active = true;
         GameObject barkObj = ObjectPooler.instance.GetPooledObject(barkPrefab);
         Bark bark = barkObj.GetComponent<Bark>();
-        bark.Initialize(CalculateBarkDamage(), CalculateBarkSize(), transform.position);
+        bark.Initialize(CalculateBarkDamage(), CalculateBarkSize(), transform.position, playerStats);
         bark.Activate();
         yield return new WaitForSeconds(CalculateBarkDelay());
         active = false;
@@ -64,16 +66,16 @@ public class BarkController : MonoBehaviour
 
     float CalculateBarkDelay()
     {
-        return 1f / (DefaultAttackSpeed * ActiveGame.instance.playerData.SpeedLevel);
+        return 1f / (DefaultAttackSpeed * playerStats.SpeedLevel);
     }
 
     int CalculateBarkDamage()
     {
-        return ActiveGame.instance.playerData.DamageLevel;
+        return playerStats.DamageLevel;
     }
 
     float CalculateBarkSize()
     {
-        return DefaultBarkSize * Mathf.Pow(BarkSizeGrowth, ActiveGame.instance.playerData.Level - 1);
+        return DefaultBarkSize * Mathf.Pow(BarkSizeGrowth, playerStats.Level - 1);
     }
 }

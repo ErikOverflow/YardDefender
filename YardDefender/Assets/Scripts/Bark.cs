@@ -8,13 +8,15 @@ public class Bark : MonoBehaviour
     float barkFinalSize = 3f;
     private const float BarkTime = 0.2f;
     Vector3 barkPos = Vector3.zero;
+    PlayerStats barkInitiator = null;
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
-    public void Initialize(int _damage, float _barkFinalSize, Vector3 _barkPos)
+    public void Initialize(int _damage, float _barkFinalSize, Vector3 _barkPos, PlayerStats _barkInitiatior)
     {
         damage = _damage;
         barkFinalSize = _barkFinalSize;
         barkPos = _barkPos;
+        barkInitiator = _barkInitiatior;
     }
 
     public void Activate()
@@ -44,6 +46,6 @@ public class Bark : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         HealthController hc = collision.GetComponent<HealthController>();
-        hc?.TakeDamage(damage);
+        hc?.TakeDamage(damage, barkInitiator);
     }
 }

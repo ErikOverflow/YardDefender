@@ -8,6 +8,8 @@ public class HealthController : MonoBehaviour
     [SerializeField]
     int health = 10;
     bool alive = true;
+    PlayerStats lastAttacker = null;
+    public PlayerStats LastAttacker { get => lastAttacker; }
 
     public Action OnDeath;
 
@@ -17,10 +19,11 @@ public class HealthController : MonoBehaviour
         health = mobStats.BaseHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, PlayerStats playerStats)
     {
         if (!alive)
             return;
+        lastAttacker = playerStats;
         health -= damage;
         if(health <= 0)
         {
