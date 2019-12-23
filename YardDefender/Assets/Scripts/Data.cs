@@ -35,3 +35,12 @@ public class PlayerData
     public int DamageLevel { get => damageLevel; set => damageLevel = value; }
     public int SpeedLevel { get => speedLevel; set => speedLevel = value; }
 }
+
+[CreateAssetMenu(fileName = "New Mob", menuName = "Create New Enemy", order = 0)]
+public class MobData : ScriptableObject
+{
+    public Sprite sprite;
+    public int baseHealth;
+    public int baseExperience;
+    public int baseGold;
+}
