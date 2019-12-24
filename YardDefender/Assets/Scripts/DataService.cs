@@ -83,6 +83,11 @@ public class DataService : MonoBehaviour
     public void DeleteGameData(int id)
     {
         _connection.Delete<SaveData>(id);
+        IEnumerable playerDatas = _connection.Table<PlayerData>().Where(gd => gd.Id == id);
+        foreach(PlayerData playerData in playerDatas)
+        {
+            _connection.Delete<PlayerData>(playerData.Id);
+        }
     }
 
     private void OnDestroy()
