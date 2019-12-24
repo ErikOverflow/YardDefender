@@ -13,6 +13,7 @@ public class ActiveGame : MonoBehaviour
     {
         if(instance != null)
         {
+            LoadGame(saveData);
             Destroy(this.gameObject);
         }
         else
