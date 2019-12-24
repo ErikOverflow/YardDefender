@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b63df0f5a065fe46b32bd6996913eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 5
+  baseHealth: 10
   baseExperience: 2
 --- !u!114 &8567607628155788704
 MonoBehaviour:
@@ -295,4 +295,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobData: {fileID: 11400000, guid: 3e9d29f49c196ce4ea3c3140b2b63480, type: 2}
   spriteRenderer: {fileID: 8567607628155788713}
+  animator: {fileID: 0}
   mobStats: {fileID: 8567607628155788707}
