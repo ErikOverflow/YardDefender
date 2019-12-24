@@ -625,21 +625,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6094995951715614486, guid: 332706e40fab081479f26b3f8eba7bbb,
         type: 3}
-      propertyPath: playerData.speedLevel
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6094995951715614486, guid: 332706e40fab081479f26b3f8eba7bbb,
-        type: 3}
-      propertyPath: playerData.level
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6094995951715614486, guid: 332706e40fab081479f26b3f8eba7bbb,
-        type: 3}
-      propertyPath: playerData.damageLevel
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6094995951715614486, guid: 332706e40fab081479f26b3f8eba7bbb,
-        type: 3}
       propertyPath: playerStats
       value: 
       objectReference: {fileID: 945462293}
@@ -657,6 +642,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8567607628155788706, guid: ed6122ff0ae7d65419061777b7536b96,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0b3d67aa9129bc24fa88efdfbb6c4694, type: 2}
     - target: {fileID: 8567607628155788712, guid: ed6122ff0ae7d65419061777b7536b96,
         type: 3}
       propertyPath: m_LocalPosition.x

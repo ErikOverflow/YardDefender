@@ -28,5 +28,6 @@ public class PlayerStats : MonoBehaviour
     public void IncreaseExperience(int exp)
     {
         experience += exp;
+        ActiveGame.instance.SaveGame();
     }
 }

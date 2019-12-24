@@ -43,10 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338fc77ddfd125f40a7cfe28376b68d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveData:
-    id: 0
-    name: 
-    gold: 0
-    level: 0
-    experience: 0
-    newGamePlus: 0
+  playerStats: {fileID: 0}

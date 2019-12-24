@@ -9,8 +9,6 @@ public class ActiveGame : MonoBehaviour
     [SerializeField]
     PlayerStats playerStats = null;
 
-    DataService dataService= DataService.instance;
-
     private void Awake()
     {
         if(instance != null)
@@ -28,13 +26,17 @@ public class ActiveGame : MonoBehaviour
     {
         saveData = _saveData;
         PlayerData playerData;
-        playerData = dataService.ReadPlayerData(saveData.Id);
+        playerData = DataService.instance.ReadPlayerData(saveData.Id);
         playerStats.Initialize(playerData);
     }
 
     public void SaveGame()
     {
-        dataService.WriteSaveData(saveData);
+        if(saveData == null)
+        {
+            saveData = new SaveData();
+        }
+        DataService.instance.WriteSaveData(saveData);
         PlayerData playerData = new PlayerData
         {
             GameId = saveData.Id,
@@ -44,6 +46,6 @@ public class ActiveGame : MonoBehaviour
             DamageLevel = playerStats.DamageLevel,
             SpeedLevel = playerStats.SpeedLevel
         };
-        dataService.WritePlayerData(playerData);
+        DataService.instance.WritePlayerData(playerData);
     }
 }
