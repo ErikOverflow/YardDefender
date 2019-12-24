@@ -13,7 +13,7 @@ public class ActiveGame : MonoBehaviour
     {
         if(instance != null)
         {
-            LoadGame(saveData);
+            instance.LoadGame();
             Destroy(this.gameObject);
         }
         else
@@ -21,6 +21,11 @@ public class ActiveGame : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+    }
+
+    public void LoadGame()
+    {
+        LoadGame(saveData);
     }
 
     public void LoadGame(SaveData _saveData)
