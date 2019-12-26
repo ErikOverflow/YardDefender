@@ -19,14 +19,11 @@ public class MobMovement : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        StartPathing();
-    }
 
-    public void StartPathing()
+    public void StartPathing(Transform newTarget)
     {
-        path = GridManager.instance.GetPath(transform.position, target.position);        
+        target = newTarget;
+        path = GridManager.instance.GetPath(transform.position, newTarget.position);        
         StartCoroutine(Pathing());
     }
 

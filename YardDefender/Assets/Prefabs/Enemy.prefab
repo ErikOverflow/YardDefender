@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8567607628155788716}
   - component: {fileID: 8567607628155788707}
   - component: {fileID: 8567607628155788704}
+  - component: {fileID: 8567607629550049021}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -206,7 +207,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -297,3 +297,17 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8567607628155788713}
   animator: {fileID: 8567607628155788706}
   mobStats: {fileID: 8567607628155788707}
+--- !u!114 &8567607629550049021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8567607628155788714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e332276e39bdb3847874a4c04c956a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  moveSpeed: 2

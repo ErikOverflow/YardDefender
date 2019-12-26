@@ -26,6 +26,14 @@ public class SpawnController : MonoBehaviour
 
     private void OnValidate()
     {
-        UpdateMob();
+        if (mobData == null)
+            return;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.sprite = mobData.sprite;
+        mobStats.Initialize(mobData);
+        if(mobData.overrideController != null)
+        {
+            animator.runtimeAnimatorController = mobData.overrideController;
+        }
     }
 }
