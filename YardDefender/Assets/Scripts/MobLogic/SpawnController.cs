@@ -12,6 +12,7 @@ public class SpawnController : MonoBehaviour
     public void Initialize(MobData _mobData)
     {
         mobData = _mobData;
+        UpdateMob();
     }
 
     private void UpdateMob()
@@ -28,12 +29,6 @@ public class SpawnController : MonoBehaviour
     {
         if (mobData == null)
             return;
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        sr.sprite = mobData.sprite;
-        mobStats.Initialize(mobData);
-        if(mobData.overrideController != null)
-        {
-            animator.runtimeAnimatorController = mobData.overrideController;
-        }
+        UpdateMob();
     }
 }
