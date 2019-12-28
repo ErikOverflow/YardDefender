@@ -10,6 +10,8 @@ public class HealthController : MonoBehaviour
     [SerializeField] GameObject mobHealthBarPrefab;
     [SerializeField] MobStats mobStats = null;
     bool alive = true;
+    GameObject healthBar = null;
+
     PlayerStats lastAttacker = null;
     public PlayerStats LastAttacker { get => lastAttacker; }
 
@@ -20,7 +22,7 @@ public class HealthController : MonoBehaviour
     {
         maxHealth = mobStats.BaseHealth;
         health = mobStats.BaseHealth;
-        UIController.instance.CreateMobHealthBar(this);
+        healthBar = UIController.instance.CreateMobHealthBar(this);
     }
 
     public void TakeDamage(int damage, PlayerStats playerStats)
@@ -36,6 +38,11 @@ public class HealthController : MonoBehaviour
             OnDeath?.Invoke();
             alive = false;
         }
+    }
+
+    private void OnDisable()
+    {
+        healthBar.SetActive(false);
     }
 
     public float GetPercent()

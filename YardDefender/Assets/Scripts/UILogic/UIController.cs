@@ -19,11 +19,12 @@ public class UIController : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    public void CreateMobHealthBar(HealthController hc)
+    public GameObject CreateMobHealthBar(HealthController hc)
     {
         GameObject go = ObjectPooler.instance.GetPooledObject(MobHealthBar);
         go.transform.SetParent(transform);
         UIMobHealth uimh = go.GetComponent<UIMobHealth>();
         uimh.Initialize(hc);
+        return go;
     }
 }

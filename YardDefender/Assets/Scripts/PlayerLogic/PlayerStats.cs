@@ -39,7 +39,6 @@ public class PlayerStats : MonoBehaviour
     public void ReInitialize()
     {
         barkController.Initialize(
-            DefaultAttackSpeed * speedLevel, //Attack Speed
             DefaultBarkSize * Mathf.Pow(BarkSizeGrowth, Level - 1), //Attack Size
             damageLevel //Attack Damage
             );

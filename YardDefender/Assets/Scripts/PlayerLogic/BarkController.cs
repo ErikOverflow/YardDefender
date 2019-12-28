@@ -26,7 +26,7 @@ public class BarkController : MonoBehaviour
 #endif
     }
 
-    public void Initialize(float _attackSpeed, float _barkSize, int _barkDamage)
+    public void Initialize(float _barkSize, int _barkDamage)
     {
         barkSize = _barkSize;
         barkDamage = _barkDamage;
