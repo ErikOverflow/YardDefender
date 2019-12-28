@@ -10,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     private const float BarkSizeGrowth = 1.1f; //Percentage increase in size per level
 
     int playerId = 0;
+    [SerializeField] int gold = 0;
     [SerializeField] int level = 1;
     [SerializeField] int experience = 0;
     [SerializeField] int damageLevel = 1;
@@ -17,6 +18,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] BarkController barkController = null;
 
     public int PlayerId { get => playerId; }
+    public int Gold { get => gold; }
     public int Level { get => level;}
     public int Experience { get => experience;}
     public int DamageLevel { get => damageLevel;}
