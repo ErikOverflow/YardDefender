@@ -8,6 +8,7 @@ public class SpawnController : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer = null;
     [SerializeField] Animator animator = null;
     [SerializeField] MobStats mobStats = null;
+    [SerializeField] HealthController healthController = null;
 
     public void Initialize(MobData _mobData)
     {
@@ -19,6 +20,7 @@ public class SpawnController : MonoBehaviour
     {
         spriteRenderer.sprite = mobData.sprite;
         mobStats.Initialize(mobData);
+        healthController.Initialize();
         if(mobData.overrideController != null)
         {
             animator.runtimeAnimatorController = mobData.overrideController;

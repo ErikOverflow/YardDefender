@@ -6,8 +6,7 @@ public class ActiveGame : MonoBehaviour
 {
     public static ActiveGame instance;
     SaveData saveData;
-    [SerializeField]
-    PlayerStats playerStats = null;
+    [SerializeField] PlayerStats playerStats = null;
 
     private void Awake()
     {

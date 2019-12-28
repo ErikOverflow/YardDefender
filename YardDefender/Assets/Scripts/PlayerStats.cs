@@ -21,6 +21,11 @@ public class PlayerStats : MonoBehaviour
     public int DamageLevel { get => damageLevel;}
     public int SpeedLevel { get => speedLevel;}
 
+    private void Start()
+    {
+        ReInitialize();
+    }
+
     public void Initialize(PlayerData playerData)
     {
         playerId = playerData.Id;

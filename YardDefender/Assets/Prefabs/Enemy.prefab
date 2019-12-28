@@ -255,6 +255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  mobHealthBarPrefab: {fileID: 3506231924645887013, guid: 6170ecc4b74094d49abb9a4514e6517e,
+    type: 3}
+  mobStats: {fileID: 8567607628155788707}
 --- !u!114 &8567607628155788716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +300,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8567607628155788713}
   animator: {fileID: 8567607628155788706}
   mobStats: {fileID: 8567607628155788707}
+  healthController: {fileID: 8567607628155788718}
 --- !u!114 &8567607629550049021
 MonoBehaviour:
   m_ObjectHideFlags: 0

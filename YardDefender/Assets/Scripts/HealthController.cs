@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField]
-    int health = 10;
+    [SerializeField] int health = 10;
+    [SerializeField] int maxHealth = 10;
+    [SerializeField] GameObject mobHealthBarPrefab;
+    [SerializeField] MobStats mobStats;
     bool alive = true;
     PlayerStats lastAttacker = null;
     public PlayerStats LastAttacker { get => lastAttacker; }
 
     public Action OnDeath;
+    public Action OnDamage;
 
-    private void OnEnable()
+    public void Initialize()
     {
-        MobStats mobStats = GetComponent<MobStats>();
+        maxHealth = mobStats.BaseHealth;
         health = mobStats.BaseHealth;
     }
 
@@ -25,11 +28,17 @@ public class HealthController : MonoBehaviour
             return;
         lastAttacker = playerStats;
         health -= damage;
+        OnDamage?.Invoke();
         if(health <= 0)
         {
             health = 0;
             OnDeath?.Invoke();
             alive = false;
         }
+    }
+
+    public float GetPercent()
+    {
+        return (float) health / maxHealth;
     }
 }
