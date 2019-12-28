@@ -31,8 +31,6 @@ public class HomeBase : MonoBehaviour
     {
         if (health <= 0)
             return;
-        GameObject go = collision.gameObject;
-        Debug.Log(go.name);
         MobStats mobStats = collision.gameObject.GetComponent<MobStats>();
         if (mobStats != null)
         {
