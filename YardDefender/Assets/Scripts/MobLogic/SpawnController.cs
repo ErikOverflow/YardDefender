@@ -26,11 +26,4 @@ public class SpawnController : MonoBehaviour
             animator.runtimeAnimatorController = mobData.overrideController;
         }
     }
-
-    private void OnValidate()
-    {
-        if (mobData == null)
-            return;
-        UpdateMob();
-    }
 }

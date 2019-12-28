@@ -25,11 +25,12 @@ public class UIMobHealth : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = trackingObject.position;
+        transform.position = trackingObject.position + new Vector3(0, -0.6f, 0);
     }
 
     private void Disable()
     {
+        OnDestroy();
         gameObject.SetActive(false);
     }
 

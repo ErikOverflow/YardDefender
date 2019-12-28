@@ -8,7 +8,7 @@ public class HealthController : MonoBehaviour
     [SerializeField] int health = 10;
     [SerializeField] int maxHealth = 10;
     [SerializeField] GameObject mobHealthBarPrefab;
-    [SerializeField] MobStats mobStats;
+    [SerializeField] MobStats mobStats = null;
     bool alive = true;
     PlayerStats lastAttacker = null;
     public PlayerStats LastAttacker { get => lastAttacker; }
@@ -20,6 +20,7 @@ public class HealthController : MonoBehaviour
     {
         maxHealth = mobStats.BaseHealth;
         health = mobStats.BaseHealth;
+        UIController.instance.CreateMobHealthBar(this);
     }
 
     public void TakeDamage(int damage, PlayerStats playerStats)

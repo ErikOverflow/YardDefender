@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static UIController instance = null;
+    [SerializeField] GameObject MobHealthBar = null;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+    // Start is called before the first frame update
+    public void CreateMobHealthBar(HealthController hc)
+    {
+        GameObject go = ObjectPooler.instance.GetPooledObject(MobHealthBar);
+        go.transform.SetParent(transform);
+        UIMobHealth uimh = go.GetComponent<UIMobHealth>();
+        uimh.Initialize(hc);
     }
 }
