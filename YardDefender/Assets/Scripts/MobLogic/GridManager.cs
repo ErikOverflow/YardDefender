@@ -27,11 +27,6 @@ public class GridManager : MonoBehaviour
         astar = new Astar(spots, bounds.size.x, bounds.size.y);
     }
 
-    private void Start()
-    {
-
-    }
-
     private void CreateGrid()
     {
         spots = new Vector3Int[bounds.size.x, bounds.size.y];
