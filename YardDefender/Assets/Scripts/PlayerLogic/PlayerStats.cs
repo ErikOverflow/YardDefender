@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class PlayerStats : MonoBehaviour
     public int Experience { get => experience;}
     public int DamageLevel { get => damageLevel;}
     public int SpeedLevel { get => speedLevel;}
+
+    public Action OnStatChange;
 
     private void Start()
     {
@@ -47,6 +50,7 @@ public class PlayerStats : MonoBehaviour
     public void KilledMob(MobStats mobStats)
     {
         experience += mobStats.Experience;
+        OnStatChange?.Invoke();
         ActiveGame.instance.SaveGame();
     }
 }
