@@ -14,11 +14,15 @@ public class UIPlayerStats : MonoBehaviour
     void Start()
     {
         playerStats.OnStatChange += UpdateUI;
+        UpdateUI();
     }
 
     void UpdateUI()
     {
         goldText.text = playerStats.Gold.ToString();
+        levelText.text = playerStats.Level.ToString();
+        experienceText.text = playerStats.Experience.ToString();
+        attackText.text = playerStats.AttackLevel.ToString();
     }
 
     private void OnDestroy()

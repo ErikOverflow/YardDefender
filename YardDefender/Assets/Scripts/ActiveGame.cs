@@ -48,7 +48,7 @@ public class ActiveGame : MonoBehaviour
             Id = playerStats.PlayerId,
             Level = playerStats.Level,
             Experience = playerStats.Experience,
-            DamageLevel = playerStats.DamageLevel,
+            DamageLevel = playerStats.AttackLevel,
             SpeedLevel = playerStats.SpeedLevel
         };
         DataService.instance.WritePlayerData(playerData);
