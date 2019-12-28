@@ -62,7 +62,7 @@ public class ObjectPooler : MonoBehaviour
         }
         else
         {
-            GameObject newGo = Instantiate(go);
+            GameObject newGo = Instantiate(go, transform);
             PoolableObject po = newGo.GetComponent<PoolableObject>();
             if (po == null)
             {

@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerStats))]
 public class BarkController : MonoBehaviour
 {
-    private const float DefaultAttackSpeed = 0.5f; //Number of attacks per second
-    private const float DefaultBarkSize = 2f;
-    private const float BarkSizeGrowth = 1.1f; //Percentage increase in size per level
+    float barkSize = 1.0f;
+    int barkDamage = 1;
 
+    WaitForSeconds barkDelay = new WaitForSeconds(1);
 #pragma warning disable 414
     [SerializeField]
     int touchNum = 2;
@@ -25,6 +25,11 @@ public class BarkController : MonoBehaviour
 #if UNITY_IOS || UNITY_ANDROID
         TouchManager.TouchInput += HandleTouch;
 #endif
+    }
+
+    public void Initialize(float _attackSpeed, float _barkSize, int _barkDamage)
+    {
+        barkDelay = new WaitForSeconds(1f / (_attackSpeed));
     }
 
     void HandleTouch(int fingerNum, Touch touch)
@@ -51,9 +56,9 @@ public class BarkController : MonoBehaviour
         active = true;
         GameObject barkObj = ObjectPooler.instance.GetPooledObject(barkPrefab);
         Bark bark = barkObj.GetComponent<Bark>();
-        bark.Initialize(CalculateBarkDamage(), CalculateBarkSize(), transform.position, playerStats);
+        bark.Initialize(barkDamage, barkSize, transform.position, playerStats);
         bark.Activate();
-        yield return new WaitForSeconds(CalculateBarkDelay());
+        yield return barkDelay;
         active = false;
     }
 
@@ -63,19 +68,4 @@ public class BarkController : MonoBehaviour
         TouchManager.TouchInput -= HandleTouch;
     }
 #endif
-
-    float CalculateBarkDelay()
-    {
-        return 1f / (DefaultAttackSpeed * playerStats.SpeedLevel);
-    }
-
-    int CalculateBarkDamage()
-    {
-        return playerStats.DamageLevel;
-    }
-
-    float CalculateBarkSize()
-    {
-        return DefaultBarkSize * Mathf.Pow(BarkSizeGrowth, playerStats.Level - 1);
-    }
 }
