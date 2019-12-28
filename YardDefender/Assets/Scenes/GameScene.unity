@@ -872,6 +872,7 @@ MonoBehaviour:
   experience: 0
   damageLevel: 10
   speedLevel: 10
+  barkController: {fileID: 945462292}
 --- !u!1001 &1131282597
 PrefabInstance:
   m_ObjectHideFlags: 0

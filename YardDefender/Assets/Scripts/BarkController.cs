@@ -30,6 +30,8 @@ public class BarkController : MonoBehaviour
     public void Initialize(float _attackSpeed, float _barkSize, int _barkDamage)
     {
         barkDelay = new WaitForSeconds(1f / (_attackSpeed));
+        barkSize = _barkSize;
+        barkDamage = _barkDamage;
     }
 
     void HandleTouch(int fingerNum, Touch touch)

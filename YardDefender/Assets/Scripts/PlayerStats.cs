@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] int experience = 0;
     [SerializeField] int damageLevel = 1;
     [SerializeField] int speedLevel = 1;
-    [SerializeField] BarkController barkController;
+    [SerializeField] BarkController barkController = null;
 
     public int PlayerId { get => playerId; }
     public int Level { get => level;}
