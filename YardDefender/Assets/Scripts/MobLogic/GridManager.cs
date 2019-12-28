@@ -6,8 +6,7 @@ using UnityEngine.Tilemaps;
 //Adapted from this youtube video: https://www.youtube.com/watch?v=HCt_CYOW9jg
 
 public class GridManager : MonoBehaviour
-{
-    public GameObject debugSprite;
+{ 
     public static GridManager instance;
     public Tilemap walkable = null;
     BoundsInt bounds;
