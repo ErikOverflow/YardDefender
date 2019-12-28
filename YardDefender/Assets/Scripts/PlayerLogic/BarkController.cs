@@ -8,7 +8,6 @@ public class BarkController : MonoBehaviour
     float barkSize = 1.0f;
     int barkDamage = 1;
 
-    WaitForSeconds barkDelay = new WaitForSeconds(1);
 #pragma warning disable 414
     [SerializeField]
     int touchNum = 2;
@@ -29,7 +28,6 @@ public class BarkController : MonoBehaviour
 
     public void Initialize(float _attackSpeed, float _barkSize, int _barkDamage)
     {
-        barkDelay = new WaitForSeconds(1f / (_attackSpeed));
         barkSize = _barkSize;
         barkDamage = _barkDamage;
     }
@@ -38,13 +36,14 @@ public class BarkController : MonoBehaviour
     {
         if (fingerNum != touchNum)
             return;
-        StartCoroutine(Bark());
+        if(touch.phase == TouchPhase.Began)
+            StartCoroutine(Bark());
     }
 
 #if !UNITY_IOS && !UNITY_ANDROID
     void Update()
     {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             StartCoroutine(Bark());
         }
@@ -60,7 +59,7 @@ public class BarkController : MonoBehaviour
         Bark bark = barkObj.GetComponent<Bark>();
         bark.Initialize(barkDamage, barkSize, transform.position, playerStats);
         bark.Activate();
-        yield return barkDelay;
+        yield return null;
         active = false;
     }
 
