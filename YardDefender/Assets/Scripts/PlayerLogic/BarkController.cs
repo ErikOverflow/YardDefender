@@ -44,7 +44,7 @@ public class BarkController : MonoBehaviour
 #if !UNITY_IOS && !UNITY_ANDROID
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             StartCoroutine(Bark());
         }
