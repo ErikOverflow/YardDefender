@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour
 {
     Rigidbody2D rb2d = null;
+    [SerializeField] float moveSpeed = 1f;
+
     [Header("Finger to listen to")]
 #pragma warning disable 414
     [SerializeField]
@@ -46,7 +48,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb2d.velocity = moveDir;
+        rb2d.velocity = moveDir * moveSpeed;
     }
 
 #if UNITY_IOS || UNITY_ANDROID
