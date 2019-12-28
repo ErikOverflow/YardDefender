@@ -4,24 +4,20 @@ using UnityEngine;
 
 public class DeathHandler : MonoBehaviour
 {
-    HealthController healthController = null;
-    MobStats mobStats = null;
-    AudioSource audioSource = null;
-    Animator animator = null;
+    [SerializeField] HealthController healthController = null;
+    [SerializeField] MobStats mobStats = null;
+    [SerializeField] AudioSource audioSource = null;
+    [SerializeField] Animator animator = null;
     //Have an EnemyDetail script that has loot table and exp amount
 
     void Awake()
     {
-        healthController = GetComponent<HealthController>();
-        mobStats = GetComponent<MobStats>();
-        audioSource = GetComponent<AudioSource>();
-        animator = GetComponent<Animator>();
         healthController.OnDeath += HandleDeath;
     }
 
     void HandleDeath()
     {
-        healthController.LastAttacker?.IncreaseExperience(mobStats.Experience);
+        healthController.LastAttacker?.KilledMob(mobStats);
         audioSource.Play();
         animator.SetBool("Alive", false);
         StartCoroutine(DisableAfterAnimation());

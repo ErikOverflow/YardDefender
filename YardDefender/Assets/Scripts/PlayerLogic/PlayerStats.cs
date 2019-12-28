@@ -44,9 +44,9 @@ public class PlayerStats : MonoBehaviour
             );
     }
 
-    public void IncreaseExperience(int exp)
+    public void KilledMob(MobStats mobStats)
     {
-        experience += exp;
+        experience += mobStats.Experience;
         ActiveGame.instance.SaveGame();
     }
 }

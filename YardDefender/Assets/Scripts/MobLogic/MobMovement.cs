@@ -5,17 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MobMovement : MonoBehaviour
 {
-    [SerializeField] Transform target = null;
+    Transform target = null;
+    [SerializeField] Rigidbody2D rb2d = null;
+    [SerializeField] HealthController healthController = null;
     public float moveSpeed = 2f; //Spots per second moved
 
-    Rigidbody2D rb2d;
     List<Spot> path = null;
 
     WaitForFixedUpdate wffu = new WaitForFixedUpdate();
 
-    private void Awake()
+    private void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        healthController.OnDeath += StopPathing;
     }
 
     // Start is called before the first frame update
@@ -25,6 +26,11 @@ public class MobMovement : MonoBehaviour
         target = newTarget;
         path = GridManager.instance.GetPath(transform.position, newTarget.position);        
         StartCoroutine(Pathing());
+    }
+
+    public void StopPathing()
+    {
+        StopCoroutine(Pathing());
     }
 
     IEnumerator Pathing()
@@ -42,5 +48,10 @@ public class MobMovement : MonoBehaviour
             }
             timer = timer % (1 / moveSpeed);
         }
+    }
+
+    private void OnDestroy()
+    {
+        healthController.OnDeath -= StopPathing;
     }
 }

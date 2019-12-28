@@ -12,7 +12,9 @@ public class UIMobHealth : MonoBehaviour
 
     public void Initialize(HealthController trackedController)
     {
+        gameObject.SetActive(true);
         healthController = trackedController;
+        HealthChange();
         trackingObject = healthController.transform;
         healthController.OnDamage += HealthChange;
     }
@@ -25,9 +27,11 @@ public class UIMobHealth : MonoBehaviour
     void LateUpdate()
     {
         transform.position = trackingObject.position + new Vector3(0, -0.6f, 0);
+        if (!healthController.isActiveAndEnabled)
+            gameObject.SetActive(false);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         healthController.OnDamage -= HealthChange;
     }

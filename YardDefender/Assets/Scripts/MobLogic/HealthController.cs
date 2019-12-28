@@ -40,11 +40,6 @@ public class HealthController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        healthBar.SetActive(false);
-    }
-
     public float GetPercent()
     {
         return (float) health / maxHealth;
