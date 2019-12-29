@@ -43,7 +43,7 @@ public class ActiveGame : MonoBehaviour
         IEnumerable<PlayerData> playerDatas = DataService.instance.GetPlayerDatas(saveData);
         PlayerData playerData = playerDatas.FirstOrDefault();
         //Update playerstats with the first one in the playerdatas list
-        playerStats?.Initialize(playerDatas.FirstOrDefault());
+        playerStats?.Initialize(playerDatas.FirstOrDefault(), saveData);
     }
 
     public void SaveGame()

@@ -30,9 +30,10 @@ public class PlayerStats : MonoBehaviour
         ActiveGame.instance.LoadGame();
     }
 
-    public void Initialize(PlayerData playerData)
+    public void Initialize(PlayerData playerData, SaveData saveData)
     {
         playerId = playerData.Id;
+        gold = saveData.Gold;
         level = playerData.Level;
         experience = playerData.Experience;
         attackLevel = playerData.AttackLevel;
