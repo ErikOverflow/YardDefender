@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ActiveGame : MonoBehaviour
 {
     public static ActiveGame instance;
-    SaveData saveData;
+    [SerializeField] int saveId = 0;
     [SerializeField] PlayerStats playerStats = null;
 
     private void Awake()
     {
         if(instance != null)
         {
-            instance.LoadGame();
             Destroy(this.gameObject);
         }
         else
@@ -22,35 +22,42 @@ public class ActiveGame : MonoBehaviour
         }
     }
 
-    public void LoadGame()
+    public void SetPlayerStats(PlayerStats _playerStats)
     {
-        LoadGame(saveData);
+        playerStats = _playerStats;
     }
 
-    public void LoadGame(SaveData _saveData)
+    public void SetSaveId(int id)
     {
-        saveData = _saveData;
-        PlayerData playerData;
-        playerData = DataService.instance.ReadPlayerData(saveData.Id);
-        playerStats.Initialize(playerData);
+        saveId = id;
+    }
+
+    public void LoadGame()
+    {
+        SaveData saveData = DataService.instance.ReadSaveData(saveId);
+        if(saveData == null)
+        {
+            return;
+        }
+        //Get all playerdatas related to the save
+        IEnumerable<PlayerData> playerDatas = DataService.instance.GetPlayerDatas(saveData);
+        PlayerData playerData = playerDatas.FirstOrDefault();
+        //Update playerstats with the first one in the playerdatas list
+        playerStats?.Initialize(playerDatas.FirstOrDefault());
     }
 
     public void SaveGame()
     {
-        if(saveData == null)
-        {
-            saveData = new SaveData();
-        }
-        DataService.instance.WriteSaveData(saveData);
-        PlayerData playerData = new PlayerData
-        {
-            GameId = saveData.Id,
-            Id = playerStats.PlayerId,
-            Level = playerStats.Level,
-            Experience = playerStats.Experience,
-            DamageLevel = playerStats.AttackLevel,
-            SpeedLevel = playerStats.SpeedLevel
-        };
-        DataService.instance.WritePlayerData(playerData);
+        //Update SaveData
+        SaveData saveData = DataService.instance.ReadSaveData(saveId);
+        saveData.Gold = playerStats.Gold;
+        DataService.instance.UpdateSaveData(saveData);
+
+        IEnumerable<PlayerData> playerDatas = DataService.instance.GetPlayerDatas(saveData);
+        PlayerData playerData = playerDatas.FirstOrDefault();
+        playerData.Level = playerStats.Level;
+        playerData.Experience = playerStats.Experience;
+        playerData.AttackLevel = playerStats.AttackLevel;
+        DataService.instance.UpdatePlayerData(playerData);
     }
 }

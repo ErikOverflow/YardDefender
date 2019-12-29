@@ -14,7 +14,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] int level = 1;
     [SerializeField] int experience = 0;
     [SerializeField] int attackLevel = 1;
-    [SerializeField] int speedLevel = 1;
     [SerializeField] BarkController barkController = null;
 
     public int PlayerId { get => playerId; }
@@ -22,13 +21,13 @@ public class PlayerStats : MonoBehaviour
     public int Level { get => level;}
     public int Experience { get => experience;}
     public int AttackLevel { get => attackLevel;}
-    public int SpeedLevel { get => speedLevel;}
 
     public Action OnStatChange;
 
     private void Start()
     {
-        ReInitialize();
+        ActiveGame.instance.SetPlayerStats(this);
+        ActiveGame.instance.LoadGame();
     }
 
     public void Initialize(PlayerData playerData)
@@ -36,9 +35,9 @@ public class PlayerStats : MonoBehaviour
         playerId = playerData.Id;
         level = playerData.Level;
         experience = playerData.Experience;
-        attackLevel = playerData.DamageLevel;
-        speedLevel = playerData.SpeedLevel;
+        attackLevel = playerData.AttackLevel;
         ReInitialize();
+        OnStatChange?.Invoke();
     }
 
     public void ReInitialize()

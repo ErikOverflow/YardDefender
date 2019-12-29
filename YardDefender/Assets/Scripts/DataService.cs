@@ -23,6 +23,7 @@ public class DataService : MonoBehaviour
         else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
 
         string databasePath = string.Format("{0}/{1}", Application.persistentDataPath, databaseName);
@@ -40,6 +41,7 @@ public class DataService : MonoBehaviour
     public void CreateDB()
     {
         //Create all relavant tables if they don't exist yet
+        Debug.Log(Application.persistentDataPath);
         _connection.CreateTable<SaveData>();
         _connection.CreateTable<PlayerData>();
     }
@@ -49,44 +51,71 @@ public class DataService : MonoBehaviour
         return _connection.Table<SaveData>();
     }
 
-    public void WriteSaveData(SaveData saveData)
+    // CRUD for SaveData
+
+    /// <summary>
+    /// Creates a new SaveData in the database.
+    /// </summary>
+    /// <returns>ID of the newly created SaveData</returns>
+    public int CreateSaveData()
     {
-        _connection.Insert(saveData);
+        return _connection.Insert(new SaveData());
     }
 
-    public void WritePlayerData(PlayerData playerData)
+    public SaveData ReadSaveData(int id)
     {
-        _connection.Insert(playerData);
+        return _connection.Table<SaveData>().Where(sd => sd.Id == id).FirstOrDefault();
     }
 
-    public PlayerData ReadPlayerData(int gameId)
+    public void UpdateSaveData(SaveData saveData)
     {
-        PlayerData pd = _connection.Table<PlayerData>().Where(cd => cd.GameId == gameId).FirstOrDefault();
-        if (pd == null)
-        {
-            pd = new PlayerData() { GameId = gameId };
-            WritePlayerData(pd);
-        }
-        return pd;
+        _connection.Update(saveData);
     }
 
-    public SaveData ReadSaveData()
+    public void DeleteSaveData(SaveData saveData)
     {
-        return _connection.Table<SaveData>().FirstOrDefault();
+        _connection.Delete(saveData);
     }
 
-    public SaveData ReadGameData(int id)
+    public IEnumerable<PlayerData> GetPlayerDatas(SaveData saveData)
     {
-        return _connection.Table<SaveData>().Where(gd => gd.Id == id).FirstOrDefault();
+        return _connection.Table<PlayerData>().Where(pd => pd.GameId == saveData.Id);
     }
 
-    public void DeleteGameData(int id)
+    //Crud for PlayerData
+    public int CreatePlayerData()
     {
-        _connection.Delete<SaveData>(id);
-        IEnumerable playerDatas = _connection.Table<PlayerData>().Where(gd => gd.Id == id);
+        return _connection.Insert(new PlayerData());
+    }
+
+    public PlayerData ReadPlayerData(int id)
+    {
+        return _connection.Table<PlayerData>().Where(pd => pd.Id == id).FirstOrDefault();
+    }
+
+    public void UpdatePlayerData(PlayerData playerData)
+    {
+        _connection.Update(playerData);
+    }
+    public void DeletePlayerData(PlayerData playerData)
+    {
+        _connection.Delete(playerData);
+    }
+
+
+
+    /// <summary>
+    /// Deletes the SaveData and any related PlayerData
+    /// </summary>
+    /// <param name="id">SaveData ID</param>
+    public void RecursiveDeleteSaveData(int id)
+    {
+        SaveData saveData = ReadSaveData(id);
+        _connection.Delete(saveData);
+        IEnumerable<PlayerData> playerDatas = GetPlayerDatas(saveData);
         foreach(PlayerData playerData in playerDatas)
         {
-            _connection.Delete<PlayerData>(playerData.Id);
+            DeletePlayerData(playerData);
         }
     }
 

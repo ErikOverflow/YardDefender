@@ -24,14 +24,14 @@ public class SelectGameController : MonoBehaviour
 
     public void ContinueGame()
     {
-        ActiveGame.instance.LoadGame(gameData);
+        ActiveGame.instance.SetSaveId(gameData.Id);
         //Load Scene
         SceneManager.LoadSceneAsync(gameScene.name);
     }
 
     public void DeleteGame()
     {
-        DataService.instance.DeleteGameData(gameData.Id);
+        DataService.instance.RecursiveDeleteSaveData(gameData.Id);
         Destroy(this.gameObject);
     }
 }

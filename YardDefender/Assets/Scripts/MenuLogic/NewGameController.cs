@@ -17,18 +17,27 @@ public class NewGameController : MonoBehaviour
 
     void Start()
     {
+        
         //if game has been beaten at least once, enable hardcore toggle
     }
     
     public void CreateGame()
     {
-        SaveData newGameData = new SaveData
-        {
-            Name = nameField.text,
-            Gold = 100,
-            NewGamePlus = ngPlus.isOn
-        };
-        DataService.instance.WriteSaveData(newGameData);
+        //Create new SaveData
+        int saveId = DataService.instance.CreateSaveData();
+        SaveData newSaveData = DataService.instance.ReadSaveData(saveId);
+        newSaveData.Name = nameField.text;
+        newSaveData.Gold = 100;
+        newSaveData.NewGamePlus = ngPlus.isOn;
+        DataService.instance.UpdateSaveData(newSaveData);
+
+        //Create new PlayerData
+        int playerId = DataService.instance.CreatePlayerData();
+        PlayerData newPlayerData = DataService.instance.ReadPlayerData(playerId);
+        newPlayerData.GameId = newSaveData.Id;
+        DataService.instance.UpdatePlayerData(newPlayerData);
+
+        ActiveGame.instance.SetSaveId(newSaveData.Id);
         //Load newGameData here
         SceneManager.LoadSceneAsync(gameScene.name);
     }
