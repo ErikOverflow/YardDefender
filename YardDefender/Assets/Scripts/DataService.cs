@@ -40,7 +40,6 @@ public class DataService : MonoBehaviour
     public void CreateDB()
     {
         //Create all relavant tables if they don't exist yet
-        Debug.Log(Application.persistentDataPath);
         _connection.CreateTable<SaveData>();
         _connection.CreateTable<PlayerData>();
     }
