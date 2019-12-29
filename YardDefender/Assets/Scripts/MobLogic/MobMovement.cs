@@ -11,13 +11,9 @@ public class MobMovement : MonoBehaviour
     public float moveSpeed = 2f; //Spots per second moved
 
     List<Spot> path = null;
+    bool alive = true;
 
     WaitForFixedUpdate wffu = new WaitForFixedUpdate();
-
-    private void Start()
-    {
-        healthController.OnDeath += StopPathing;
-    }
 
     // Start is called before the first frame update
 
@@ -26,11 +22,6 @@ public class MobMovement : MonoBehaviour
         target = newTarget;
         path = GridManager.instance.GetPath(transform.position, newTarget.position);        
         StartCoroutine(Pathing());
-    }
-
-    public void StopPathing()
-    {
-        StopCoroutine(Pathing());
     }
 
     IEnumerator Pathing()
@@ -42,16 +33,13 @@ public class MobMovement : MonoBehaviour
             Vector2 destPos = GridManager.instance.GetSpotWorldPosition(spot);
             while(timer < 1 / moveSpeed)
             {
+                if (!healthController.Alive)
+                    yield break;
                 rb2d.MovePosition(Vector2.Lerp(startPos, destPos, timer * moveSpeed));
                 yield return wffu;
                 timer += Time.fixedDeltaTime;
             }
             timer = timer % (1 / moveSpeed);
         }
-    }
-
-    private void OnDestroy()
-    {
-        healthController.OnDeath -= StopPathing;
     }
 }

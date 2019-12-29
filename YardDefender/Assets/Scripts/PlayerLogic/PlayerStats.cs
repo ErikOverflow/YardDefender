@@ -7,7 +7,6 @@ public class PlayerStats : MonoBehaviour
 {
     private const float DefaultAttackSpeed = 0.5f; //Number of attacks per second
     private const float DefaultBarkSize = 2f;
-    private const float BarkSizeGrowth = 1.1f; //Percentage increase in size per level
 
     int playerId = 0;
     [SerializeField] int gold = 0;
@@ -44,7 +43,7 @@ public class PlayerStats : MonoBehaviour
     public void ReInitialize()
     {
         barkController.Initialize(
-            DefaultBarkSize * Mathf.Pow(BarkSizeGrowth, Level - 1), //Attack Size
+            DefaultBarkSize, //Attack Size
             attackLevel //Attack Damage
             );
     }

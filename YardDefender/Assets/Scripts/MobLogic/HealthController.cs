@@ -14,6 +14,7 @@ public class HealthController : MonoBehaviour
 
     PlayerStats lastAttacker = null;
     public PlayerStats LastAttacker { get => lastAttacker; }
+    public bool Alive { get => alive; }
 
     public Action OnDeath;
     public Action OnDamage;

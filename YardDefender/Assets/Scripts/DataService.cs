@@ -62,6 +62,11 @@ public class DataService : MonoBehaviour
         return newSaveData.Id;
     }
 
+    public void CreateSaveData(SaveData saveData) //For debugging purposes only
+    {
+        _connection.Insert(saveData);
+    }
+
     public SaveData ReadSaveData(int id)
     {
         return _connection.Table<SaveData>().Where(sd => sd.Id == id).FirstOrDefault();
