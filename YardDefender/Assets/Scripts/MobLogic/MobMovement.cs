@@ -11,7 +11,6 @@ public class MobMovement : MonoBehaviour
     public float moveSpeed = 2f; //Spots per second moved
 
     List<Spot> path = null;
-    bool alive = true;
 
     WaitForFixedUpdate wffu = new WaitForFixedUpdate();
 
