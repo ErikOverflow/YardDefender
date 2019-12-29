@@ -10,8 +10,7 @@ public class DataService : MonoBehaviour
 {
     public static DataService instance;
     private SQLiteConnection _connection;
-    [SerializeField]
-    string databaseName = "game.db";
+    [SerializeField] string databaseName = "game.db";
 
     public void Awake()
     {
@@ -59,7 +58,9 @@ public class DataService : MonoBehaviour
     /// <returns>ID of the newly created SaveData</returns>
     public int CreateSaveData()
     {
-        return _connection.Insert(new SaveData());
+        SaveData newSaveData = new SaveData();
+        _connection.Insert(newSaveData);
+        return newSaveData.Id;
     }
 
     public SaveData ReadSaveData(int id)
@@ -85,7 +86,9 @@ public class DataService : MonoBehaviour
     //Crud for PlayerData
     public int CreatePlayerData()
     {
-        return _connection.Insert(new PlayerData());
+        PlayerData newPlayerData = new PlayerData();
+        _connection.Insert(newPlayerData);
+        return newPlayerData.Id;
     }
 
     public PlayerData ReadPlayerData(int id)
