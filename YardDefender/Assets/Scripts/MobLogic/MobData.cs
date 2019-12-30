@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,4 +11,12 @@ public class MobData : ScriptableObject
     public int baseExperience;
     public int baseGold;
     public AnimatorOverrideController overrideController;
+    public List<WeaponDrop> weaponDrops;
+}
+
+[Serializable]
+public struct WeaponDrop
+{
+    public float dropChance;
+    public Weapon weapon;
 }

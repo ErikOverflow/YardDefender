@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8567607628155788707}
   - component: {fileID: 8567607628155788704}
   - component: {fileID: 8567607629550049021}
+  - component: {fileID: 5930747407891076090}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -287,8 +288,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b63df0f5a065fe46b32bd6996913eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealth: 10
-  baseExperience: 2
+  health: 10
+  experience: 1
+  gold: 5
 --- !u!114 &8567607628155788704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +308,7 @@ MonoBehaviour:
   animator: {fileID: 8567607628155788706}
   mobStats: {fileID: 8567607628155788707}
   healthController: {fileID: 8567607628155788718}
+  lootController: {fileID: 5930747407891076090}
 --- !u!114 &8567607629550049021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +321,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e332276e39bdb3847874a4c04c956a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   rb2d: {fileID: 8567607628155788717}
   healthController: {fileID: 8567607628155788718}
   moveSpeed: 2
+--- !u!114 &5930747407891076090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8567607628155788714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af08575fab4574c09bff784d44f65673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthController: {fileID: 8567607628155788718}
+  weaponPrefab: {fileID: 5296023180016641273, guid: c615d2d555c64444e96612c1adf76f02,
+    type: 3}
