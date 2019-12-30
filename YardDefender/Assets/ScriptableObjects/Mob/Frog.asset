@@ -17,3 +17,6 @@ MonoBehaviour:
   baseExperience: 2
   baseGold: 2
   overrideController: {fileID: 0}
+  weaponDrops:
+  - dropChance: 0.8
+    weapon: {fileID: 11400000, guid: 2d36122ec623b42ffa5336909cdd556b, type: 2}

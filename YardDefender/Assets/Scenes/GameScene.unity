@@ -8439,13 +8439,19 @@ PrefabInstance:
     - target: {fileID: 2129058185918437916, guid: 938273b3cad574e28a8b24857bc35839,
         type: 3}
       propertyPath: allWeapons.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2129058185918437916, guid: 938273b3cad574e28a8b24857bc35839,
         type: 3}
       propertyPath: allWeapons.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: b936e9fa7b2014ca7b722b1029d14f85,
+        type: 2}
+    - target: {fileID: 2129058185918437916, guid: 938273b3cad574e28a8b24857bc35839,
+        type: 3}
+      propertyPath: allWeapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d36122ec623b42ffa5336909cdd556b,
         type: 2}
     - target: {fileID: 6161878407149375701, guid: 938273b3cad574e28a8b24857bc35839,
         type: 3}
