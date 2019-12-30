@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class MobStats : MonoBehaviour
 {
-    int level = 1;
-    [SerializeField] int baseHealth = 10;
-    [SerializeField] int baseExperience = 1;
+    [SerializeField] int health = 10;
+    [SerializeField] int experience = 1;
+    [SerializeField] int gold = 5;
 
     public void Initialize(MobData mobData)
     {
-        baseHealth = mobData.baseHealth;
-        baseExperience = mobData.baseExperience;
+        health = mobData.baseHealth;
+        experience = mobData.baseExperience;
+        gold = mobData.baseGold;
     }
 
-    public int BaseHealth { get => baseHealth * level;}
-    public int Experience { get => baseExperience * level;}
+    public int Health { get => health; }
+    public int Experience { get => experience; }
+    public int Gold { get => gold; }
 }

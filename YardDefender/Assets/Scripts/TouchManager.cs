@@ -10,7 +10,7 @@ public class TouchManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Destroy(this.gameObject);
+            Destroy(this);
             return;
         }
         else

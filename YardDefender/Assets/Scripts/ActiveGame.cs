@@ -13,7 +13,7 @@ public class ActiveGame : MonoBehaviour
     {
         if(instance != null)
         {
-            Destroy(this.gameObject);
+            Destroy(this);
         }
         else
         {

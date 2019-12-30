@@ -17,7 +17,8 @@ public class DeathHandler : MonoBehaviour
 
     void HandleDeath()
     {
-        healthController.LastAttacker?.KilledMob(mobStats);
+        //healthController.LastAttacker?.KilledMob(mobStats);
+        KillManager.instance.EnemyKilled(mobStats, healthController.LastAttacker);
         audioSource.Play();
         animator.SetBool("Alive", false);
         StartCoroutine(DisableAfterAnimation());

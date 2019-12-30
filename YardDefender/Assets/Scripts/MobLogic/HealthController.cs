@@ -21,8 +21,8 @@ public class HealthController : MonoBehaviour
 
     public void Initialize()
     {
-        maxHealth = mobStats.BaseHealth;
-        health = mobStats.BaseHealth;
+        maxHealth = mobStats.Health;
+        health = mobStats.Health;
         healthBar = UIController.instance.CreateMobHealthBar(this);
     }
 

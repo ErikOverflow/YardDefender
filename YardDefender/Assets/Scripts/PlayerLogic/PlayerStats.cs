@@ -12,14 +12,15 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] int gold = 0;
     [SerializeField] int level = 1;
     [SerializeField] int experience = 0;
+    int nextLevelExperience = 0;
     [SerializeField] int attackLevel = 1;
     [SerializeField] BarkController barkController = null;
 
     public int PlayerId { get => playerId; }
     public int Gold { get => gold; }
-    public int Level { get => level;}
-    public int Experience { get => experience;}
-    public int AttackLevel { get => attackLevel;}
+    public int Level { get => level; }
+    public int Experience { get => experience; }
+    public int AttackLevel { get => attackLevel; }
 
     public Action OnStatChange;
 
@@ -27,6 +28,17 @@ public class PlayerStats : MonoBehaviour
     {
         ActiveGame.instance.SetPlayerStats(this);
         ActiveGame.instance.LoadGame();
+
+        KillManager.instance.OnKill += EnemyKilled;
+    }
+
+    private void EnemyKilled(MobStats mobStats, PlayerStats playerStats)
+    {
+        experience += mobStats.Experience;
+        gold += mobStats.Gold;
+        ReInitialize();
+        ActiveGame.instance.SaveGame();
+        OnStatChange?.Invoke();
     }
 
     public void Initialize(PlayerData playerData, SaveData saveData)
@@ -35,6 +47,7 @@ public class PlayerStats : MonoBehaviour
         gold = saveData.Gold;
         level = playerData.Level;
         experience = playerData.Experience;
+        nextLevelExperience = CalculateNextLevelExp();
         attackLevel = playerData.AttackLevel;
         ReInitialize();
         OnStatChange?.Invoke();
@@ -42,16 +55,33 @@ public class PlayerStats : MonoBehaviour
 
     public void ReInitialize()
     {
+        while(experience >= nextLevelExperience)
+        {
+            level++;
+            experience -= nextLevelExperience;
+            nextLevelExperience = CalculateNextLevelExp();
+        }
         barkController.Initialize(
             DefaultBarkSize, //Attack Size
             attackLevel //Attack Damage
             );
     }
 
-    public void KilledMob(MobStats mobStats)
+    int CalculateNextLevelExp()
     {
-        experience += mobStats.Experience;
-        OnStatChange?.Invoke();
-        ActiveGame.instance.SaveGame();
+        return 100;
+        //return Mathf.FloorToInt(Mathf.Pow(10, Mathf.Pow(1.1f, level)));
     }
+
+    public void OnDestroy()
+    {
+        KillManager.instance.OnKill -= EnemyKilled;
+    }
+
+    //public void KilledMob(MobStats mobStats)
+    //{
+    //    experience += mobStats.Experience;
+    //    OnStatChange?.Invoke();
+    //    ActiveGame.instance.SaveGame();
+    //}
 }
