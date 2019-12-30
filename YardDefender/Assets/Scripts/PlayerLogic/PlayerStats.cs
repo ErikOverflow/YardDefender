@@ -24,6 +24,8 @@ public class PlayerStats : MonoBehaviour
     public int AttackLevel { get => attackLevel; }
     public int Damage { get => CalculateDamage(); }
 
+    public IEnumerable<WeaponData> PlayerWeapons { get => playerEquipment.WeaponInventory; }
+
     public Action OnStatChange;
 
     private void Start()

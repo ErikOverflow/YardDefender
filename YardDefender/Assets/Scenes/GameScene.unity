@@ -3018,8 +3018,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2410331009a491e8c6a9828f0d8c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flatDamage: 2
-  multiplierDamage: 1
+  weaponInventory:
+  - id: 1
+    name: Beginner Weapon 3
+    playerId: 0
+    flatDamage: 1
+    damageMultiplier: 1
+  - id: 2
+    name: Test
+    playerId: 0
+    flatDamage: 2
+    damageMultiplier: 1
+  - id: 16
+    name: Testicl
+    playerId: 0
+    flatDamage: 5
+    damageMultiplier: 1
 --- !u!1 &1040871207
 GameObject:
   m_ObjectHideFlags: 3
@@ -8431,7 +8445,7 @@ PrefabInstance:
         type: 3}
       propertyPath: allWeapons.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: d6144d5930f944b1f8c238e7f4458e87,
+      objectReference: {fileID: 11400000, guid: b936e9fa7b2014ca7b722b1029d14f85,
         type: 2}
     - target: {fileID: 6161878407149375701, guid: 938273b3cad574e28a8b24857bc35839,
         type: 3}

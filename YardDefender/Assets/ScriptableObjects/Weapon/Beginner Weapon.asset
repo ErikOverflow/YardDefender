@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: New Weapon
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  sprite: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: aa539ba9e8f3a4a2dbc89d4fa688cb59, type: 3}
+  m_Name: Beginner Weapon
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: c5aa0d4cb0dfcfa419908ef76cc22985, type: 3}
   flatDamageMin: 1
   flatDamageMax: 1
   multiplierDamageMin: 1

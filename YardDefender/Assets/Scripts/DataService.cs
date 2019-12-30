@@ -83,7 +83,7 @@ public class DataService : MonoBehaviour
         _connection.Delete(saveData);
     }
 
-    public IEnumerable<PlayerData> GetPlayerDatas(SaveData saveData)
+    public IEnumerable<PlayerData> ReadPlayerDatas(SaveData saveData)
     {
         return _connection.Table<PlayerData>().Where(pd => pd.GameId == saveData.Id);
     }
@@ -143,9 +143,22 @@ public class DataService : MonoBehaviour
         _connection.Update(weaponData);
     }
 
+    public void UpdateWeaponDatas(IEnumerable<WeaponData> weaponDatas)
+    {
+        _connection.UpdateAll(weaponDatas);
+    }
+
     public void DeleteWeaponData(WeaponData weaponData)
     {
         _connection.Delete(weaponData);
+    }
+
+    public void DeleteWeaponDatas(IEnumerable<WeaponData> weaponDatas)
+    {
+        foreach(WeaponData weaponData in weaponDatas)
+        {
+            DeleteWeaponData(weaponData);
+        }
     }
 
     /// <summary>
@@ -156,7 +169,7 @@ public class DataService : MonoBehaviour
     {
         SaveData saveData = ReadSaveData(id);
         _connection.Delete(saveData);
-        IEnumerable<PlayerData> playerDatas = GetPlayerDatas(saveData);
+        IEnumerable<PlayerData> playerDatas = ReadPlayerDatas(saveData);
         foreach(PlayerData playerData in playerDatas)
         {
             DeletePlayerData(playerData);

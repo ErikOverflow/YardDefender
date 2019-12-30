@@ -5,26 +5,27 @@ using UnityEngine;
 
 public class PlayerEquipment : MonoBehaviour
 {
-    [SerializeField] int flatDamage = 0;
-    [SerializeField] float multiplierDamage = 1.0f;
-
-
+    WeaponData weaponData = new WeaponData();
     //Can reroll all stats with gold
     //Can prestige weapons with gold after a certain number of kills with the weapon. Prestige unlocks special ability.
     //Drops from enemies, with a minimum of 1% before it can drop (requiring higher difficulty levels to get some items)
+    public List<WeaponData> weaponInventory = new List<WeaponData>();
 
-    public int FlatDamage { get => flatDamage; }
-    public float MultiplierDamage { get => multiplierDamage; }
+
+    public int FlatDamage { get => weaponData.FlatDamage; }
+    public float MultiplierDamage { get => weaponData.DamageMultiplier; }
+    public IEnumerable<WeaponData> WeaponInventory { get => weaponInventory; }
 
     public Action OnEquipmentChange;
 
-    public void EquipWeapon()
+    public void EquipWeapon(WeaponData newWeapon)
     {
         OnEquipmentChange?.Invoke();
+        ActiveGame.instance.SaveGame();
     }
 
-    public void EquipArmor()
+    internal IEnumerable<WeaponData> FirstOrDefault()
     {
-        OnEquipmentChange?.Invoke();
+        throw new NotImplementedException();
     }
 }

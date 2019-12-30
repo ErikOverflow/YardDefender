@@ -38,12 +38,15 @@ public class PlayerData
 public class WeaponData
 {
     [SerializeField] int id;
+    [SerializeField] string name;
     [SerializeField] int playerId;
     [SerializeField] int flatDamage = 0;
     [SerializeField] float damageMultiplier = 1f;
 
     [AutoIncrement, PrimaryKey] public int Id { get => id; set => id = value; }
+    public string Name { get => name; set => name = value; }
     public int PlayerId { get => playerId; set => playerId = value; }
     public int FlatDamage { get => flatDamage; set => flatDamage = value; }
     public float DamageMultiplier { get => damageMultiplier; set => damageMultiplier = value; }
+    public Sprite Sprite { get => WeaponTable.instance.GetWeapon(name).sprite;  }
 }
