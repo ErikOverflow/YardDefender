@@ -7849,7 +7849,7 @@ MonoBehaviour:
     weight: 1
   - mobData: {fileID: 11400000, guid: f2974c289c9d348d1b4e6d90e11eb7fe, type: 2}
     weight: 2
-  mobCount: 5
+  mobCount: 10
   target: {fileID: 65351385}
 --- !u!4 &1877472439
 Transform:
