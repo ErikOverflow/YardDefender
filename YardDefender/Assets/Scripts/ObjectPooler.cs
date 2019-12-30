@@ -58,7 +58,9 @@ public class ObjectPooler : MonoBehaviour
 
         if (dict[go.name].Count > 0)
         {
-            return dict[go.name].Dequeue();
+            GameObject newGo = dict[go.name].Dequeue();
+            newGo.SetActive(true);
+            return newGo;
         }
         else
         {
