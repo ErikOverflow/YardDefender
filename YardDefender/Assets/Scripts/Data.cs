@@ -33,3 +33,17 @@ public class PlayerData
     public int Experience { get => experience; set => experience = value; }
     public int AttackLevel { get => attackLevel; set => attackLevel = value; }
 }
+
+[Serializable]
+public class WeaponData
+{
+    [SerializeField] int id;
+    [SerializeField] int playerId;
+    [SerializeField] int flatDamage = 0;
+    [SerializeField] float damageMultiplier = 1f;
+
+    [AutoIncrement, PrimaryKey] public int Id { get => id; set => id = value; }
+    public int PlayerId { get => playerId; set => playerId = value; }
+    public int FlatDamage { get => flatDamage; set => flatDamage = value; }
+    public float DamageMultiplier { get => damageMultiplier; set => damageMultiplier = value; }
+}

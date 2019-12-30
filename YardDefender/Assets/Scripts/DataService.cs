@@ -42,11 +42,7 @@ public class DataService : MonoBehaviour
         //Create all relavant tables if they don't exist yet
         _connection.CreateTable<SaveData>();
         _connection.CreateTable<PlayerData>();
-    }
-
-    public IEnumerable<SaveData> ReadSaveDatas()
-    {
-        return _connection.Table<SaveData>();
+        _connection.CreateTable<WeaponData>();
     }
 
     // CRUD for SaveData
@@ -65,6 +61,11 @@ public class DataService : MonoBehaviour
     public void CreateSaveData(SaveData saveData) //For debugging purposes only
     {
         _connection.Insert(saveData);
+    }
+
+    public IEnumerable<SaveData> ReadSaveDatas()
+    {
+        return _connection.Table<SaveData>();
     }
 
     public SaveData ReadSaveData(int id)
@@ -88,6 +89,11 @@ public class DataService : MonoBehaviour
     }
 
     //Crud for PlayerData
+
+    /// <summary>
+    /// Creates a new PlayerData in the database.
+    /// </summary>
+    /// <returns>ID of the newly created PlayerData</returns>
     public int CreatePlayerData()
     {
         PlayerData newPlayerData = new PlayerData();
@@ -109,7 +115,38 @@ public class DataService : MonoBehaviour
         _connection.Delete(playerData);
     }
 
+    //CRUD for WeaponData
 
+    /// <summary>
+    /// Creates a new WeaponData in the database.
+    /// </summary>
+    /// <returns>ID of the newly created WeaponData</returns>
+    public int CreateWeaponData()
+    {
+        WeaponData newWeaponData = new WeaponData();
+        _connection.Insert(newWeaponData);
+        return newWeaponData.Id;
+    }
+
+    public WeaponData ReadWeaponData(int id)
+    {
+        return _connection.Table<WeaponData>().Where(wd => wd.Id == id).FirstOrDefault();
+    }
+
+    public IEnumerable<WeaponData> ReadWeaponDatas(int playerId)
+    {
+        return _connection.Table<WeaponData>().Where(wd => wd.PlayerId == playerId);
+    }
+
+    public void UpdateWeaponData(WeaponData weaponData)
+    {
+        _connection.Update(weaponData);
+    }
+
+    public void DeleteWeaponData(WeaponData weaponData)
+    {
+        _connection.Delete(weaponData);
+    }
 
     /// <summary>
     /// Deletes the SaveData and any related PlayerData

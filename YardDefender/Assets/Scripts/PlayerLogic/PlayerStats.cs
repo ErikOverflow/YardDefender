@@ -15,12 +15,14 @@ public class PlayerStats : MonoBehaviour
     int nextLevelExperience = 0;
     [SerializeField] int attackLevel = 1;
     [SerializeField] BarkController barkController = null;
+    [SerializeField] PlayerEquipment playerEquipment = null; //Only READ from the equipment
 
     public int PlayerId { get => playerId; }
     public int Gold { get => gold; }
     public int Level { get => level; }
     public int Experience { get => experience; }
     public int AttackLevel { get => attackLevel; }
+    public int Damage { get => CalculateDamage(); }
 
     public Action OnStatChange;
 
@@ -30,6 +32,8 @@ public class PlayerStats : MonoBehaviour
         ActiveGame.instance.LoadGame();
 
         KillManager.instance.OnKill += EnemyKilled;
+        playerEquipment.OnEquipmentChange += ReInitialize;
+
     }
 
     private void EnemyKilled(MobStats mobStats, PlayerStats playerStats)
@@ -39,6 +43,11 @@ public class PlayerStats : MonoBehaviour
         ReInitialize();
         ActiveGame.instance.SaveGame();
         OnStatChange?.Invoke();
+    }
+
+    private int CalculateDamage()
+    {
+        return Mathf.FloorToInt((attackLevel + playerEquipment.FlatDamage) * level * playerEquipment.MultiplierDamage);
     }
 
     public void Initialize(PlayerData playerData, SaveData saveData)
@@ -55,7 +64,7 @@ public class PlayerStats : MonoBehaviour
 
     public void ReInitialize()
     {
-        while(experience >= nextLevelExperience)
+        while (experience >= nextLevelExperience)
         {
             level++;
             experience -= nextLevelExperience;
@@ -63,7 +72,7 @@ public class PlayerStats : MonoBehaviour
         }
         barkController.Initialize(
             DefaultBarkSize, //Attack Size
-            attackLevel //Attack Damage
+            Damage//Attack Damage
             );
     }
 
@@ -76,6 +85,7 @@ public class PlayerStats : MonoBehaviour
     public void OnDestroy()
     {
         KillManager.instance.OnKill -= EnemyKilled;
+        playerEquipment.OnEquipmentChange -= ReInitialize;
     }
 
     //public void KilledMob(MobStats mobStats)

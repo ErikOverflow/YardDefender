@@ -22,7 +22,7 @@ public class UIPlayerStats : MonoBehaviour
         goldText.text = playerStats.Gold.ToString();
         levelText.text = playerStats.Level.ToString();
         experienceText.text = playerStats.Experience.ToString();
-        attackText.text = playerStats.AttackLevel.ToString();
+        attackText.text = playerStats.Damage.ToString();
     }
 
     private void OnDestroy()
