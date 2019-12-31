@@ -8,8 +8,6 @@ public class LootWeapon : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer = null;
     WeaponData weaponData = null;
 
-    WaitForSeconds wfs = new WaitForSeconds(0.3f);
-
     public void Initialize(Weapon weapon)
     {
         weaponData = new WeaponData
@@ -22,19 +20,13 @@ public class LootWeapon : MonoBehaviour
         spriteRenderer.sprite = weaponData.Sprite;
     }
 
-    IEnumerator DelayPickup(PlayerEquipment playerEquipment)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        yield return wfs;
+        PlayerEquipment playerEquipment = collision.GetComponent<PlayerEquipment>();
         if (playerEquipment != null)
         {
             playerEquipment.PickupWeapon(weaponData);
         }
         gameObject.SetActive(false);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        PlayerEquipment playerEquipment = collision.GetComponent<PlayerEquipment>();
-        StartCoroutine(DelayPickup(playerEquipment));
     }
 }
