@@ -3019,6 +3019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2410331009a491e8c6a9828f0d8c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStats: {fileID: 945462293}
   equippedWeapon:
     id: 0
     name: 

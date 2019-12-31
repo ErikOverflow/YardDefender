@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class PlayerEquipment : MonoBehaviour
 {
+    [SerializeField] PlayerStats playerStats = null;
     [SerializeField] WeaponData equippedWeapon = null;
     //Can reroll all stats with gold
     //Can prestige weapons with gold after a certain number of kills with the weapon. Prestige unlocks special ability.
@@ -24,14 +25,17 @@ public class PlayerEquipment : MonoBehaviour
     public void EquipWeapon(WeaponData newWeapon)
     {
         equippedWeapon = newWeapon;
+        newWeapon.Equipped = true;
+        DataService.instance.UpdateWeaponData(newWeapon);
         OnEquipmentChange?.Invoke();
-        ActiveGame.instance.SaveGame();
     }
 
     public void PickupWeapon(WeaponData newWeapon)
     {
         weaponInventory.Add(newWeapon);
-        ActiveGame.instance.SaveGame();
+        newWeapon.Id = DataService.instance.CreateWeaponData();
+        newWeapon.PlayerId = playerStats.PlayerId;
+        DataService.instance.UpdateWeaponData(newWeapon);
     }
 
     public void Initialize(IEnumerable<WeaponData> weaponDatas)

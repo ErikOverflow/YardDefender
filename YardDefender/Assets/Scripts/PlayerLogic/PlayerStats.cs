@@ -44,7 +44,15 @@ public class PlayerStats : MonoBehaviour
         experience += mobStats.Experience;
         gold += mobStats.Gold;
         CalculateStats();
-        ActiveGame.instance.SaveGame();
+        PlayerData playerData = new PlayerData
+        {
+            Id = playerId,
+            AttackLevel = attackLevel,
+            Experience = experience,
+            GameId = ActiveGame.instance.GameId,
+            Level = level
+        };
+        DataService.instance.UpdatePlayerData(playerData);
         OnStatChange?.Invoke();
     }
 

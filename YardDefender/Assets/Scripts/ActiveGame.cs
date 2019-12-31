@@ -9,6 +9,8 @@ public class ActiveGame : MonoBehaviour
     [SerializeField] int saveId = 0;
     [SerializeField] PlayerStats playerStats = null;
 
+    public int GameId { get => saveId; }
+
     private void Awake()
     {
         if(instance != null)
