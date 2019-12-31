@@ -42,8 +42,9 @@ public class ActiveGame : MonoBehaviour
         //Get all playerdatas related to the save
         IEnumerable<PlayerData> playerDatas = DataService.instance.ReadPlayerDatas(saveData);
         PlayerData playerData = playerDatas.FirstOrDefault();
+        IEnumerable<WeaponData> weaponDatas = DataService.instance.ReadWeaponDatas(playerData.Id);
         //Update playerstats with the first one in the playerdatas list
-        playerStats?.Initialize(playerDatas.FirstOrDefault(), saveData);
+        playerStats?.Initialize(playerDatas.FirstOrDefault(), saveData, weaponDatas);
     }
 
     public void SaveGame()

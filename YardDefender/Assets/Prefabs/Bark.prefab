@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4035716496641096374}
   - component: {fileID: 4035716496641096375}
   - component: {fileID: 2023015897651528148}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Bark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,9 +120,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4035716496641096371}
   m_Enabled: 1
-  m_SortingLayerID: 830348751
-  m_SortingLayer: 4
-  m_SortingOrder: 1
+  m_SortingLayerID: 741865227
+  m_SortingLayer: 6
+  m_SortingOrder: 0
 --- !u!1 &4035716497487725031
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4035716497487725028}
   - component: {fileID: 4035716497487725029}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: BarkMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}

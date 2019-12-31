@@ -24,7 +24,7 @@ public class PlayerStats : MonoBehaviour
     public int AttackLevel { get => attackLevel; }
     public int Damage { get => CalculateDamage(); }
 
-    public IEnumerable<WeaponData> PlayerWeapons { get => playerEquipment.WeaponInventory; }
+    public IEnumerable<WeaponData> PlayerWeapons { get => playerEquipment.WeaponInventory;}
 
     public Action OnStatChange;
 
@@ -34,7 +34,7 @@ public class PlayerStats : MonoBehaviour
         ActiveGame.instance.LoadGame();
 
         KillManager.instance.OnKill += EnemyKilled;
-        playerEquipment.OnEquipmentChange += ReInitialize;
+        playerEquipment.OnEquipmentChange += CalculateStats;
 
     }
 
@@ -42,7 +42,7 @@ public class PlayerStats : MonoBehaviour
     {
         experience += mobStats.Experience;
         gold += mobStats.Gold;
-        ReInitialize();
+        CalculateStats();
         ActiveGame.instance.SaveGame();
         OnStatChange?.Invoke();
     }
@@ -52,7 +52,7 @@ public class PlayerStats : MonoBehaviour
         return Mathf.FloorToInt((attackLevel + playerEquipment.FlatDamage) * level * playerEquipment.MultiplierDamage);
     }
 
-    public void Initialize(PlayerData playerData, SaveData saveData)
+    public void Initialize(PlayerData playerData, SaveData saveData, IEnumerable<WeaponData> weaponDatas)
     {
         playerId = playerData.Id;
         gold = saveData.Gold;
@@ -60,11 +60,12 @@ public class PlayerStats : MonoBehaviour
         experience = playerData.Experience;
         nextLevelExperience = CalculateNextLevelExp();
         attackLevel = playerData.AttackLevel;
-        ReInitialize();
+        playerEquipment.Initialize(weaponDatas);
+        CalculateStats();
         OnStatChange?.Invoke();
     }
 
-    public void ReInitialize()
+    public void CalculateStats()
     {
         while (experience >= nextLevelExperience)
         {
@@ -87,13 +88,6 @@ public class PlayerStats : MonoBehaviour
     public void OnDestroy()
     {
         KillManager.instance.OnKill -= EnemyKilled;
-        playerEquipment.OnEquipmentChange -= ReInitialize;
+        playerEquipment.OnEquipmentChange -= CalculateStats;
     }
-
-    //public void KilledMob(MobStats mobStats)
-    //{
-    //    experience += mobStats.Experience;
-    //    OnStatChange?.Invoke();
-    //    ActiveGame.instance.SaveGame();
-    //}
 }

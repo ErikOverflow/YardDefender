@@ -15,8 +15,8 @@ TagManager:
   - 
   - Enemy
   - Player
-  - 
-  - 
+  - PlayerAttack
+  - Items
   - 
   - 
   - 
@@ -50,11 +50,14 @@ TagManager:
   - name: Enemy
     uniqueID: 3534394699
     locked: 0
+  - name: Player
+    uniqueID: 830348751
+    locked: 0
   - name: ItemDrop
     uniqueID: 3633883101
     locked: 0
-  - name: Player
-    uniqueID: 830348751
+  - name: PlayerAttack
+    uniqueID: 741865227
     locked: 0
   - name: HUD UI
     uniqueID: 158213123
