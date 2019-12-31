@@ -2912,7 +2912,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 830348751
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 83175fa077de72544a5c4613aa57f013, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3019,22 +3019,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2410331009a491e8c6a9828f0d8c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponInventory:
-  - id: 1
-    name: Beginner Weapon 3
+  equippedWeapon:
+    id: 0
+    name: 
     playerId: 0
-    flatDamage: 1
+    flatDamage: 0
     damageMultiplier: 1
-  - id: 2
-    name: Test
-    playerId: 0
-    flatDamage: 2
-    damageMultiplier: 1
-  - id: 16
-    name: Testicl
-    playerId: 0
-    flatDamage: 5
-    damageMultiplier: 1
+    equipped: 0
+  weaponInventory: []
 --- !u!58 &945462295
 CircleCollider2D:
   m_ObjectHideFlags: 0

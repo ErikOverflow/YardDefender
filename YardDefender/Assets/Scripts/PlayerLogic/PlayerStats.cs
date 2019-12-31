@@ -25,6 +25,7 @@ public class PlayerStats : MonoBehaviour
     public int Damage { get => CalculateDamage(); }
 
     public IEnumerable<WeaponData> PlayerWeapons { get => playerEquipment.WeaponInventory;}
+    public int WeaponEquippedId { get => playerEquipment.WeaponEquippedId; }
 
     public Action OnStatChange;
 
@@ -49,7 +50,12 @@ public class PlayerStats : MonoBehaviour
 
     private int CalculateDamage()
     {
-        return Mathf.FloorToInt((attackLevel + playerEquipment.FlatDamage) * level * playerEquipment.MultiplierDamage);
+        int damage = attackLevel;
+        if (playerEquipment.WeaponEquipped)
+            damage = Mathf.CeilToInt(damage * playerEquipment.MultiplierDamage);
+        if (playerEquipment.WeaponEquipped)
+            damage += playerEquipment.FlatDamage;
+        return damage;
     }
 
     public void Initialize(PlayerData playerData, SaveData saveData, IEnumerable<WeaponData> weaponDatas)

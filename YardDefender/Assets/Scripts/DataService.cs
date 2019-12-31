@@ -14,7 +14,7 @@ public class DataService : MonoBehaviour
 
     public void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Destroy(this);
             return;
@@ -155,7 +155,7 @@ public class DataService : MonoBehaviour
 
     public void DeleteWeaponDatas(IEnumerable<WeaponData> weaponDatas)
     {
-        foreach(WeaponData weaponData in weaponDatas)
+        foreach (WeaponData weaponData in weaponDatas)
         {
             DeleteWeaponData(weaponData);
         }
@@ -170,7 +170,7 @@ public class DataService : MonoBehaviour
         SaveData saveData = ReadSaveData(id);
         _connection.Delete(saveData);
         IEnumerable<PlayerData> playerDatas = ReadPlayerDatas(saveData);
-        foreach(PlayerData playerData in playerDatas)
+        foreach (PlayerData playerData in playerDatas)
         {
             DeletePlayerData(playerData);
         }

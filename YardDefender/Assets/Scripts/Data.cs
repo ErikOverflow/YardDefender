@@ -43,6 +43,7 @@ public class WeaponData
     [SerializeField] int playerId;
     [SerializeField] int flatDamage = 0;
     [SerializeField] float damageMultiplier = 1f;
+    [SerializeField] bool equipped = false;
 
     [AutoIncrement, PrimaryKey] public int Id { get => id; set => id = value; }
     public string Name { get => name; set => name = value; }
@@ -50,4 +51,5 @@ public class WeaponData
     public int FlatDamage { get => flatDamage; set => flatDamage = value; }
     public float DamageMultiplier { get => damageMultiplier; set => damageMultiplier = value; }
     public Sprite Sprite { get => WeaponTable.instance.GetWeapon(name).sprite;  }
+    public bool Equipped { get => equipped; set => equipped = value; }
 }
