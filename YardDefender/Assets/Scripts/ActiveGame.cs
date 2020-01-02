@@ -39,6 +39,7 @@ public class ActiveGame : MonoBehaviour
         SaveData saveData = DataService.instance.ReadSaveData(saveId);
         if(saveData == null)
         {
+            //This should not be reached during regular gameplay
             return;
         }
         //Get all playerdatas related to the save

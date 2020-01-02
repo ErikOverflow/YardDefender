@@ -50,12 +50,12 @@ public class WeaponData
     public int PlayerId { get => playerId; set => playerId = value; }
     public int FlatDamage { get => flatDamage; set => flatDamage = value; }
     public float DamageMultiplier { get => damageMultiplier; set => damageMultiplier = value; }
-    public Sprite Sprite { get => WeaponTable.instance.GetWeapon(name).sprite;  }
+    public Sprite Sprite { get => WeaponTableManager.instance.GetWeapon(name).sprite;  }
     public bool Equipped { get => equipped; set => equipped = value; }
 
     public void Reroll()
     {
-        Weapon weapon = WeaponTable.instance.GetWeapon(name);
+        Weapon weapon = WeaponTableManager.instance.GetWeapon(name);
         flatDamage = Random.Range(weapon.flatDamageMin, weapon.flatDamageMax + 1);
         damageMultiplier = Random.Range(weapon.multiplierDamageMin, weapon.multiplierDamageMax);
     }

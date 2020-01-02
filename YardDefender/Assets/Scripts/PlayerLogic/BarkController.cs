@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerStats))]
 public class BarkController : MonoBehaviour
 {
-    float barkSize = 1.0f;
+    float barkSize = 2.0f;
     int barkDamage = 1;
 
 #pragma warning disable 414
