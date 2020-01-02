@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,8 +30,15 @@ public class WeaponTable : MonoBehaviour
 
     public Weapon GetWeapon(string weaponName)
     {
+        if (string.IsNullOrEmpty(weaponName))
+            return null;
         Weapon weapon;
         weaponDict.TryGetValue(weaponName, out weapon);
         return weapon;
     }
+}
+
+public class WeaponNotInGlobalTableException : Exception
+{
+    public WeaponNotInGlobalTableException(string message) : base(message) { }
 }
