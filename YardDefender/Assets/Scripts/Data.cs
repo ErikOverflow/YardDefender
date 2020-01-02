@@ -51,6 +51,7 @@ public class WeaponData
     public int FlatDamage { get => flatDamage; set => flatDamage = value; }
     public float DamageMultiplier { get => damageMultiplier; set => damageMultiplier = value; }
     public Sprite Sprite { get => WeaponTableManager.instance.GetWeapon(name).sprite;  }
+    public int RerollCost { get => WeaponTableManager.instance.GetWeapon(name).rerollCost; }
     public bool Equipped { get => equipped; set => equipped = value; }
 
     public void Reroll()

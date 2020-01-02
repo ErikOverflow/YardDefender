@@ -8,8 +8,10 @@ public class ActiveGame : MonoBehaviour
     public static ActiveGame instance;
     [SerializeField] int saveId = 0;
     [SerializeField] PlayerStats playerStats = null;
+    [SerializeField] bool newGamePlus = false;
 
     public int GameId { get => saveId; }
+    public bool NewGamePlus { get => newGamePlus; }
 
     private void Awake()
     {
@@ -43,6 +45,7 @@ public class ActiveGame : MonoBehaviour
             return;
         }
         //Get all playerdatas related to the save
+        newGamePlus = saveData.NewGamePlus;
         IEnumerable<PlayerData> playerDatas = DataService.instance.ReadPlayerDatas(saveData);
         PlayerData playerData = playerDatas.FirstOrDefault();
         IEnumerable<WeaponData> weaponDatas = DataService.instance.ReadWeaponDatas(playerData.Id);

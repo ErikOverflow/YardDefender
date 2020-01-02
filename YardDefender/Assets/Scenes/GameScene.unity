@@ -3367,7 +3367,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -5568257498981804235, guid: 020128472b1b51d48900cf1332a00f10,
+    type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3611,6 +3612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 945462293}
+  uiEquipment: {fileID: 1645091054}
   goldText: {fileID: 1525508138}
   levelText: {fileID: 576994726}
   experienceText: {fileID: 293620272}

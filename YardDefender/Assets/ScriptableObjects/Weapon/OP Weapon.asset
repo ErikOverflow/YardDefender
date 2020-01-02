@@ -17,3 +17,4 @@ MonoBehaviour:
   flatDamageMax: 20
   multiplierDamageMin: 1
   multiplierDamageMax: 20
+  rerollCost: 10

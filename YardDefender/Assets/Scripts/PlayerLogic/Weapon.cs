@@ -8,4 +8,5 @@ public class Weapon : ScriptableObject
     public Sprite sprite;
     public int flatDamageMin, flatDamageMax;
     public float multiplierDamageMin, multiplierDamageMax;
+    public int rerollCost;
 }
