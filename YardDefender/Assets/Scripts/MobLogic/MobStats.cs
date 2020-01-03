@@ -8,11 +8,11 @@ public class MobStats : MonoBehaviour
     [SerializeField] int experience = 1;
     [SerializeField] int gold = 5;
 
-    public void Initialize(MobData mobData)
+    public void Initialize(Mob mob)
     {
-        health = mobData.baseHealth;
-        experience = mobData.baseExperience;
-        gold = mobData.baseGold;
+        health = mob.baseHealth;
+        experience = mob.baseExperience;
+        gold = mob.baseGold;
     }
 
     public int Health { get => health; }

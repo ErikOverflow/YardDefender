@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
-    [SerializeField] MobData mobData;
+    [SerializeField] Mob mob;
     [SerializeField] SpriteRenderer spriteRenderer = null;
     [SerializeField] Animator animator = null;
     [SerializeField] MobStats mobStats = null;
     [SerializeField] HealthController healthController = null;
     [SerializeField] LootController lootController = null;
 
-    public void Initialize(MobData _mobData)
+    public void Initialize(Mob _mob)
     {
-        mobData = _mobData;
+        mob = _mob;
         UpdateMob();
     }
 
     private void UpdateMob()
     {
-        spriteRenderer.sprite = mobData.sprite;
-        mobStats.Initialize(mobData);
+        spriteRenderer.sprite = mob.sprite;
+        mobStats.Initialize(mob);
         healthController.Initialize();
-        lootController.Initialize(mobData.weaponDrops);
-        if(mobData.overrideController != null)
+        lootController.Initialize(mob.weaponDrops);
+        if(mob.overrideController != null)
         {
-            animator.runtimeAnimatorController = mobData.overrideController;
+            animator.runtimeAnimatorController = mob.overrideController;
         }
     }
 }
