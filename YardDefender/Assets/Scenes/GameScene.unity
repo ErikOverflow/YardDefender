@@ -2620,8 +2620,9 @@ GameObject:
   - component: {fileID: 640375075}
   - component: {fileID: 640375074}
   - component: {fileID: 640375076}
+  - component: {fileID: 640375077}
   m_Layer: 10
-  m_Name: Grid
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2668,6 +2669,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkable: {fileID: 598825970}
+--- !u!114 &640375077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640375073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f3ac3cc8b5841f08628c6d2a281b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
 --- !u!1 &700883836
 GameObject:
   m_ObjectHideFlags: 0
@@ -23622,23 +23636,11 @@ PrefabInstance:
       propertyPath: playerStats
       value: 
       objectReference: {fileID: 945462293}
-    - target: {fileID: 2129058185918437916, guid: 938273b3cad574e28a8b24857bc35839,
+    - target: {fileID: 942815322327126582, guid: 938273b3cad574e28a8b24857bc35839,
         type: 3}
-      propertyPath: allWeapons.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2129058185918437916, guid: 938273b3cad574e28a8b24857bc35839,
-        type: 3}
-      propertyPath: allWeapons.Array.data[0]
+      propertyPath: levelStats
       value: 
-      objectReference: {fileID: 11400000, guid: b936e9fa7b2014ca7b722b1029d14f85,
-        type: 2}
-    - target: {fileID: 2129058185918437916, guid: 938273b3cad574e28a8b24857bc35839,
-        type: 3}
-      propertyPath: allWeapons.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 2d36122ec623b42ffa5336909cdd556b,
-        type: 2}
+      objectReference: {fileID: 640375077}
     - target: {fileID: 6161878407149375701, guid: 938273b3cad574e28a8b24857bc35839,
         type: 3}
       propertyPath: m_LocalPosition.x

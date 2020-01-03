@@ -43,6 +43,44 @@ public class DataService : MonoBehaviour
         _connection.CreateTable<SaveData>();
         _connection.CreateTable<PlayerData>();
         _connection.CreateTable<WeaponData>();
+        _connection.CreateTable<LevelData>();
+    }
+
+    //Generic CRUD
+    public int CreateRow<T>() where T : Data, new()
+    {
+        T newData = new T();
+        _connection.Insert(newData);
+        return newData.Id;
+    }
+
+    public T ReadData<T>(int id) where T : Data, new()
+    {
+        return _connection.Table<T>().Where(row => row.Id == id).FirstOrDefault();
+    }
+
+    public T ReadGameData<T>(int gameId) where T: GameData, new()
+    {
+        return _connection.Table<T>().Where(row => row.GameId == gameId).FirstOrDefault();
+    }
+
+    public void UpdateData<T>(T dataToUpdate)
+    {
+        _connection.Update(dataToUpdate);
+    }
+
+    public void DeleteData<T>(T dataToDelete)
+    {
+        _connection.Delete(dataToDelete);
+    }
+
+    //LevelData CRUD
+
+    public int CreateLevelData()
+    {
+        LevelData newData = new LevelData();
+        _connection.Insert(newData);
+        return newData.Id;
     }
 
     // CRUD for SaveData

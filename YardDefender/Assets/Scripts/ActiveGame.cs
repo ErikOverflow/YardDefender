@@ -8,6 +8,7 @@ public class ActiveGame : MonoBehaviour
     public static ActiveGame instance;
     [SerializeField] int saveId = 0;
     [SerializeField] PlayerStats playerStats = null;
+    [SerializeField] LevelStats levelStats = null;
     [SerializeField] bool newGamePlus = false;
 
     public int GameId { get => saveId; }
@@ -17,6 +18,8 @@ public class ActiveGame : MonoBehaviour
     {
         if(instance != null)
         {
+            instance.SetPlayerStats(this.playerStats);
+            instance.SetLevelStats(this.levelStats);
             Destroy(this);
         }
         else
@@ -31,9 +34,37 @@ public class ActiveGame : MonoBehaviour
         playerStats = _playerStats;
     }
 
+    public void SetLevelStats(LevelStats _levelStats)
+    {
+        levelStats = _levelStats;
+    }
+
     public void SetSaveId(int id)
     {
         saveId = id;
+    }
+
+    public void LoadData(LevelStats levelStats)
+    {
+        LevelData levelData = DataService.instance.ReadGameData<LevelData>(saveId);
+        levelStats.SetLevel(levelData.Level);
+    }
+
+    public void LoadData(PlayerStats playerStats)
+    {
+        SaveData saveData = DataService.instance.ReadSaveData(saveId);
+        if (saveData == null)
+        {
+            //This should not be reached during regular gameplay
+            return;
+        }
+        //Get all playerdatas related to the save
+        newGamePlus = saveData.NewGamePlus;
+        IEnumerable<PlayerData> playerDatas = DataService.instance.ReadPlayerDatas(saveData);
+        PlayerData playerData = playerDatas.FirstOrDefault();
+        IEnumerable<WeaponData> weaponDatas = DataService.instance.ReadWeaponDatas(playerData.Id);
+        //Update playerstats with the first one in the playerdatas list
+        playerStats.Initialize(playerDatas.FirstOrDefault(), saveData, weaponDatas);
     }
 
     public void LoadGame()
@@ -46,6 +77,8 @@ public class ActiveGame : MonoBehaviour
         }
         //Get all playerdatas related to the save
         newGamePlus = saveData.NewGamePlus;
+        LevelData levelData = DataService.instance.ReadGameData<LevelData>(saveId);
+        levelStats.SetLevel(levelData.Level);
         IEnumerable<PlayerData> playerDatas = DataService.instance.ReadPlayerDatas(saveData);
         PlayerData playerData = playerDatas.FirstOrDefault();
         IEnumerable<WeaponData> weaponDatas = DataService.instance.ReadWeaponDatas(playerData.Id);
@@ -59,7 +92,9 @@ public class ActiveGame : MonoBehaviour
         SaveData saveData = DataService.instance.ReadSaveData(saveId);
         saveData.Gold = playerStats.Gold;
         DataService.instance.UpdateSaveData(saveData);
-
+        LevelData levelData = DataService.instance.ReadGameData<LevelData>(saveId);
+        levelData.Level = levelStats.CurrentLevel;
+        DataService.instance.UpdateData<LevelData>(levelData);
         //Save player data
         IEnumerable<PlayerData> playerDatas = DataService.instance.ReadPlayerDatas(saveData);
         foreach(PlayerData playerData in playerDatas)

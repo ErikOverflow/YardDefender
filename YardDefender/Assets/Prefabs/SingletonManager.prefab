@@ -62,6 +62,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveId: 0
   playerStats: {fileID: 0}
+  levelStats: {fileID: 0}
+  newGamePlus: 0
 --- !u!114 &1854163769731255099
 MonoBehaviour:
   m_ObjectHideFlags: 0

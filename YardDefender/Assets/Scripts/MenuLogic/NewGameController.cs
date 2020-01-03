@@ -37,6 +37,13 @@ public class NewGameController : MonoBehaviour
         newPlayerData.GameId = newSaveData.Id;
         DataService.instance.UpdatePlayerData(newPlayerData);
 
+        //Create a new level and set it to level 1
+        int levelDataId = DataService.instance.CreateRow<LevelData>();
+        LevelData levelData = DataService.instance.ReadData<LevelData>(levelDataId);
+        levelData.GameId = newSaveData.Id;
+        levelData.Level = 10;
+        DataService.instance.UpdateData<LevelData>(levelData);
+
         ActiveGame.instance.SetSaveId(newSaveData.Id);
         //Load newGameData here
         SceneManager.LoadSceneAsync(gameScene.name);

@@ -50,7 +50,7 @@ public class WeaponData
     public int PlayerId { get => playerId; set => playerId = value; }
     public int FlatDamage { get => flatDamage; set => flatDamage = value; }
     public float DamageMultiplier { get => damageMultiplier; set => damageMultiplier = value; }
-    public Sprite Sprite { get => WeaponTableManager.instance.GetWeapon(name).sprite;  }
+    public Sprite Sprite { get => WeaponTableManager.instance.GetWeapon(name).sprite; }
     public int RerollCost { get => WeaponTableManager.instance.GetWeapon(name).rerollCost; }
     public bool Equipped { get => equipped; set => equipped = value; }
 
@@ -60,4 +60,29 @@ public class WeaponData
         flatDamage = Random.Range(weapon.flatDamageMin, weapon.flatDamageMax + 1);
         damageMultiplier = Random.Range(weapon.multiplierDamageMin, weapon.multiplierDamageMax);
     }
+}
+
+[Serializable]
+public class LevelData : GameData
+{
+    [SerializeField] private int id;
+    [SerializeField] int gameId;
+    [SerializeField] private int level = 1;
+
+    [AutoIncrement, PrimaryKey] public override int Id { get => id; set => id = value; }
+    public int Level { get => level; set => level = value; }
+    public override int GameId { get => gameId; set => gameId = value; }
+}
+
+[Serializable]
+public abstract class Data
+{
+    [AutoIncrement, PrimaryKey] public virtual int Id { get; set; }
+}
+
+[Serializable]
+public abstract class GameData : Data
+{
+
+    public abstract int GameId { get; set; }
 }
