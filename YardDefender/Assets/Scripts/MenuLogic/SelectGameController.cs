@@ -4,34 +4,33 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SelectGameController : MonoBehaviour
+namespace ErikOverflow.YardDefender
 {
-    [SerializeField]
-    TextMeshProUGUI saveName = null;
-    [SerializeField]
-    TextMeshProUGUI gold = null;
-    [SerializeField]
-    Object gameScene = null;
-
-    SaveData gameData = null;
-
-    public void SetData(SaveData _gameData)
+    public class SelectGameController : MonoBehaviour
     {
-        gameData = _gameData;
-        saveName.text = gameData.Name;
-        gold.text = gameData.Gold.ToString();
-    }
+        [SerializeField] TextMeshProUGUI saveName = null;
+        [SerializeField] TextMeshProUGUI gold = null;
+        [SerializeField] Object gameScene = null;
 
-    public void ContinueGame()
-    {
-        ActiveGame.instance.SetSaveId(gameData.Id);
-        //Load Scene
-        SceneManager.LoadSceneAsync(gameScene.name);
-    }
+        SaveData saveData = null;
 
-    public void DeleteGame()
-    {
-        DataService.instance.RecursiveDeleteSaveData(gameData.Id);
-        Destroy(this.gameObject);
+        public void SetData(SaveData _saveData)
+        {
+            saveData = _saveData;
+            saveName.text = saveData.Name;
+            //gold.text = gameData.Gold.ToString();
+        }
+
+        public void ContinueGame()
+        {
+            PlayerPrefs.SetInt("GameId", saveData.Id);
+            SceneManager.LoadSceneAsync(gameScene.name);
+        }
+
+        public void DeleteGame()
+        {
+            DataService.instance.DeleteRow<SaveData>(saveData);
+            Destroy(this.gameObject);
+        }
     }
 }
