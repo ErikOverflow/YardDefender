@@ -11,7 +11,10 @@ GameObject:
   - component: {fileID: 964647625792862801}
   - component: {fileID: 964647625792862800}
   - component: {fileID: 964647625792862807}
+  - component: {fileID: 973166406}
   - component: {fileID: 1752287315}
+  - component: {fileID: 973166405}
+  - component: {fileID: 973166404}
   m_Layer: 0
   m_Name: MobPrefab
   m_TagString: Untagged
@@ -71,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -760572597
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4bf718bb7a99d83489c6f66afb055450, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7fd88e44bb7b26f44a91a9d448695ef8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,6 +104,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &973166406
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964647625792862802}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &1752287315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,3 +147,32 @@ MonoBehaviour:
     id: 0
     saveId: 0
     name: 
+--- !u!114 &973166405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964647625792862802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c99237f674f4cabaa51eb3e2e18f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  moveSpeed: 1
+  mobInfo: {fileID: 1752287315}
+--- !u!114 &973166404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964647625792862802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f24dbf89fc745a9be5b431d6c1b17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobMovementInfo: {fileID: 973166405}
+  rb2d: {fileID: 973166406}

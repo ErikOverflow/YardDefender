@@ -15,8 +15,11 @@ namespace ErikOverflow.YardDefender
         [SerializeField] int experience = 0;
         [SerializeField] int gold = 0;
         [SerializeField] ItemData itemDrop = null;
+        GameObject lastDamageSource = null;
 
-        public Action OnInfoChange;
+        public Action OnDeath;
+
+        public GameObject LastDamageSource { get => lastDamageSource; }
 
         public void Initialize(int _maxHealth, int _experience, int _gold, ItemData _itemDrop, Sprite sprite, AnimatorOverrideController aoc)
         {
@@ -26,8 +29,22 @@ namespace ErikOverflow.YardDefender
             gold = _gold;
             itemDrop = _itemDrop;
             spriteRenderer.sprite = sprite;
-            animator.runtimeAnimatorController = aoc;
+            if(aoc != null)
+                animator.runtimeAnimatorController = aoc;
         }
-    
+
+        public void TakeDamage(int damageAmount, GameObject damageSource)
+        {
+            if (currentHealth <= 0)
+                return;
+            currentHealth -= damageAmount;
+            lastDamageSource = damageSource;
+            if(currentHealth <= 0)
+            {
+                OnDeath?.Invoke();
+            }
+            //animator.SetBool("Alive", false);
+        }
+
     }
 }

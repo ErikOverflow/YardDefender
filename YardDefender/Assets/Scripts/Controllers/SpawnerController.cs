@@ -8,6 +8,7 @@ namespace ErikOverflow.YardDefender
     {
         [SerializeField] GameObject mobPrefab = null;
         [SerializeField] SpawnerInfo spawnerInfo = null;
+        [SerializeField] LevelInfo levelInfo = null;
         [SerializeField] float spawnDelay = 0.5f;
 
         WaitForSeconds wfs = null;
@@ -40,6 +41,8 @@ namespace ErikOverflow.YardDefender
                 int mobGold = nextMob.baseGold * 1;
                 ItemData itemDrop = RollForItem(nextMob.itemDrops);
                 mobInfo.Initialize(mobHealth, mobExperience, mobGold, itemDrop, nextMob.sprite, nextMob.overrideController);
+                MobMovementInfo mobMovementInfo = go.GetComponent<MobMovementInfo>();
+                mobMovementInfo.SetTarget(levelInfo.BasePosition);
                 go.transform.SetParent(transform);
                 go.transform.localPosition = Vector3.zero;
 
