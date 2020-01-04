@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 6161878407149375706}
   - component: {fileID: 942815322327126582}
   - component: {fileID: 1854163769731255099}
-  - component: {fileID: 6044869926859313731}
-  - component: {fileID: 5704311399803909105}
   - component: {fileID: 2129058185918437916}
   m_Layer: 0
   m_Name: SingletonManager
@@ -80,31 +78,6 @@ MonoBehaviour:
   - gameObject: {fileID: 4035716496641096371, guid: 0403697debf6e4a4798d3bf24229fb14,
       type: 3}
     count: 5
---- !u!114 &6044869926859313731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6161878407149375707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16fe39ba1062af4479f948480c1f2194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  databaseName: game.db
---- !u!114 &5704311399803909105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6161878407149375707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43cf6801427ca438d942624088d58f3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2129058185918437916
 MonoBehaviour:
   m_ObjectHideFlags: 0

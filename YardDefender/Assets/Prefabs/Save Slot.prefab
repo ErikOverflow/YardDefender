@@ -1027,9 +1027,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveName: {fileID: 7463389947913991027}
-  level: {fileID: 7463389946479960206}
   gold: {fileID: 7463389946957584768}
-  gameScene: {fileID: 102900000, guid: d61cc730aae886041be193f313951e80, type: 3}
+  gameScene: {fileID: 102900000, guid: fb68585d1d2504d08bc0b0f5ef9eb4d3, type: 3}
 --- !u!1 &7463389946479960200
 GameObject:
   m_ObjectHideFlags: 0

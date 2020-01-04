@@ -90,7 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameField: {fileID: 7443039602345277660}
   ngPlus: {fileID: 7443039601497526762}
-  gameScene: {fileID: 102900000, guid: d61cc730aae886041be193f313951e80, type: 3}
+  gameScene: {fileID: 102900000, guid: fb68585d1d2504d08bc0b0f5ef9eb4d3, type: 3}
 --- !u!1 &5733311842141197207
 GameObject:
   m_ObjectHideFlags: 0
