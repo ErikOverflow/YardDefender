@@ -12,7 +12,7 @@ namespace ErikOverflow.YardDefender
     [Serializable]
     public abstract class Data
     {
-        int id;
+        [SerializeField] int id;
         [AutoIncrement, PrimaryKey] public int Id { get => id; set => id = value; }
     }
 
@@ -22,9 +22,9 @@ namespace ErikOverflow.YardDefender
     [Serializable]
     public abstract class GameData : Data
     {
-        [SerializeField] int gameId;
+        [SerializeField] int saveId;
 
-        public int GameId { get => gameId; set => gameId = value; }
+        public int SaveId { get => saveId; set => saveId = value; }
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ namespace ErikOverflow.YardDefender
 
 
     [Serializable]
-    public abstract class ItemData : GameData
+    public class ItemData : GameData
     {
         [SerializeField] string name;
 
@@ -62,10 +62,23 @@ namespace ErikOverflow.YardDefender
     [Serializable]
     public class WeaponData : ItemData
     {
+        [SerializeField] int itemId;
         [SerializeField] int damage;
         [SerializeField] int multiplier;
 
+        public int ItemId { get => itemId; set => itemId = value; }
         public int Damage { get => damage; set => damage = value; }
         public int Multiplier { get => multiplier; set => multiplier = value; }
+    }
+
+    // Currently not stored to DB
+    [Serializable]
+    public class HealthData
+    {
+        [SerializeField] int maxHealth;
+        [SerializeField] int currentHealth;
+
+        public int MaxHealth { get => maxHealth; set => maxHealth = value; }
+        public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
     }
 }

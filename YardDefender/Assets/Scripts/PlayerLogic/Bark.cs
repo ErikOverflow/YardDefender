@@ -2,50 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bark : MonoBehaviour
+namespace ErikOverflow.YardDefender
 {
-    int damage = 1;
-    float barkFinalSize = 3f;
-    private const float BarkTime = 0.2f;
-    Vector3 barkPos = Vector3.zero;
-    PlayerStats barkInitiator = null;
-    WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
-
-    public void Initialize(int _damage, float _barkFinalSize, Vector3 _barkPos, PlayerStats _barkInitiatior)
+    public class Bark : MonoBehaviour
     {
-        damage = _damage;
-        barkFinalSize = _barkFinalSize;
-        barkPos = _barkPos;
-        barkInitiator = _barkInitiatior;
-    }
+        int damage = 1;
+        float barkFinalSize = 3f;
+        private const float BarkTime = 0.2f;
+        Vector3 barkPos = Vector3.zero;
+        PlayerInfo barkInitiator = null;
+        WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
-    public void Activate()
-    {
-        transform.gameObject.SetActive(true);
-        transform.position = barkPos;
-        StartCoroutine(Barking());
-    }
-
-    IEnumerator Barking()
-    {
-        float time = 0f;
-        transform.localScale = Vector3.zero;
-        yield return waitForFixedUpdate;
-        while (time < BarkTime)
+        public void Initialize(int _damage, float _barkFinalSize, Vector3 _barkPos, PlayerInfo _barkInitiatior)
         {
-            time += Time.fixedDeltaTime;
-            if (time > BarkTime)
-                time = BarkTime;
-            transform.localScale = Vector3.one * (time * (barkFinalSize) / BarkTime);
-            yield return waitForFixedUpdate;
+            damage = _damage;
+            barkFinalSize = _barkFinalSize;
+            barkPos = _barkPos;
+            barkInitiator = _barkInitiatior;
         }
-        transform.gameObject.SetActive(false);
-        gameObject.SetActive(false);
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        HealthController hc = collision.GetComponent<HealthController>();
-        hc?.TakeDamage(damage, barkInitiator);
+        public void Activate()
+        {
+            transform.gameObject.SetActive(true);
+            transform.position = barkPos;
+            StartCoroutine(Barking());
+        }
+
+        IEnumerator Barking()
+        {
+            float time = 0f;
+            transform.localScale = Vector3.zero;
+            yield return waitForFixedUpdate;
+            while (time < BarkTime)
+            {
+                time += Time.fixedDeltaTime;
+                if (time > BarkTime)
+                    time = BarkTime;
+                transform.localScale = Vector3.one * (time * (barkFinalSize) / BarkTime);
+                yield return waitForFixedUpdate;
+            }
+            transform.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            throw new System.Exception("HealthInfo and HealthController not yet implemented.");
+            //HealthController hc = collision.GetComponent<HealthController>();
+            //hc?.TakeDamage(damage, barkInitiator);
+        }
     }
 }

@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6161878407149375701}
   - component: {fileID: 6161878407149375706}
-  - component: {fileID: 942815322327126582}
   - component: {fileID: 1854163769731255099}
-  - component: {fileID: 2129058185918437916}
+  - component: {fileID: 9088112239749414244}
   m_Layer: 0
   m_Name: SingletonManager
   m_TagString: Untagged
@@ -46,22 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299ef78e832c24943bb9cd39c7437819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &942815322327126582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6161878407149375707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 338fc77ddfd125f40a7cfe28376b68d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveId: 0
-  playerStats: {fileID: 0}
-  levelStats: {fileID: 0}
-  newGamePlus: 0
 --- !u!114 &1854163769731255099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +61,7 @@ MonoBehaviour:
   - gameObject: {fileID: 4035716496641096371, guid: 0403697debf6e4a4798d3bf24229fb14,
       type: 3}
     count: 5
---- !u!114 &2129058185918437916
+--- !u!114 &9088112239749414244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +70,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6161878407149375707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf4a3ba7ef8cb4f248ec7e20a348da0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 95e5f74113ba64be795f1c42239ceb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalWeaponTable: {fileID: 11400000, guid: 1b23b7ddc84fde9449e1e00fe34284a6, type: 2}
+  databaseName: gameRestructuring.db

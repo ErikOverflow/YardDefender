@@ -9,6 +9,7 @@ namespace ErikOverflow.YardDefender
     public class SelectGameController : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI saveName = null;
+#pragma warning disable 414
         [SerializeField] TextMeshProUGUI gold = null;
         [SerializeField] Object gameScene = null;
 

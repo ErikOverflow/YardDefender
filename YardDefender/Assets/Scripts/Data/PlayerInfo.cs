@@ -7,21 +7,22 @@ namespace ErikOverflow.YardDefender
 {
     public class PlayerInfo : MonoBehaviour
     {
-        [SerializeField] int saveId = 0;
+        [SerializeField] GameInfo gameInfo = null;
         [SerializeField] PlayerData playerData = null;
 
         public Action OnInfoChange;
 
         public PlayerData PlayerData { get => playerData; }
 
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            if (PlayerPrefs.HasKey(Constants.SaveIdPref))
-            {
-                saveId = PlayerPrefs.GetInt(Constants.SaveIdPref);
-            }
-            playerData = DataService.instance.ReadRowByGameId<PlayerData>(saveId);
+            gameInfo.OnInfoChange += LoadPlayerData;
+            LoadPlayerData();
+        }
+
+        void LoadPlayerData()
+        {
+            playerData = DataService.instance.ReadRowByGameId<PlayerData>(gameInfo.SaveData.Id);
             OnInfoChange?.Invoke();
         }
 
@@ -48,6 +49,11 @@ namespace ErikOverflow.YardDefender
         int CalculateExperienceNeeded()
         {
             return 100;
+        }
+
+        private void OnDestroy()
+        {
+            gameInfo.OnInfoChange -= LoadPlayerData;
         }
     }
 }

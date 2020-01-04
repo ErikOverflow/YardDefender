@@ -32,6 +32,8 @@ namespace ErikOverflow.YardDefender
         private void CreateDB()
         {
             _connection.CreateTable<SaveData>();
+            _connection.CreateTable<PlayerData>();
+            _connection.CreateTable<ItemData>();
         }
 
         //Generic CRUD
@@ -47,9 +49,14 @@ namespace ErikOverflow.YardDefender
             return _connection.Table<T>().Where(row => row.Id == id).FirstOrDefault();
         }
 
-        public T ReadRowByGameId<T>(int gameId) where T : GameData, new()
+        public T ReadRowByGameId<T>(int saveId) where T : GameData, new()
         {
-            return _connection.Table<T>().Where(row => row.GameId == gameId).FirstOrDefault();
+            return _connection.Table<T>().Where(row => row.SaveId == saveId).FirstOrDefault();
+        }
+
+        public IEnumerable<T> ReadRowsByGameId<T>(int saveId) where T : GameData, new()
+        {
+            return _connection.Table<T>().Where(row => row.SaveId == saveId);
         }
 
         public IEnumerable<T> ReadAllRows<T>() where T : new()

@@ -11,6 +11,7 @@ namespace ErikOverflow.YardDefender
     public class NewGameController : MonoBehaviour
     {
         [SerializeField] TMP_InputField nameField = null;
+#pragma warning disable 414
         [SerializeField] Toggle ngPlus = null;
         [SerializeField] Object gameScene = null;
 

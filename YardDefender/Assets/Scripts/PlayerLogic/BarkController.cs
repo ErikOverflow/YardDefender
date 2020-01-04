@@ -2,66 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerStats))]
-public class BarkController : MonoBehaviour
+namespace ErikOverflow.YardDefender
 {
-    float barkSize = 2.0f;
-    int barkDamage = 1;
+    public class BarkController : MonoBehaviour
+    {
+        float barkSize = 2.0f;
+        int barkDamage = 1;
 
 #pragma warning disable 414
-    [SerializeField]
-    int touchNum = 2;
+        [SerializeField] int touchNum = 2;
+        [SerializeField] PlayerInfo playerInfo = null;
+        [SerializeField] GameObject barkPrefab = null;
 
-    [SerializeField]
-    GameObject barkPrefab = null;
+        bool active = false;
 
-    bool active = false;
-    PlayerStats playerStats = null;
-    // Start is called before the first frame update
-    void Awake()
-    {
-        playerStats = GetComponent<PlayerStats>();
+        // Start is called before the first frame update
+        void Awake()
+        {
 #if UNITY_IOS || UNITY_ANDROID
         TouchManager.TouchInput += HandleTouch;
 #endif
-    }
+        }
 
-    public void Initialize(float _barkSize, int _barkDamage)
-    {
-        barkSize = _barkSize;
-        barkDamage = _barkDamage;
-    }
+        public void Initialize(float _barkSize, int _barkDamage)
+        {
+            barkSize = _barkSize;
+            barkDamage = _barkDamage;
+        }
 
-    void HandleTouch(int fingerNum, Touch touch)
-    {
-        if (fingerNum != touchNum)
-            return;
-        if(touch.phase == TouchPhase.Began)
-            StartCoroutine(Bark());
-    }
+        void HandleTouch(int fingerNum, Touch touch)
+        {
+            if (fingerNum != touchNum)
+                return;
+            if (touch.phase == TouchPhase.Began)
+                StartCoroutine(Bark());
+        }
 
 #if !UNITY_IOS && !UNITY_ANDROID
-    void Update()
-    {
-        if (Input.GetButtonDown("Fire1"))
+        void Update()
         {
-            StartCoroutine(Bark());
+            if (Input.GetButtonDown("Fire1"))
+            {
+                StartCoroutine(Bark());
+            }
         }
-    }
 #endif
 
-    IEnumerator Bark()
-    {
-        if (active)
-            yield break;
-        active = true;
-        GameObject barkObj = ObjectPooler.instance.GetPooledObject(barkPrefab);
-        Bark bark = barkObj.GetComponent<Bark>();
-        bark.Initialize(barkDamage, barkSize, transform.position, playerStats);
-        bark.Activate();
-        yield return null;
-        active = false;
-    }
+        IEnumerator Bark()
+        {
+            if (active)
+                yield break;
+            active = true;
+            GameObject barkObj = ObjectPooler.instance.GetPooledObject(barkPrefab);
+            Bark bark = barkObj.GetComponent<Bark>();
+            bark.Initialize(barkDamage, barkSize, transform.position, playerInfo);
+            bark.Activate();
+            yield return null;
+            active = false;
+        }
 
 #if UNITY_IOS || UNITY_ANDROID
     void OnDestroy()
@@ -69,4 +67,5 @@ public class BarkController : MonoBehaviour
         TouchManager.TouchInput -= HandleTouch;
     }
 #endif
+    }
 }
