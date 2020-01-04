@@ -29,18 +29,6 @@ namespace ErikOverflow.YardDefender
             CreateDB();
         }
 
-        //public void Start()
-        //{
-        //    SaveData sd = CreateRow<SaveData>();
-        //    sd.Name = "Erik's new game!";
-        //    UpdateRow<SaveData>(sd);
-            
-        //    foreach (SaveData gd in ReadAllRows<SaveData>())
-        //    {
-        //        Debug.Log(gd.Name);
-        //    }
-        //}
-
         private void CreateDB()
         {
             _connection.CreateTable<SaveData>();

@@ -10,27 +10,20 @@ namespace ErikOverflow.YardDefender
     //Generates new game slot buttons
     public class NewGameController : MonoBehaviour
     {
-        [SerializeField]
-        TMP_InputField nameField = null;
-        [SerializeField]
-        Toggle ngPlus = null;
-        [SerializeField]
-        Object gameScene = null;
+        [SerializeField] TMP_InputField nameField = null;
+        [SerializeField] Toggle ngPlus = null;
+        [SerializeField] Object gameScene = null;
 
-        void Start()
-        {
+        SaveInfo saveInfo = null;
 
-            //if game has been beaten at least once, enable hardcore toggle
-        }
+        public SaveInfo SaveInfo { set => saveInfo = value; }
 
         public void CreateGame()
         {
-            SaveData saveData = DataService.instance.CreateRow<SaveData>();
-            saveData.Name = nameField.text;
-            DataService.instance.UpdateRow<SaveData>(saveData);
-            PlayerPrefs.SetInt("GameId", saveData.Id);
+            int saveId = saveInfo.NewGame(nameField.text);
+            PlayerPrefs.SetInt("GameId", saveId);
 
-            //Load newGameData here
+            //Load next scene with current save ID
             SceneManager.LoadSceneAsync(gameScene.name);
         }
     }

@@ -35,6 +35,8 @@ namespace ErikOverflow.YardDefender
                 selectGameController.SetData(saveData);
             }
             GameObject newSlot = ObjectPooler.instance.GetPooledObject(newGameSlotPrefab);
+            NewGameController newGameController = newSlot.GetComponent<NewGameController>();
+            newGameController.SaveInfo = saveInfo;
             newSlot.transform.SetParent(saveSlotLayoutGroup);
             newSlot.transform.localScale = Vector3.one;
         }

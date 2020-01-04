@@ -18,5 +18,13 @@ namespace ErikOverflow.YardDefender
             saveDatas = DataService.instance.ReadAllRows<SaveData>();
             OnInfoChanged?.Invoke();
         }
+
+        public int NewGame(string name)
+        {
+            SaveData saveData = DataService.instance.CreateRow<SaveData>();
+            saveData.Name = name;
+            DataService.instance.UpdateRow<SaveData>(saveData);
+            return saveData.Id;
+        }
     }
 }
