@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace ErikOverflow.YardDefender
         public List<ItemDrop> itemDrops;
     }
 
+    [Serializable]
     public struct ItemDrop
     {
         public ItemTemplate itemTemplate;

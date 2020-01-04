@@ -35,32 +35,32 @@ public class PlayerData
     public int AttackLevel { get => attackLevel; set => attackLevel = value; }
 }
 
-[Serializable]
-public class WeaponData
-{
-    [SerializeField] int id;
-    [SerializeField] string name;
-    [SerializeField] int playerId;
-    [SerializeField] int flatDamage = 0;
-    [SerializeField] float damageMultiplier = 1f;
-    [SerializeField] bool equipped = false;
+//[Serializable]
+//public class WeaponData
+//{
+//    [SerializeField] int id;
+//    [SerializeField] string name;
+//    [SerializeField] int playerId;
+//    [SerializeField] int flatDamage = 0;
+//    [SerializeField] float damageMultiplier = 1f;
+//    [SerializeField] bool equipped = false;
 
-    [AutoIncrement, PrimaryKey] public int Id { get => id; set => id = value; }
-    public string Name { get => name; set => name = value; }
-    public int PlayerId { get => playerId; set => playerId = value; }
-    public int FlatDamage { get => flatDamage; set => flatDamage = value; }
-    public float DamageMultiplier { get => damageMultiplier; set => damageMultiplier = value; }
-    public Sprite Sprite { get => WeaponTableManager.instance.GetWeapon(name).sprite; }
-    public int RerollCost { get => WeaponTableManager.instance.GetWeapon(name).rerollCost; }
-    public bool Equipped { get => equipped; set => equipped = value; }
+//    [AutoIncrement, PrimaryKey] public int Id { get => id; set => id = value; }
+//    public string Name { get => name; set => name = value; }
+//    public int PlayerId { get => playerId; set => playerId = value; }
+//    public int FlatDamage { get => flatDamage; set => flatDamage = value; }
+//    public float DamageMultiplier { get => damageMultiplier; set => damageMultiplier = value; }
+//    public Sprite Sprite { get => WeaponTableManager.instance.GetWeapon(name).sprite; }
+//    public int RerollCost { get => WeaponTableManager.instance.GetWeapon(name).rerollCost; }
+//    public bool Equipped { get => equipped; set => equipped = value; }
 
-    public void Reroll()
-    {
-        Weapon weapon = WeaponTableManager.instance.GetWeapon(name);
-        flatDamage = Random.Range(weapon.flatDamageMin, weapon.flatDamageMax + 1);
-        damageMultiplier = Random.Range(weapon.multiplierDamageMin, weapon.multiplierDamageMax);
-    }
-}
+//    public void Reroll()
+//    {
+//        Weapon weapon = //WeaponTableManager.instance.GetWeapon(name);
+//        flatDamage = Random.Range(weapon.flatDamageMin, weapon.flatDamageMax + 1);
+//        damageMultiplier = Random.Range(weapon.multiplierDamageMin, weapon.multiplierDamageMax);
+//    }
+//}
 
 [Serializable]
 public class LevelData : GameData

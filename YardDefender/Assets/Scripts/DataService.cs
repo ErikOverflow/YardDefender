@@ -42,7 +42,7 @@ public class DataService : MonoBehaviour
         //Create all relavant tables if they don't exist yet
         _connection.CreateTable<SaveData>();
         _connection.CreateTable<PlayerData>();
-        _connection.CreateTable<WeaponData>();
+        //_connection.CreateTable<WeaponData>();
         _connection.CreateTable<LevelData>();
     }
 
@@ -159,45 +159,45 @@ public class DataService : MonoBehaviour
     /// Creates a new WeaponData in the database.
     /// </summary>
     /// <returns>ID of the newly created WeaponData</returns>
-    public int CreateWeaponData()
-    {
-        WeaponData newWeaponData = new WeaponData();
-        _connection.Insert(newWeaponData);
-        return newWeaponData.Id;
-    }
+    //public int CreateWeaponData()
+    //{
+    //    WeaponData newWeaponData = new WeaponData();
+    //    _connection.Insert(newWeaponData);
+    //    return newWeaponData.Id;
+    //}
 
-    public WeaponData ReadWeaponData(int id)
-    {
-        return _connection.Table<WeaponData>().Where(wd => wd.Id == id).FirstOrDefault();
-    }
+    //public WeaponData ReadWeaponData(int id)
+    //{
+    //    return _connection.Table<WeaponData>().Where(wd => wd.Id == id).FirstOrDefault();
+    //}
 
-    public IEnumerable<WeaponData> ReadWeaponDatas(int playerId)
-    {
-        return _connection.Table<WeaponData>().Where(wd => wd.PlayerId == playerId);
-    }
+    //public IEnumerable<WeaponData> ReadWeaponDatas(int playerId)
+    //{
+    //    return _connection.Table<WeaponData>().Where(wd => wd.PlayerId == playerId);
+    //}
 
-    public void UpdateWeaponData(WeaponData weaponData)
-    {
-        _connection.Update(weaponData);
-    }
+    //public void UpdateWeaponData(WeaponData weaponData)
+    //{
+    //    _connection.Update(weaponData);
+    //}
 
-    public void UpdateWeaponDatas(IEnumerable<WeaponData> weaponDatas)
-    {
-        _connection.UpdateAll(weaponDatas);
-    }
+    //public void UpdateWeaponDatas(IEnumerable<WeaponData> weaponDatas)
+    //{
+    //    _connection.UpdateAll(weaponDatas);
+    //}
 
-    public void DeleteWeaponData(WeaponData weaponData)
-    {
-        _connection.Delete(weaponData);
-    }
+    //public void DeleteWeaponData(WeaponData weaponData)
+    //{
+    //    _connection.Delete(weaponData);
+    //}
 
-    public void DeleteWeaponDatas(IEnumerable<WeaponData> weaponDatas)
-    {
-        foreach (WeaponData weaponData in weaponDatas)
-        {
-            DeleteWeaponData(weaponData);
-        }
-    }
+    //public void DeleteWeaponDatas(IEnumerable<WeaponData> weaponDatas)
+    //{
+    //    foreach (WeaponData weaponData in weaponDatas)
+    //    {
+    //        DeleteWeaponData(weaponData);
+    //    }
+    //}
 
     /// <summary>
     /// Deletes the SaveData and any related PlayerData

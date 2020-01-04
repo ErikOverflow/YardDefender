@@ -64,11 +64,11 @@ namespace ErikOverflow.YardDefender
     {
         [SerializeField] int itemId;
         [SerializeField] int damage;
-        [SerializeField] int multiplier;
+        [SerializeField] float multiplier;
 
         public int ItemId { get => itemId; set => itemId = value; }
         public int Damage { get => damage; set => damage = value; }
-        public int Multiplier { get => multiplier; set => multiplier = value; }
+        public float Multiplier { get => multiplier; set => multiplier = value; }
     }
 
     // Currently not stored to DB

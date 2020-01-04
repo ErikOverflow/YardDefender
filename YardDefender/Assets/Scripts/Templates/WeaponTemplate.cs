@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ErikOverflow.YardDefender
 {
     [CreateAssetMenu(fileName = "New Weapon Template", menuName = "Create New Weapon Template", order = 0)]
-    public class WeaponTemplate : ScriptableObject
+    public class WeaponTemplate : ItemTemplate
     {
         public int flatDamageMin, flatDamageMax;
         public float multiplierDamageMin, multiplierDamageMax;
