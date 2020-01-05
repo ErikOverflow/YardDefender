@@ -19,6 +19,7 @@ namespace ErikOverflow.YardDefender
         public List<ItemData> AllItemDatas { get => new List<ItemData>().Concat(itemDatas).Concat(weaponDatas).ToList(); }
 
         public Action OnInfoChange;
+        public Action OnInfoLoaded;
 
         // Start is called before the first frame update
         void Start()
@@ -32,6 +33,12 @@ namespace ErikOverflow.YardDefender
             itemDatas = DataService.instance.ReadRowsByGameId<ItemData>(gameInfo.SaveData.Id).ToList();
             weaponDatas = DataService.instance.ReadRowsByGameId<WeaponData>(gameInfo.SaveData.Id).ToList();
             OnInfoChange?.Invoke();
+            OnInfoLoaded?.Invoke();
+        }
+
+        public WeaponData GetWeaponData(int id)
+        {
+            return weaponDatas.FirstOrDefault(wd => wd.Id == id);
         }
 
         public void AddItem(ItemData itemData)

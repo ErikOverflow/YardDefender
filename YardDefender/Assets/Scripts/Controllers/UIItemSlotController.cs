@@ -23,5 +23,10 @@ namespace ErikOverflow.YardDefender
             ItemDictionary.Instance.TryGetValue(uIItemSlotInfo.ItemData.Guid, out itemTemplate);
             image.sprite = itemTemplate.sprite;
         }
+
+        public void UseItem()
+        {
+            uIItemSlotInfo.EquipmentInfo.EquipItem(uIItemSlotInfo.ItemData);
+        }
     }
 }

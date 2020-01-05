@@ -50,7 +50,7 @@ namespace ErikOverflow.YardDefender
         public int Gold { get => gold; set => gold = value; }
     }
 
-    [SerializeField]
+    [Serializable]
     public class EquipmentData : GameData
     {
         [SerializeField] int equippedWeapon;

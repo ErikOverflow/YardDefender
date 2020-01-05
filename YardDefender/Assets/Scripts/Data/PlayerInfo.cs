@@ -9,9 +9,9 @@ namespace ErikOverflow.YardDefender
     {
         [SerializeField] GameInfo gameInfo = null;
         [SerializeField] PlayerData playerData = null;
-
+        
         public Action OnInfoChange;
-
+        
         public PlayerData PlayerData { get => playerData; }
 
         private void Start()

@@ -14,6 +14,7 @@ namespace ErikOverflow.YardDefender
             if (itemInfo == null)
                 return;
             inventoryInfo.AddItem(itemInfo.ItemData);
+            itemInfo.gameObject.SetActive(false);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ErikOverflow.YardDefender
 {
@@ -11,13 +13,19 @@ namespace ErikOverflow.YardDefender
         [SerializeField] GameObject inventorySlotPrefab = null;
         [SerializeField] Transform inventoryContent = null;
 
+        [SerializeField] Image equippedWeaponImage = null;
+        [SerializeField] TextMeshProUGUI rerollCost = null;
+        [SerializeField] TextMeshProUGUI flatDamageText = null;
+        [SerializeField] TextMeshProUGUI multiplierText = null;
+
 
         // Start is called before the first frame update
         void Start()
         {
             inventoryInfo.OnInfoChange += ReloadInventory;
-            equipmentInfo.OnInfoChange += ReloadInventory;
+            equipmentInfo.OnInfoChange += ReloadEquipment;
             ReloadInventory();
+            ReloadEquipment();
         }
 
         void ReloadInventory()
@@ -32,7 +40,32 @@ namespace ErikOverflow.YardDefender
                 go.transform.SetParent(inventoryContent);
                 go.transform.localScale = Vector3.one;
                 UIItemSlotInfo uIItemSlotInfo = go.GetComponent<UIItemSlotInfo>();
-                uIItemSlotInfo.Initialize(itemData);
+                uIItemSlotInfo.Initialize(itemData, equipmentInfo);
+            }
+        }
+
+        void ReloadEquipment()
+        {
+            WeaponData weaponData = equipmentInfo.WeaponData;
+            if(weaponData == null)
+            {
+                //Zero out fields
+            }
+            else
+            {
+                ItemTemplate itemTemplate;
+                ItemDictionary.Instance.TryGetValue(weaponData.Guid, out itemTemplate);
+                if(itemTemplate is WeaponTemplate weaponTemplate)
+                {
+                    equippedWeaponImage.sprite = weaponTemplate.sprite;
+                    rerollCost.text = weaponTemplate.rerollCost.ToString();
+                }
+                else
+                {
+                    //no reroll cost
+                }
+                flatDamageText.text = weaponData.Damage.ToString();
+                multiplierText.text = weaponData.Multiplier.ToString("G4");
             }
         }
     }

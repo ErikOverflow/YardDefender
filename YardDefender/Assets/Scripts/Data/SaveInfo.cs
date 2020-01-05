@@ -29,6 +29,10 @@ namespace ErikOverflow.YardDefender
             playerData.SaveId = saveData.Id;
             DataService.instance.UpdateRow<PlayerData>(playerData);
 
+            EquipmentData equipmentData = DataService.instance.CreateRow<EquipmentData>();
+            equipmentData.SaveId = saveData.Id;
+            equipmentData.EquippedWeapon = -1;
+            DataService.instance.UpdateRow<EquipmentData>(equipmentData);
             //ItemData itemData = DataService.instance.CreateRow<ItemData>();
             //itemData.SaveId = saveData.Id;
             //DataService.instance.UpdateRow<ItemData>(itemData);

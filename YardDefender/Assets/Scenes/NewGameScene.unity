@@ -813,7 +813,6 @@ GameObject:
   - component: {fileID: 311077238}
   - component: {fileID: 311077237}
   - component: {fileID: 311077236}
-  - component: {fileID: 311077239}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -897,30 +896,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311077234}
   m_CullTransparentMesh: 0
---- !u!114 &311077239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311077234}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 15
-    m_Right: 15
-    m_Top: 15
-    m_Bottom: 15
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 50, y: 50}
-  m_Spacing: {x: 15, y: 15}
-  m_Constraint: 0
-  m_ConstraintCount: 2
 --- !u!1 &325564973
 GameObject:
   m_ObjectHideFlags: 0
@@ -3800,6 +3775,10 @@ MonoBehaviour:
   inventorySlotPrefab: {fileID: 1969343579958954132, guid: c595c180ab5a4494780a1fa80088f72c,
     type: 3}
   inventoryContent: {fileID: 1912048896}
+  equippedWeaponImage: {fileID: 1758134576}
+  rerollCost: {fileID: 952212235}
+  flatDamageText: {fileID: 1269675660}
+  multiplierText: {fileID: 1128784008}
 --- !u!1 &923191201
 GameObject:
   m_ObjectHideFlags: 0
@@ -4315,7 +4294,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ea881cbc1ce40ab9c92ae1bca148f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameInfo: {fileID: 0}
+  gameInfo: {fileID: 1335549387}
+  equipmentData:
+    id: 0
+    saveId: 0
+    equippedWeapon: -1
+  inventoryInfo: {fileID: 945462293}
+  weaponData:
+    id: 0
+    saveId: 0
+    name: 
+    guid: 
+    damage: 0
+    multiplier: 0
 --- !u!58 &945462295
 CircleCollider2D:
   m_ObjectHideFlags: 0
