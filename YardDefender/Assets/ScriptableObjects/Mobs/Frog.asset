@@ -20,3 +20,5 @@ MonoBehaviour:
   itemDrops:
   - itemTemplate: {fileID: 11400000, guid: eeb1142c4d360480ebf0da3e7311adf8, type: 2}
     dropRate: 0.5
+  - itemTemplate: {fileID: 11400000, guid: 1ffe574cf3b804597a08da8d75558766, type: 2}
+    dropRate: 0.5

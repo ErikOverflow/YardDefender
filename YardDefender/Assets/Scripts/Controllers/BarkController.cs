@@ -6,9 +6,6 @@ namespace ErikOverflow.YardDefender
 {
     public class BarkController : MonoBehaviour
     {
-        float barkSize = 2.0f;
-        int barkDamage = 1;
-
 #pragma warning disable 414
         [SerializeField] int touchNum = 2;
         [SerializeField] PlayerInfo playerInfo = null;
@@ -22,12 +19,6 @@ namespace ErikOverflow.YardDefender
 #if UNITY_IOS || UNITY_ANDROID
         TouchManager.TouchInput += HandleTouch;
 #endif
-        }
-
-        public void Initialize(float _barkSize, int _barkDamage)
-        {
-            barkSize = _barkSize;
-            barkDamage = _barkDamage;
         }
 
         void HandleTouch(int fingerNum, Touch touch)
@@ -54,8 +45,8 @@ namespace ErikOverflow.YardDefender
                 yield break;
             active = true;
             GameObject barkObj = ObjectPooler.instance.GetPooledObject(barkPrefab);
-            Bark bark = barkObj.GetComponent<Bark>();
-            bark.Initialize(barkDamage, barkSize, transform.position, playerInfo);
+            BarkInfo bark = barkObj.GetComponent<BarkInfo>();
+            bark.Initialize(playerInfo.Attack, playerInfo.BarkSize, transform.position, playerInfo);
             bark.Activate();
             yield return null;
             active = false;

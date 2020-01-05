@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ErikOverflow.YardDefender
 {
-    public class Bark : MonoBehaviour
+    public class BarkInfo : MonoBehaviour
     {
         int damage = 1;
         float barkFinalSize = 3f;

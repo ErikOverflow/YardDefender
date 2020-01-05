@@ -3390,7 +3390,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 930891217}
   m_HandleRect: {fileID: 930891216}
-  m_Direction: 3
+  m_Direction: 2
   m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
@@ -4151,6 +4151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameInfo: {fileID: 1335549387}
+  equipmentInfo: {fileID: 945462294}
   playerData:
     id: 0
     saveId: 0

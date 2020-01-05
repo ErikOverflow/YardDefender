@@ -8,11 +8,28 @@ namespace ErikOverflow.YardDefender
     public class PlayerInfo : MonoBehaviour
     {
         [SerializeField] GameInfo gameInfo = null;
+        [SerializeField] EquipmentInfo equipmentInfo = null;
         [SerializeField] PlayerData playerData = null;
         
         public Action OnInfoChange;
         
         public PlayerData PlayerData { get => playerData; }
+        public int Attack
+        {
+            get
+            {
+                if (equipmentInfo.WeaponData == null)
+                    return 1;
+                return Mathf.FloorToInt(equipmentInfo.WeaponData.Damage * equipmentInfo.WeaponData.Multiplier);
+            }
+        }
+        public float BarkSize
+        {
+            get
+            {
+                return 1f + playerData.Level / 2f;
+            }
+        }
 
         private void Start()
         {
