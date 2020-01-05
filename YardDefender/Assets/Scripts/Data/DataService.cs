@@ -33,7 +33,9 @@ namespace ErikOverflow.YardDefender
         {
             _connection.CreateTable<SaveData>();
             _connection.CreateTable<PlayerData>();
+            _connection.CreateTable<EquipmentData>();
             _connection.CreateTable<ItemData>();
+            _connection.CreateTable<WeaponData>();
         }
 
         //Generic CRUD
@@ -42,6 +44,11 @@ namespace ErikOverflow.YardDefender
             T newData = new T();
             _connection.Insert(newData);
             return newData;
+        }
+
+        public void InsertRow<T>(T newData) where T:Data, new()
+        {
+            _connection.Insert(newData);
         }
 
         public T ReadRowById<T>(int id) where T : Data, new()

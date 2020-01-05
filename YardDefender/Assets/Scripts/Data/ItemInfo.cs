@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,29 +6,30 @@ namespace ErikOverflow.YardDefender
 {
     public class ItemInfo : MonoBehaviour
     {
-        [SerializeField] GameInfo gameInfo = null;
-        [SerializeField] IEnumerable<ItemData> itemDatas = null;
+        [SerializeField] SpriteRenderer spriteRenderer = null;
+        ItemData itemData = null;
 
-        public IEnumerable<ItemData> ItemDatas { get => itemDatas; }
-
-        public Action OnInfoChange;
+        public ItemData ItemData { get => itemData; }
 
         // Start is called before the first frame update
         void Start()
         {
-            gameInfo.OnInfoChange += LoadInventoryData;
-            LoadInventoryData();
+            ItemData _itemData = new WeaponData
+            {
+                Name = "Megaphone",
+                Multiplier = 1.4f,
+                Damage = 5,
+                Guid = "38c45551-d75f-458b-b420-30e1253ee27d"
+            };
+            SetItem(_itemData);
         }
 
-        void LoadInventoryData()
+        public void SetItem(ItemData _itemData)
         {
-            itemDatas = DataService.instance.ReadRowsByGameId<ItemData>(gameInfo.SaveData.Id);
-            OnInfoChange?.Invoke();
-        }
-
-        private void OnDestroy()
-        {
-            gameInfo.OnInfoChange -= LoadInventoryData;
+            itemData = _itemData;
+            ItemTemplate itemTemplate;
+            ItemDictionary.Instance.TryGetValue(itemData.Guid, out itemTemplate);
+            spriteRenderer.sprite = itemTemplate.sprite;
         }
     }
 }

@@ -50,23 +50,30 @@ namespace ErikOverflow.YardDefender
         public int Gold { get => gold; set => gold = value; }
     }
 
+    [SerializeField]
+    public class EquipmentData : GameData
+    {
+        [SerializeField] int equippedWeapon;
+
+        public int EquippedWeapon { get => equippedWeapon; set => equippedWeapon = value; }
+    }
 
     [Serializable]
     public class ItemData : GameData
     {
         [SerializeField] string name;
+        [SerializeField] string guid;
 
         public string Name { get => name; set => name = value; }
+        public string Guid { get => guid; set => guid = value; }
     }
 
     [Serializable]
     public class WeaponData : ItemData
     {
-        [SerializeField] int itemId;
         [SerializeField] int damage;
         [SerializeField] float multiplier;
 
-        public int ItemId { get => itemId; set => itemId = value; }
         public int Damage { get => damage; set => damage = value; }
         public float Multiplier { get => multiplier; set => multiplier = value; }
     }

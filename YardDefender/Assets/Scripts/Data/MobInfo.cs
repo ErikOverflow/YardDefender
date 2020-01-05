@@ -14,7 +14,7 @@ namespace ErikOverflow.YardDefender
         [SerializeField] int maxHealth = 0;
         [SerializeField] int experience = 0;
         [SerializeField] int gold = 0;
-        [SerializeField] ItemData itemDrop = null;
+        ItemData itemDrop = null;
         GameObject lastDamageSource = null;
 
         public Action OnDeath;

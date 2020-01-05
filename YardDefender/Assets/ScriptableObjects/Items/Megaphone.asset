@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d1c31080b9b48aa81ae9e96f58e2f8, type: 3}
   m_Name: Megaphone
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 3a55ca7f3bce1f14b9f814acbe20cda0, type: 3}
+  templateId: 38c45551-d75f-458b-b420-30e1253ee27d
   flatDamageMin: 5
   flatDamageMax: 10
   multiplierDamageMin: 1.2
