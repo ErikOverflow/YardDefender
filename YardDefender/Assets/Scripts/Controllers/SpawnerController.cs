@@ -68,19 +68,14 @@ namespace ErikOverflow.YardDefender
                     //If it's a Weapon Template
                     if(itemTemplate is WeaponTemplate weaponTemplate)
                     {
-                        WeaponData weaponData = new WeaponData
-                        {
-                            Damage = Random.Range(weaponTemplate.flatDamageMin, weaponTemplate.flatDamageMax),
-                            Multiplier = Random.Range(weaponTemplate.multiplierDamageMin, weaponTemplate.multiplierDamageMax),
-                            Name = weaponTemplate.name
-                        };
-                        return weaponData;
+                        return weaponTemplate.RollForWeapon();
                     }
 
                     //If it is a generic Item Template
                     ItemData itemData = new ItemData
                     {
-                        Name = itemTemplate.name
+                        Name = itemTemplate.name,
+                        Guid = itemTemplate.TemplateId
                     };
                 }
             }

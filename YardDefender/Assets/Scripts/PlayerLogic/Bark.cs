@@ -47,9 +47,8 @@ namespace ErikOverflow.YardDefender
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            throw new System.Exception("HealthInfo and HealthController not yet implemented.");
-            //HealthController hc = collision.GetComponent<HealthController>();
-            //hc?.TakeDamage(damage, barkInitiator);
+            MobInfo mobInfo = collision.GetComponent<MobInfo>();
+            mobInfo?.TakeDamage(damage, barkInitiator);
         }
     }
 }
