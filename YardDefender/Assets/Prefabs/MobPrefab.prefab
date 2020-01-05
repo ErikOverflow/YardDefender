@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 1752287315}
   - component: {fileID: 973166405}
   - component: {fileID: 973166404}
-  m_Layer: 0
+  - component: {fileID: -5778262559332836277}
+  m_Layer: 8
   m_Name: MobPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,10 +144,6 @@ MonoBehaviour:
   maxHealth: 0
   experience: 0
   gold: 0
-  itemDrop:
-    id: 0
-    saveId: 0
-    name: 
 --- !u!114 &973166405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,3 +173,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobMovementInfo: {fileID: 973166405}
   rb2d: {fileID: 973166406}
+--- !u!58 &-5778262559332836277
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964647625792862802}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.50390625
