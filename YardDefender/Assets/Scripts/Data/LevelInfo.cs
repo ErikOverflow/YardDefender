@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ErikOverflow.YardDefender
@@ -11,6 +12,7 @@ namespace ErikOverflow.YardDefender
         [SerializeField] int level = 1;
         [SerializeField] List<LevelTemplate> levelTemplates = null;
         Dictionary<int, LevelTemplate> templateDictionary = null;
+        int maxLevel = 0;
 
         public Transform BasePosition { get => basePosition; }
         public int Level { get => level; }
@@ -33,11 +35,16 @@ namespace ErikOverflow.YardDefender
             {
                 templateDictionary.Add(template.levelNum, template);
             }
+            maxLevel = levelTemplates.Max(lt => lt.levelNum);
         }
 
-        public void NextLevel()
+        public void ChangeLevel(int changeAmount)
         {
-            level++;
+            level += changeAmount;
+            if(level > maxLevel)
+            {
+                level = maxLevel;
+            }
             OnInfoChange?.Invoke();
         }
     }

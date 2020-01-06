@@ -40,6 +40,8 @@ namespace ErikOverflow.YardDefender
             {
                 MobTemplate nextMob = spawnerInfo.NextMob();
                 GameObject go = ObjectPooler.instance.GetPooledObject(mobPrefab);
+                go.transform.SetParent(transform);
+                go.transform.localPosition = Vector3.zero;
                 MobInfo mobInfo = go.GetComponent<MobInfo>();
                 int mobHealth = nextMob.baseHealth * 1;
                 int mobExperience = nextMob.baseExperience * 1;
@@ -55,8 +57,6 @@ namespace ErikOverflow.YardDefender
                     ;
                 MobMovementInfo mobMovementInfo = go.GetComponent<MobMovementInfo>();
                 mobMovementInfo.SetTarget(levelInfo.BasePosition);
-                go.transform.SetParent(transform);
-                go.transform.localPosition = Vector3.zero;
 
                 if (spawnerInfo.MobsRemaining == 0)
                 {
