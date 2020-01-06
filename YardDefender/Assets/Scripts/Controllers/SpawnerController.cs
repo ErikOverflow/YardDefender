@@ -36,7 +36,7 @@ namespace ErikOverflow.YardDefender
 
         IEnumerator Spawning()
         {
-            while (true)
+            while (spawnerInfo.Active)
             {
                 MobTemplate nextMob = spawnerInfo.NextMob();
                 GameObject go = ObjectPooler.instance.GetPooledObject(mobPrefab);

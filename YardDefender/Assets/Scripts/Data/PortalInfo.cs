@@ -26,11 +26,11 @@ namespace ErikOverflow.YardDefender
 
         void Start()
         {
-            levelInfo.OnInfoChange += ResetPortal;
-            ResetPortal();
+            levelInfo.OnLevelChange += UpdatePortal;
+            UpdatePortal();
         }
 
-        void ResetPortal()
+        void UpdatePortal()
         {
             mobsKilled = 0;
             mobsNeeded = levelInfo.LevelTemplate.totalSpawns;

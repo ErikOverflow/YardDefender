@@ -11,20 +11,26 @@ namespace ErikOverflow.YardDefender
     {
         [SerializeField] LevelInfo levelInfo = null;
         [SerializeField] int mobsRemaining = 0;
+        bool active = false;
         int totalWeight = 0;
 
         public int MobsRemaining { get => mobsRemaining; }
+        public bool Active { get => active; }
 
         public Action OnInfoChange;
 
         private void Start()
         {
+            
+            active = true;
+            levelInfo.OnLevelChange += ConfigureSpawner;
             levelInfo.OnInfoChange += ConfigureSpawner;
             ConfigureSpawner();
         }
 
         private void ConfigureSpawner()
         {
+            active = !levelInfo.Loading;
             mobsRemaining = levelInfo.LevelTemplate.totalSpawns;
             totalWeight = levelInfo.LevelTemplate.TotalWeight;
             OnInfoChange?.Invoke();
@@ -43,7 +49,6 @@ namespace ErikOverflow.YardDefender
                 }
             }
             return null;
-
         }
     }
 }

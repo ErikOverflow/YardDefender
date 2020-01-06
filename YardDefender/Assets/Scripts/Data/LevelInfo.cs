@@ -13,6 +13,7 @@ namespace ErikOverflow.YardDefender
         [SerializeField] List<LevelTemplate> levelTemplates = null;
         Dictionary<int, LevelTemplate> templateDictionary = null;
         int maxLevel = 0;
+        bool loading = false;
 
         public Transform BasePosition { get => basePosition; }
         public int Level { get => level; }
@@ -26,7 +27,10 @@ namespace ErikOverflow.YardDefender
             }
         }
 
+        public bool Loading { get => loading; }
+
         public Action OnInfoChange;
+        public Action OnLevelChange;
 
         public void Awake()
         {
@@ -45,6 +49,16 @@ namespace ErikOverflow.YardDefender
             {
                 level = maxLevel;
             }
+            loading = true;
+            OnLevelChange?.Invoke();
+            //wait for a few seconds,then enable
+            StartCoroutine(ActivateAfterAnimation());
+        }
+
+        IEnumerator ActivateAfterAnimation()
+        {
+            yield return new WaitForSeconds(3);
+            loading = false;
             OnInfoChange?.Invoke();
         }
     }

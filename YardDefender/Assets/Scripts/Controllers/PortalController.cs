@@ -20,12 +20,12 @@ namespace ErikOverflow.YardDefender
 
         private void Start()
         {
-            portalInfo.OnInfoChange += ActivatePortal;
+            portalInfo.OnInfoChange += UpdatePortal;
             mainCam = Camera.main;
-            ActivatePortal();
+            UpdatePortal();
         }
 
-        private void ActivatePortal()
+        private void UpdatePortal()
         {
             button.enabled = portalInfo.Active;
             if (portalInfo.Active)
