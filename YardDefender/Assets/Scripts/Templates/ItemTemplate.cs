@@ -7,8 +7,5 @@ namespace ErikOverflow.YardDefender
     public class ItemTemplate : ScriptableObject
     {
         public Sprite sprite;
-        string templateId = System.Guid.NewGuid().ToString();
-
-        public string TemplateId { get => templateId; }
     }
 }

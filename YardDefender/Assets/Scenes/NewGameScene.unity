@@ -2759,6 +2759,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basePosition: {fileID: 65351385}
   level: 1
+  levelTemplates:
+  - {fileID: 11400000, guid: 754ef8628b1554c4eba0019ec38c4a63, type: 2}
 --- !u!1 &700883836
 GameObject:
   m_ObjectHideFlags: 0
@@ -22667,11 +22669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e5fb6a2010704c58a93d05fe8849261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobs:
-  - template: {fileID: 11400000, guid: 696a9c935a87346beaddfcce04c0fc07, type: 2}
-    weight: 5
-  - template: {fileID: 11400000, guid: 696a9c935a87346beaddfcce04c0fc07, type: 2}
-    weight: 5
+  levelInfo: {fileID: 640375077}
   mobsRemaining: 10
 --- !u!4 &1877472439
 Transform:

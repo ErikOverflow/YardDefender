@@ -8,28 +8,17 @@ namespace ErikOverflow.YardDefender
     {
         [SerializeField] ItemTable itemTable = null;
 
-        static Dictionary<string, ItemTemplate> instance;
+        static Dictionary<int, ItemTemplate> instance;
 
-        public static Dictionary<string, ItemTemplate> Instance { get => instance; }
+        public static Dictionary<int, ItemTemplate> Instance { get => instance; }
 
         private void Awake()
         {
-            instance = new Dictionary<string, ItemTemplate>();
+            instance = new Dictionary<int, ItemTemplate>();
             foreach (ItemTemplate itemTemplate in itemTable.itemTemplates)
             {
-                instance.Add(itemTemplate.TemplateId, itemTemplate);
+                instance.Add(itemTemplate.GetInstanceID(), itemTemplate);
             }
-        }
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

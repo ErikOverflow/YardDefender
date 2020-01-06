@@ -62,10 +62,10 @@ namespace ErikOverflow.YardDefender
     public class ItemData : GameData
     {
         [SerializeField] string name;
-        [SerializeField] string guid;
+        [SerializeField] int guid;
 
         public string Name { get => name; set => name = value; }
-        public string Guid { get => guid; set => guid = value; }
+        public int Guid { get => guid; set => guid = value; }
     }
 
     [Serializable]

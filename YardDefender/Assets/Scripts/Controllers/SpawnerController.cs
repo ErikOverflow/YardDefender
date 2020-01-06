@@ -14,6 +14,8 @@ namespace ErikOverflow.YardDefender
         WaitForSeconds wfs = null;
         //Listen to LevelInfo to scale mobs
 
+        Coroutine spawningCoroutine;
+
         private void Awake()
         {
             wfs = new WaitForSeconds(spawnDelay);
@@ -21,12 +23,15 @@ namespace ErikOverflow.YardDefender
 
         private void Start()
         {
+            spawnerInfo.OnInfoChange += StartSpawning;
             StartSpawning();
         }
 
         void StartSpawning()
         {
-            StartCoroutine(Spawning());
+            if (spawningCoroutine != null)
+                StopCoroutine(spawningCoroutine);
+            spawningCoroutine = StartCoroutine(Spawning());
         }
 
         IEnumerator Spawning()
@@ -75,7 +80,7 @@ namespace ErikOverflow.YardDefender
                     ItemData itemData = new ItemData
                     {
                         Name = itemTemplate.name,
-                        Guid = itemTemplate.TemplateId
+                        Guid = itemTemplate.GetInstanceID()
                     };
                 }
             }

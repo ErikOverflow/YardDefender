@@ -9,16 +9,25 @@ namespace ErikOverflow.YardDefender
 {
     public class SpawnerInfo : MonoBehaviour
     {
-        [SerializeField] List<WeightedMobRecord> mobs = null;
+        [SerializeField] LevelInfo levelInfo = null;
         [SerializeField] int mobsRemaining = 0;
         int totalWeight = 0;
 
         public int MobsRemaining { get => mobsRemaining; }
 
-        private void Awake()
+        public Action OnInfoChange;
+
+        private void Start()
         {
-            mobsRemaining = 10;
-            totalWeight = mobs.Sum(m => m.weight);
+            levelInfo.OnInfoChange += ConfigureSpawner;
+            ConfigureSpawner();
+        }
+
+        private void ConfigureSpawner()
+        {
+            mobsRemaining = levelInfo.LevelTemplate.totalSpawns;
+            totalWeight = levelInfo.LevelTemplate.TotalWeight;
+            OnInfoChange?.Invoke();
         }
 
         public MobTemplate NextMob()
@@ -27,7 +36,7 @@ namespace ErikOverflow.YardDefender
                 return null;
             mobsRemaining--;
             int mobSelection = Random.Range(0, totalWeight);
-            foreach (WeightedMobRecord mr in mobs)
+            foreach (WeightedMobRecord mr in levelInfo.LevelTemplate.mobs)
             {
                 mobSelection -= mr.weight;
                 if (mobSelection < 0)
@@ -38,12 +47,5 @@ namespace ErikOverflow.YardDefender
             return null;
 
         }
-    }
-
-    [Serializable]
-    public struct WeightedMobRecord
-    {
-        public MobTemplate template;
-        public int weight;
     }
 }
