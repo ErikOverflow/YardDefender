@@ -8,7 +8,7 @@ namespace ErikOverflow.YardDefender
     public class MobMovementInfo : MonoBehaviour
     {
         [SerializeField] Transform target = null;
-        [SerializeField] float moveSpeed = 1f;
+        [SerializeField] float moveSpeed = 2f;
         [SerializeField] List<Spot> path = null;
         [SerializeField] MobInfo mobInfo = null;
 

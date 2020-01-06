@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ErikOverflow.YardDefender
 {
@@ -9,27 +10,33 @@ namespace ErikOverflow.YardDefender
     {
         [SerializeField] PortalInfo portalInfo = null;
         [SerializeField] LevelInfo levelInfo = null;
-        [SerializeField] SpriteRenderer spriteRenderer = null;
-        [SerializeField] new Collider2D collider2D = null;
+        [SerializeField] Button button = null;
+        [SerializeField] Image image = null;
+
+        [SerializeField] Sprite activeImage = null;
+        [SerializeField] Sprite inactiveImage = null;
+
+        Camera mainCam = null;
 
         private void Start()
         {
             portalInfo.OnInfoChange += ActivatePortal;
+            mainCam = Camera.main;
             ActivatePortal();
         }
 
         private void ActivatePortal()
         {
-            spriteRenderer.enabled = portalInfo.Active;
-            collider2D.enabled = portalInfo.Active;
+            button.enabled = portalInfo.Active;
+            if (portalInfo.Active)
+                image.sprite = activeImage;
+            else
+                image.sprite = inactiveImage;
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public void LevelUp()
         {
-            if(collision.GetComponent<PlayerInfo>() != null)
-            {
-                levelInfo.ChangeLevel(portalInfo.LevelChange);
-            }
+            levelInfo.ChangeLevel(portalInfo.LevelChange);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace ErikOverflow.YardDefender
 
         IEnumerator Spawning()
         {
-            while (spawnerInfo.MobsRemaining > 0)
+            while (true)
             {
                 MobTemplate nextMob = spawnerInfo.NextMob();
                 GameObject go = ObjectPooler.instance.GetPooledObject(mobPrefab);
@@ -57,11 +57,6 @@ namespace ErikOverflow.YardDefender
                     ;
                 MobMovementInfo mobMovementInfo = go.GetComponent<MobMovementInfo>();
                 mobMovementInfo.SetTarget(levelInfo.BasePosition);
-
-                if (spawnerInfo.MobsRemaining == 0)
-                {
-                    yield break;
-                }
                 yield return wfs;
             }
         }

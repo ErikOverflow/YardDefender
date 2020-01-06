@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  moveSpeed: 1
+  moveSpeed: 2
   mobInfo: {fileID: 1752287315}
 --- !u!114 &973166404
 MonoBehaviour:

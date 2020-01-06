@@ -32,8 +32,6 @@ namespace ErikOverflow.YardDefender
 
         public MobTemplate NextMob()
         {
-            if (mobsRemaining <= 0)
-                return null;
             mobsRemaining--;
             int mobSelection = Random.Range(0, totalWeight);
             foreach (WeightedMobRecord mr in levelInfo.LevelTemplate.mobs)
