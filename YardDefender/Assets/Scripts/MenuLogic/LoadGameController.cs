@@ -3,28 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Generates the continuable games from the local SQLite database
-public class LoadGameController : MonoBehaviour
+namespace ErikOverflow.YardDefender
 {
-    [SerializeField]
-    GameObject saveSlotPrefab = null;
-    [SerializeField]
-    GameObject newGameSlotPrefab = null;
-    [SerializeField]
-    Transform saveSlotLayoutGroup = null;
-
-    public void OnEnable()
+    public class LoadGameController : MonoBehaviour
     {
-        foreach(Transform t in saveSlotLayoutGroup)
+        [SerializeField] GameObject saveSlotPrefab = null;
+        [SerializeField] GameObject newGameSlotPrefab = null;
+        [SerializeField] Transform saveSlotLayoutGroup = null;
+        [SerializeField] SaveInfo saveInfo = null;
+
+        void Start()
         {
-            Destroy(t.gameObject);
+            saveInfo.OnInfoChanged += InitializeSaveSlots;
+            InitializeSaveSlots();
         }
-        IEnumerable<SaveData> gameDatas = DataService.instance.ReadSaveDatas();
-        foreach(SaveData gameData in gameDatas)
+
+        void InitializeSaveSlots()
         {
-            GameObject gObj = Instantiate(saveSlotPrefab, saveSlotLayoutGroup);
-            SelectGameController selectGameController = gObj.GetComponent<SelectGameController>();
-            selectGameController.SetData(gameData);
+            //Deactive any currently visible save slots
+            foreach(Transform t in saveSlotLayoutGroup)
+            {
+                t.gameObject.SetActive(false);
+            }
+
+            foreach(SaveData saveData in saveInfo.SaveDatas)
+            {
+                GameObject saveSlot = ObjectPooler.instance.GetPooledObject(saveSlotPrefab);
+                saveSlot.transform.SetParent(saveSlotLayoutGroup);
+                saveSlot.transform.localScale = Vector3.one;
+                SelectGameController selectGameController = saveSlot.GetComponent<SelectGameController>();
+                selectGameController.SetData(saveData);
+            }
+            GameObject newSlot = ObjectPooler.instance.GetPooledObject(newGameSlotPrefab);
+            NewGameController newGameController = newSlot.GetComponent<NewGameController>();
+            newGameController.SaveInfo = saveInfo;
+            newSlot.transform.SetParent(saveSlotLayoutGroup);
+            newSlot.transform.localScale = Vector3.one;
         }
-        Instantiate(newGameSlotPrefab, saveSlotLayoutGroup);
     }
 }
