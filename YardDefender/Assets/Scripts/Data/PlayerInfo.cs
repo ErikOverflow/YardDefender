@@ -65,7 +65,7 @@ namespace ErikOverflow.YardDefender
 
         int CalculateExperienceNeeded()
         {
-            return 100;
+            return Mathf.FloorToInt(Mathf.Pow(1.1f, playerData.Level) * 100f);
         }
 
         private void OnDestroy()
