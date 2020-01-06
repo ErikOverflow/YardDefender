@@ -45,7 +45,14 @@ namespace ErikOverflow.YardDefender
                 int mobExperience = nextMob.baseExperience * 1;
                 int mobGold = nextMob.baseGold * 1;
                 ItemData itemDrop = RollForItem(nextMob.itemDrops);
-                mobInfo.Initialize(mobHealth, mobExperience, mobGold, itemDrop, nextMob.sprite, nextMob.overrideController);
+                mobInfo.Initialize(
+                    mobHealth * levelInfo.Level, //Mob health
+                    mobExperience * levelInfo.Level, //Mob experience dropped
+                    mobGold * levelInfo.Level, //Mob gold dropped
+                    itemDrop,
+                    nextMob.sprite,
+                    nextMob.overrideController)
+                    ;
                 MobMovementInfo mobMovementInfo = go.GetComponent<MobMovementInfo>();
                 mobMovementInfo.SetTarget(levelInfo.BasePosition);
                 go.transform.SetParent(transform);
@@ -71,7 +78,7 @@ namespace ErikOverflow.YardDefender
                     itemTemplate = drop.itemTemplate;
 
                     //If it's a Weapon Template
-                    if(itemTemplate is WeaponTemplate weaponTemplate)
+                    if (itemTemplate is WeaponTemplate weaponTemplate)
                     {
                         return weaponTemplate.RollForWeapon();
                     }

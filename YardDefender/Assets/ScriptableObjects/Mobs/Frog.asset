@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 7fd88e44bb7b26f44a91a9d448695ef8, type: 3}
   baseHealth: 5
-  baseExperience: 1
+  baseExperience: 8
   baseGold: 1
   overrideController: {fileID: 0}
   itemDrops:
