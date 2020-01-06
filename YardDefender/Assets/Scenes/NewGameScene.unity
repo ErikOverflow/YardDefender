@@ -3556,6 +3556,7 @@ GameObject:
   - component: {fileID: 917791684}
   - component: {fileID: 917791683}
   - component: {fileID: 917791687}
+  - component: {fileID: 917791688}
   m_Layer: 5
   m_Name: HUD Canvas
   m_TagString: Untagged
@@ -3668,6 +3669,24 @@ MonoBehaviour:
   rerollCost: {fileID: 952212235}
   flatDamageText: {fileID: 1269675660}
   multiplierText: {fileID: 1128784008}
+--- !u!114 &917791688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917791682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e94d4abe4d440f8be70d53e04fbc76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldAmountText: {fileID: 1525508138}
+  expAmountText: {fileID: 293620272}
+  levelAmountText: {fileID: 576994726}
+  attackAmountText: {fileID: 1513095864}
+  playerInfo: {fileID: 945462292}
+  equipmentInfo: {fileID: 945462294}
 --- !u!1 &923191201
 GameObject:
   m_ObjectHideFlags: 0
@@ -5804,7 +5823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveData:
-    id: 0
+    id: 9
     name: 
 --- !u!4 &1335549388
 Transform:

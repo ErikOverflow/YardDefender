@@ -14,9 +14,7 @@ namespace ErikOverflow.YardDefender
 
         public void SetItem(ItemData _itemData)
         {
-            Debug.Log(_itemData.Name);
             itemData = _itemData;
-            Debug.Log(itemData.Guid);
             ItemDictionary.Instance.TryGetValue(itemData.Guid, out itemTemplate);
             spriteRenderer.sprite = itemTemplate.sprite;
         }
