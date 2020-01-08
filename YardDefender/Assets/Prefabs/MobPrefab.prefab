@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mobMovementInfo: {fileID: 973166405}
-  mobInfo: {fileID: 0}
+  mobInfo: {fileID: 1752287315}
   rb2d: {fileID: 973166406}
 --- !u!114 &-1554414564564471567
 MonoBehaviour:
@@ -305,8 +305,6 @@ MonoBehaviour:
   mobInfo: {fileID: 1752287315}
   animator: {fileID: 964647625792862807}
   deathAudioSource: {fileID: -4796987718229344940}
-  itemDropPrefab: {fileID: 2244506314083379066, guid: 9740e4b93c8f3453486fc8f102d08d50,
-    type: 3}
 --- !u!114 &-810470900035568927
 MonoBehaviour:
   m_ObjectHideFlags: 0

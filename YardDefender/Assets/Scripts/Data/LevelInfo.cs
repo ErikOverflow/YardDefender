@@ -20,7 +20,7 @@ namespace ErikOverflow.YardDefender
         private void Start()
         {
             ChangeLevel(1);
-            StartCoroutine(DelayedStart());
+            EventManager.Instance.LevelStarted();
         }
 
         IEnumerator DelayedStart()

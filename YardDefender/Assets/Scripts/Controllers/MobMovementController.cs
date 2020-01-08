@@ -14,7 +14,7 @@ namespace ErikOverflow.YardDefender
         Coroutine activePathing = null;
         WaitForFixedUpdate wffu = new WaitForFixedUpdate();
 
-        private void Start()
+        private void Awake()
         {
             EventManager.Instance.OnMobKilled += StopPathing;
             EventManager.Instance.OnMobSpawned += StartPathing;
