@@ -87,5 +87,12 @@ namespace ErikOverflow.YardDefender
         {
             OnPlayerInfoChanged?.Invoke();
         }
+
+        public Action OnPlayerEquipmentChanged;
+
+        public void PlayerEquipmentChanged()
+        {
+            OnPlayerEquipmentChanged?.Invoke();
+        }
     }
 }

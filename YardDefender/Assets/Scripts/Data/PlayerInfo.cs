@@ -67,7 +67,6 @@ namespace ErikOverflow.YardDefender
                 playerData.Level++;
                 EventManager.Instance.PlayerLevelChanged();
             }
-            //leveling should be handled by a LevelController
             DataService.instance.UpdateRow<PlayerData>(playerData);
             EventManager.Instance.PlayerInfoChanged();
         }
