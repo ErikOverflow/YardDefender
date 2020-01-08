@@ -68,14 +68,19 @@ namespace ErikOverflow.YardDefender
         }
 
         public event Action OnPlayerLevelChanged;
-
+        /*
+         * - UI should update
+         * - Player Health should be recalculated;
+         */
         public void PlayerLevelChanged()
         {
             OnPlayerLevelChanged?.Invoke();
         }
 
         public event Action<SpawnerInfo> OnSpawnerDefeated;
-
+        /*
+         * - Portal should be notified that a spawner has been defeated
+         */
         public void SpawnerDefeated(SpawnerInfo spawnerInfo)
         {
             OnSpawnerDefeated?.Invoke(spawnerInfo);
