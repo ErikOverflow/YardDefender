@@ -17,8 +17,6 @@ namespace ErikOverflow.YardDefender
         ItemData itemDrop = null;
         PlayerInfo lastDamageSource = null;
 
-        public Action OnDeath;
-
         public ItemData ItemDrop { get => itemDrop; }
         public PlayerInfo LastDamageSource { get => lastDamageSource; }
         public int Experience { get => experience; }
@@ -45,7 +43,7 @@ namespace ErikOverflow.YardDefender
             lastDamageSource = damageSource;
             if(currentHealth <= 0)
             {
-                OnDeath?.Invoke();
+                EventManager.Instance.MobKilled(this);
             }
         }
 

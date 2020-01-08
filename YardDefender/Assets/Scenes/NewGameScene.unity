@@ -264,6 +264,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &174180172 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6161878407149375707, guid: 938273b3cad574e28a8b24857bc35839,
+    type: 3}
+  m_PrefabInstance: {fileID: 6161878406672548429}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &174180173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174180172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b5d8972f071450aa99d926054e0861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &185931547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,8 +2715,6 @@ GameObject:
   - component: {fileID: 640375074}
   - component: {fileID: 640375076}
   - component: {fileID: 640375077}
-  - component: {fileID: 640375079}
-  - component: {fileID: 640375078}
   m_Layer: 10
   m_Name: Level
   m_TagString: Untagged
@@ -2764,33 +2780,6 @@ MonoBehaviour:
   levelTemplates:
   - {fileID: 11400000, guid: 754ef8628b1554c4eba0019ec38c4a63, type: 2}
   - {fileID: 11400000, guid: 19cc17f22c84e4005a4351035418dbd6, type: 2}
---- !u!114 &640375078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640375073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f72f8a2d23504adb818d43229de9a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &640375079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640375073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bec6e46a0dc5d4cf5953a955d450ea2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelInfo: {fileID: 640375077}
-  explosionInfo: {fileID: 640375078}
-  map: {fileID: 598825968}
 --- !u!1 &700883836
 GameObject:
   m_ObjectHideFlags: 0
@@ -5856,7 +5845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveData:
-    id: 9
+    id: 1
     name: 
 --- !u!4 &1335549388
 Transform:
@@ -22701,7 +22690,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelInfo: {fileID: 640375077}
-  mobsRemaining: 10
 --- !u!4 &1877472439
 Transform:
   m_ObjectHideFlags: 0
@@ -22728,10 +22716,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab99142d90714e6a8afe87360d11b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobPrefab: {fileID: 964647625792862802, guid: efe3b29e8d8ce41759a426c181352b69,
-    type: 3}
   spawnerInfo: {fileID: 1877472438}
   levelInfo: {fileID: 640375077}
+  mobPrefab: {fileID: 964647625792862802, guid: efe3b29e8d8ce41759a426c181352b69,
+    type: 3}
   spawnDelay: 0.5
 --- !u!1 &1886371367
 GameObject:

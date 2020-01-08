@@ -11,55 +11,29 @@ namespace ErikOverflow.YardDefender
         [SerializeField] Transform basePosition = null;
         [SerializeField] int level = 1;
         [SerializeField] List<LevelTemplate> levelTemplates = null;
-        Dictionary<int, LevelTemplate> templateDictionary = null;
-        int maxLevel = 0;
-        bool loading = false;
+        LevelTemplate currentLevel = null;
 
         public Transform BasePosition { get => basePosition; }
         public int Level { get => level; }
-        public LevelTemplate LevelTemplate
+        public LevelTemplate CurrentLevel { get => currentLevel; }
+
+        private void Start()
         {
-            get
-            {
-                LevelTemplate levelTemplate;
-                templateDictionary.TryGetValue(level, out levelTemplate);
-                return levelTemplate;
-            }
+            ChangeLevel(1);
+            StartCoroutine(DelayedStart());
         }
 
-        public bool Loading { get => loading; }
-
-        public Action OnInfoChange;
-        public Action OnLevelChange;
-
-        public void Awake()
+        IEnumerator DelayedStart()
         {
-            templateDictionary = new Dictionary<int, LevelTemplate>();
-            foreach(LevelTemplate template in levelTemplates)
-            {
-                templateDictionary.Add(template.levelNum, template);
-            }
-            maxLevel = levelTemplates.Max(lt => lt.levelNum);
+            yield return null;
+            EventManager.Instance.LevelStarted();
         }
 
-        public void ChangeLevel(int changeAmount)
+        public void ChangeLevel(int newLevel)
         {
-            level += changeAmount;
-            if(level > maxLevel)
-            {
-                level = maxLevel;
-            }
-            loading = true;
-            OnLevelChange?.Invoke();
-            //wait for a few seconds,then enable
-            StartCoroutine(ActivateAfterAnimation());
-        }
-
-        IEnumerator ActivateAfterAnimation()
-        {
-            yield return new WaitForSeconds(3);
-            loading = false;
-            OnInfoChange?.Invoke();
+            level = newLevel;
+            currentLevel = levelTemplates.FirstOrDefault(lt => lt.levelNum == level);
+            EventManager.Instance.LevelChanged();
         }
     }
 }

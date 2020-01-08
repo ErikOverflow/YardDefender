@@ -15,12 +15,9 @@ namespace ErikOverflow.YardDefender
         [SerializeField] PlayerInfo playerInfo = null;
         [SerializeField] EquipmentInfo equipmentInfo = null;
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-            playerInfo.OnInfoChange += ReloadUI;
-            equipmentInfo.OnInfoChange += ReloadUI;
-            if(playerInfo.PlayerData != null)
-                ReloadUI();
+            EventManager.Instance.OnPlayerInfoChanged += ReloadUI;
         }
 
         // Update is called once per frame

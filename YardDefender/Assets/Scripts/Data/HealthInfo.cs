@@ -15,10 +15,8 @@ namespace ErikOverflow.YardDefender
 
         public void Start()
         {
-            playerInfo.OnInfoChange += LoadHealthData;
-            //Listen to LevelInfo for level up and have it call
-            LoadHealthData();
-            ResetHealthData();
+            EventManager.Instance.OnPlayerLevelChanged += LoadHealthData;
+            EventManager.Instance.OnLevelStarted += ResetHealthData;
         }
 
         void LoadHealthData()

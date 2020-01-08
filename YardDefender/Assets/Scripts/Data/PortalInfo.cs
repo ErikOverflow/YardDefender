@@ -7,45 +7,19 @@ namespace ErikOverflow.YardDefender
 {
     public class PortalInfo : MonoBehaviour
     {
-        public static PortalInfo instance;
         [SerializeField] LevelInfo levelInfo = null;
-        int levelChange = 1;
-        int mobsNeeded = 0;
-        int mobsKilled = 0;
-        bool active = false;
+        int nextLevel = 0;
 
-        public Action OnInfoChange;
-
-        public bool Active { get => active; }
-        public int LevelChange { get => levelChange; }
-
-        private void Awake()
-        {
-            instance = this;
-        }
+        public int NextLevel { get => nextLevel; }
 
         void Start()
         {
-            levelInfo.OnLevelChange += UpdatePortal;
-            UpdatePortal();
+            EventManager.Instance.OnLevelChanged += ConfigurePortal;
         }
 
-        void UpdatePortal()
+        void ConfigurePortal()
         {
-            mobsKilled = 0;
-            mobsNeeded = levelInfo.LevelTemplate.totalSpawns;
-            active = false;
-            OnInfoChange?.Invoke();
-        }
-
-        public void MobKilled()
-        {
-            mobsKilled++;
-            if(mobsKilled >= mobsNeeded)
-            {
-                active = true;
-            }
-            OnInfoChange?.Invoke();
+            nextLevel = levelInfo.Level + 1;
         }
     }
 }

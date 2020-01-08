@@ -11,8 +11,6 @@ namespace ErikOverflow.YardDefender
         [SerializeField] EquipmentInfo equipmentInfo = null;
         [SerializeField] PlayerData playerData = null;
         
-        public Action OnInfoChange;
-        
         public PlayerData PlayerData { get => playerData; }
         public int Attack
         {
@@ -34,33 +32,44 @@ namespace ErikOverflow.YardDefender
         private void Start()
         {
             gameInfo.OnInfoChange += LoadPlayerData;
+            EventManager.Instance.OnMobKilled += HandleMobKill;
             LoadPlayerData();
+        }
+
+        private void HandleMobKill(MobInfo mob)
+        {
+            if(mob.LastDamageSource == this)
+            {
+                ChangeGold(mob.Gold);
+                ChangeExperience(mob.Experience);
+            }
         }
 
         void LoadPlayerData()
         {
             playerData = DataService.instance.ReadRowByGameId<PlayerData>(gameInfo.SaveData.Id);
-            OnInfoChange?.Invoke();
+            EventManager.Instance.PlayerInfoChanged();
         }
 
-        public void ChangeGold(int changeAmount)
+        void ChangeGold(int changeAmount)
         {
             playerData.Gold += changeAmount;
             DataService.instance.UpdateRow<PlayerData>(playerData);
-            OnInfoChange?.Invoke();
+            EventManager.Instance.PlayerInfoChanged();
         }
 
-        public void ChangeExperience(int changeAmount)
+        void ChangeExperience(int changeAmount)
         {
             playerData.Experience += changeAmount;
             while(playerData.Experience > CalculateExperienceNeeded())
             {
                 playerData.Experience -= CalculateExperienceNeeded();
                 playerData.Level++;
+                EventManager.Instance.PlayerLevelChanged();
             }
             //leveling should be handled by a LevelController
             DataService.instance.UpdateRow<PlayerData>(playerData);
-            OnInfoChange?.Invoke();
+            EventManager.Instance.PlayerInfoChanged();
         }
 
         int CalculateExperienceNeeded()

@@ -7,5 +7,6 @@ namespace ErikOverflow.YardDefender
     public class ItemTemplate : ScriptableObject
     {
         public Sprite sprite;
+        public int itemId;
     }
 }

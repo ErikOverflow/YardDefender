@@ -15,7 +15,7 @@ namespace ErikOverflow.YardDefender
         // Start is called before the fir st frame update
         void Start()
         {
-            mobInfo.OnDeath += HandleDeath;
+            //mobInfo.OnDeath += HandleDeath;
         }
 
         void HandleDeath()
@@ -23,9 +23,6 @@ namespace ErikOverflow.YardDefender
             deathAudioSource.Play();
             animator.SetBool("Alive", false);
             StartCoroutine(DisableAfterAnimation());
-            mobInfo.LastDamageSource?.ChangeExperience(mobInfo.Experience);
-            mobInfo.LastDamageSource?.ChangeGold(mobInfo.Gold);
-            PortalInfo.instance.MobKilled();
 
             if (mobInfo.ItemDrop != null)
             {

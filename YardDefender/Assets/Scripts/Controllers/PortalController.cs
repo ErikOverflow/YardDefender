@@ -20,23 +20,26 @@ namespace ErikOverflow.YardDefender
 
         private void Start()
         {
-            portalInfo.OnInfoChange += UpdatePortal;
+            EventManager.Instance.OnLevelChanged += InitializePortal;
+            //On level completed, open portal
             mainCam = Camera.main;
-            UpdatePortal();
         }
 
-        private void UpdatePortal()
+        private void InitializePortal()
         {
-            button.enabled = portalInfo.Active;
-            if (portalInfo.Active)
-                image.sprite = activeImage;
-            else
-                image.sprite = inactiveImage;
+            button.enabled = false;
+            image.sprite = inactiveImage;
+        }
+
+        private void OpenPortal()
+        {
+            button.enabled = true;
+            image.sprite = activeImage;
         }
 
         public void LevelUp()
         {
-            levelInfo.ChangeLevel(portalInfo.LevelChange);
+            levelInfo.ChangeLevel(portalInfo.NextLevel);
         }
     }
 }
