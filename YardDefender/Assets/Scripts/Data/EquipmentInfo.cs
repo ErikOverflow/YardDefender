@@ -12,15 +12,11 @@ namespace ErikOverflow.YardDefender
         [SerializeField] InventoryInfo inventoryInfo = null;
         [SerializeField] WeaponData weaponData = null;
 
-        public Action OnInfoChange;
-
         public EquipmentData EquipmentData { get => equipmentData; }
         public WeaponData WeaponData { get => weaponData; }
 
         private void Start()
         {
-            gameInfo.OnInfoChange += LoadWeapon;
-            inventoryInfo.OnInfoLoaded += LoadWeapon;
             LoadWeapon();
         }
 

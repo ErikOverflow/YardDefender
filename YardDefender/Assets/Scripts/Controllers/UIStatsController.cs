@@ -11,9 +11,8 @@ namespace ErikOverflow.YardDefender
         [SerializeField] TextMeshProUGUI expAmountText = null;
         [SerializeField] TextMeshProUGUI levelAmountText = null;
         [SerializeField] TextMeshProUGUI attackAmountText = null;
-
         [SerializeField] PlayerInfo playerInfo = null;
-        [SerializeField] EquipmentInfo equipmentInfo = null;
+
         // Start is called before the first frame update
         void Awake()
         {

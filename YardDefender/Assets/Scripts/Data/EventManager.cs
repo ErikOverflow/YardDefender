@@ -67,32 +67,39 @@ namespace ErikOverflow.YardDefender
             OnMobKilled?.Invoke(mobInfo);
         }
 
-        public Action OnPlayerLevelChanged;
+        public event Action OnPlayerLevelChanged;
 
         public void PlayerLevelChanged()
         {
             OnPlayerLevelChanged?.Invoke();
         }
 
-        public Action<SpawnerInfo> OnSpawnerDefeated;
+        public event Action<SpawnerInfo> OnSpawnerDefeated;
 
         public void SpawnerDefeated(SpawnerInfo spawnerInfo)
         {
             OnSpawnerDefeated?.Invoke(spawnerInfo);
         }
 
-        public Action OnPlayerInfoChanged;
+        public event Action OnPlayerInfoChanged;
 
         public void PlayerInfoChanged()
         {
             OnPlayerInfoChanged?.Invoke();
         }
 
-        public Action OnPlayerEquipmentChanged;
+        public event Action OnPlayerEquipmentChanged;
 
         public void PlayerEquipmentChanged()
         {
             OnPlayerEquipmentChanged?.Invoke();
+        }
+
+        public event Action OnInventoryChanged;
+
+        public void InventoryChanged()
+        {
+            OnInventoryChanged?.Invoke();
         }
     }
 }

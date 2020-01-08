@@ -10,7 +10,6 @@ namespace ErikOverflow.YardDefender
         [SerializeField] MobInfo mobInfo = null;
         [SerializeField] Animator animator = null;
         [SerializeField] AudioSource deathAudioSource = null;
-        [SerializeField] GameObject itemDropPrefab = null;
 
         void Awake()
         {
