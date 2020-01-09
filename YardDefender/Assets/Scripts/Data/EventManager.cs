@@ -39,9 +39,16 @@ namespace ErikOverflow.YardDefender
         /*
          * Should run one frame after level changed
          */
-         public void LevelStarted()
+        public void LevelStarted()
         {
             OnLevelStarted?.Invoke();
+        }
+
+        public event Action<LevelInfo> OnLevelDefeated;
+
+        public void LevelDefeated(LevelInfo levelInfo)
+        {
+            OnLevelDefeated?.Invoke(levelInfo);
         }
 
         public event Action<MobInfo> OnMobSpawned;
@@ -74,13 +81,6 @@ namespace ErikOverflow.YardDefender
             OnPlayerLevelChanged?.Invoke();
         }
 
-        public event Action<SpawnerInfo> OnSpawnerDefeated;
-
-        public void SpawnerDefeated(SpawnerInfo spawnerInfo)
-        {
-            OnSpawnerDefeated?.Invoke(spawnerInfo);
-        }
-
         public event Action OnPlayerInfoChanged;
 
         public void PlayerInfoChanged()
@@ -100,6 +100,20 @@ namespace ErikOverflow.YardDefender
         public void InventoryChanged()
         {
             OnInventoryChanged?.Invoke();
+        }
+
+        public event Action<SpawnerInfo> OnSpawnerConfigured;
+
+        public void SpawnerConfigured(SpawnerInfo spawnerInfo)
+        {
+            OnSpawnerConfigured?.Invoke(spawnerInfo);
+        }
+
+        public event Action<SpawnerInfo> OnSpawnerDefeated;
+
+        public void SpawnerDefeated(SpawnerInfo spawnerInfo)
+        {
+            OnSpawnerDefeated?.Invoke(spawnerInfo);
         }
     }
 }

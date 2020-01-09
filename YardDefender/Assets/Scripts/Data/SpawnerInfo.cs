@@ -30,7 +30,7 @@ namespace ErikOverflow.YardDefender
             //There are no living spawned mobs, and no mobs left to spawn
             if(activeSpawnedMobs.Count + mobs.Count == 0)
             {
-                //Spawner defeated
+                EventManager.Instance.SpawnerDefeated(this);
             }
         }
 
@@ -56,6 +56,7 @@ namespace ErikOverflow.YardDefender
             if(bossMob != null)
                 mobs.Enqueue(bossMob);
             activeSpawnedMobs = new HashSet<MobInfo>();
+            EventManager.Instance.SpawnerConfigured(this);
         }
 
         public MobTemplate NextMob()

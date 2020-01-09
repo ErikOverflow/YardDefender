@@ -38,7 +38,6 @@ namespace ErikOverflow.YardDefender
 
         IEnumerator Spawning()
         {
-            //Wait one frame before starting
             while (spawnerInfo.MobsRemaining > 0)
             {
                 MobTemplate nextMob = spawnerInfo.NextMob();

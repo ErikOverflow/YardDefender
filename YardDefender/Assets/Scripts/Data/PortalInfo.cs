@@ -12,12 +12,12 @@ namespace ErikOverflow.YardDefender
 
         public int NextLevel { get => nextLevel; }
 
-        void Start()
+        void Awake()
         {
-            EventManager.Instance.OnLevelChanged += ConfigurePortal;
+            EventManager.Instance.OnLevelStarted += SetPortalDestination;
         }
 
-        void ConfigurePortal()
+        void SetPortalDestination()
         {
             nextLevel = levelInfo.Level + 1;
         }

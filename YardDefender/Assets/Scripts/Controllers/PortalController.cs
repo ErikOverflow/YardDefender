@@ -8,21 +8,18 @@ namespace ErikOverflow.YardDefender
 {
     public class PortalController : MonoBehaviour
     {
-        [SerializeField] PortalInfo portalInfo = null;
         [SerializeField] LevelInfo levelInfo = null;
+        [SerializeField] PortalInfo portalInfo = null;
         [SerializeField] Button button = null;
         [SerializeField] Image image = null;
 
         [SerializeField] Sprite activeImage = null;
         [SerializeField] Sprite inactiveImage = null;
 
-        Camera mainCam = null;
-
-        private void Start()
+        private void Awake()
         {
-            EventManager.Instance.OnLevelChanged += InitializePortal;
-            //On level completed, open portal
-            mainCam = Camera.main;
+            EventManager.Instance.OnLevelStarted += InitializePortal;
+            EventManager.Instance.OnLevelDefeated += OpenPortal;
         }
 
         private void InitializePortal()
@@ -31,7 +28,7 @@ namespace ErikOverflow.YardDefender
             image.sprite = inactiveImage;
         }
 
-        private void OpenPortal()
+        private void OpenPortal(LevelInfo _levelInfo)
         {
             button.enabled = true;
             image.sprite = activeImage;
