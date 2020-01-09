@@ -13,25 +13,26 @@ namespace ErikOverflow.YardDefender
         [SerializeField] Button button = null;
         [SerializeField] Image image = null;
 
-        [SerializeField] Sprite activeImage = null;
-        [SerializeField] Sprite inactiveImage = null;
+        [SerializeField] Sprite activeButtonImage = null;
+        [SerializeField] Sprite inactiveButtonImage = null;
 
+        
         private void Awake()
         {
-            EventManager.Instance.OnLevelStarted += InitializePortal;
-            EventManager.Instance.OnLevelDefeated += OpenPortal;
+            EventManager.instance.OnLevelStarted += InitializePortal;
+            EventManager.instance.OnLevelDefeated += OpenPortal;
         }
 
         private void InitializePortal()
         {
             button.enabled = false;
-            image.sprite = inactiveImage;
+            image.sprite = inactiveButtonImage;
         }
 
         private void OpenPortal(LevelInfo _levelInfo)
         {
             button.enabled = true;
-            image.sprite = activeImage;
+            image.sprite = activeButtonImage;
         }
 
         public void LevelUp()

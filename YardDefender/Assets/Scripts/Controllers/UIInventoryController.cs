@@ -20,8 +20,8 @@ namespace ErikOverflow.YardDefender
         // Start is called before the first frame update
         void Awake()
         {
-            EventManager.Instance.OnPlayerEquipmentChanged += ReloadEquipment;
-            EventManager.Instance.OnInventoryChanged += ReloadInventory;
+            EventManager.instance.OnPlayerEquipmentChanged += ReloadEquipment;
+            EventManager.instance.OnInventoryChanged += ReloadInventory;
         }
 
         private void Start()

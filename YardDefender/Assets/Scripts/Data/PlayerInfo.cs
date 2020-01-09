@@ -32,7 +32,7 @@ namespace ErikOverflow.YardDefender
         private void Start()
         {
             gameInfo.OnInfoChange += LoadPlayerData;
-            EventManager.Instance.OnMobKilled += HandleMobKill;
+            EventManager.instance.OnMobKilled += HandleMobKill;
             LoadPlayerData();
         }
 
@@ -48,14 +48,14 @@ namespace ErikOverflow.YardDefender
         void LoadPlayerData()
         {
             playerData = DataService.instance.ReadRowByGameId<PlayerData>(gameInfo.SaveData.Id);
-            EventManager.Instance.PlayerInfoChanged();
+            EventManager.instance.PlayerInfoChanged();
         }
 
         void ChangeGold(int changeAmount)
         {
             playerData.Gold += changeAmount;
             DataService.instance.UpdateRow<PlayerData>(playerData);
-            EventManager.Instance.PlayerInfoChanged();
+            EventManager.instance.PlayerInfoChanged();
         }
 
         void ChangeExperience(int changeAmount)
@@ -65,10 +65,10 @@ namespace ErikOverflow.YardDefender
             {
                 playerData.Experience -= CalculateExperienceNeeded();
                 playerData.Level++;
-                EventManager.Instance.PlayerLevelChanged();
+                EventManager.instance.PlayerLevelChanged();
             }
             DataService.instance.UpdateRow<PlayerData>(playerData);
-            EventManager.Instance.PlayerInfoChanged();
+            EventManager.instance.PlayerInfoChanged();
         }
 
         int CalculateExperienceNeeded()

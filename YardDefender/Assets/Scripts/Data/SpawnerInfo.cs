@@ -20,8 +20,8 @@ namespace ErikOverflow.YardDefender
 
         private void Awake()
         {
-            EventManager.Instance.OnLevelChanged += ConfigureSpawner;
-            EventManager.Instance.OnMobKilled += RemoveMobFromTracking;
+            EventManager.instance.OnLevelChanged += ConfigureSpawner;
+            EventManager.instance.OnMobKilled += RemoveMobFromTracking;
         }
 
         private void RemoveMobFromTracking(MobInfo mob)
@@ -30,7 +30,7 @@ namespace ErikOverflow.YardDefender
             //There are no living spawned mobs, and no mobs left to spawn
             if(activeSpawnedMobs.Count + mobs.Count == 0)
             {
-                EventManager.Instance.SpawnerDefeated(this);
+                EventManager.instance.SpawnerDefeated(this);
             }
         }
 
@@ -56,7 +56,7 @@ namespace ErikOverflow.YardDefender
             if(bossMob != null)
                 mobs.Enqueue(bossMob);
             activeSpawnedMobs = new HashSet<MobInfo>();
-            EventManager.Instance.SpawnerConfigured(this);
+            EventManager.instance.SpawnerConfigured(this);
         }
 
         public MobTemplate NextMob()

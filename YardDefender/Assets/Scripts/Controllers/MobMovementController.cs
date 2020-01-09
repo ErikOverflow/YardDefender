@@ -16,8 +16,8 @@ namespace ErikOverflow.YardDefender
 
         private void Awake()
         {
-            EventManager.Instance.OnMobKilled += StopPathing;
-            EventManager.Instance.OnMobSpawned += StartPathing;
+            EventManager.instance.OnMobKilled += StopPathing;
+            EventManager.instance.OnMobSpawned += StartPathing;
         }
 
         private void StopPathing(MobInfo mob)

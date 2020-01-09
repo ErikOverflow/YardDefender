@@ -43,7 +43,7 @@ namespace ErikOverflow.YardDefender
             lastDamageSource = damageSource;
             if(currentHealth <= 0)
             {
-                EventManager.Instance.MobKilled(this);
+                EventManager.instance.MobKilled(this);
             }
         }
 

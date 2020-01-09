@@ -50,6 +50,9 @@ TagManager:
   - name: Enemy
     uniqueID: 3534394699
     locked: 0
+  - name: ScreenWipe
+    uniqueID: 1082386307
+    locked: 0
   - name: Player
     uniqueID: 830348751
     locked: 0

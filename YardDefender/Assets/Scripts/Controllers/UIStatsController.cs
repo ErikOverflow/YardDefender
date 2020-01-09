@@ -16,8 +16,8 @@ namespace ErikOverflow.YardDefender
         // Start is called before the first frame update
         void Awake()
         {
-            EventManager.Instance.OnPlayerInfoChanged += ReloadUI;
-            EventManager.Instance.OnPlayerEquipmentChanged += ReloadUI;
+            EventManager.instance.OnPlayerInfoChanged += ReloadUI;
+            EventManager.instance.OnPlayerEquipmentChanged += ReloadUI;
         }
 
         // Update is called once per frame

@@ -18,7 +18,7 @@ namespace ErikOverflow.YardDefender
 
         void Start()
         {
-            EventManager.Instance.OnMobKilled += RemoveTarget;
+            EventManager.instance.OnMobKilled += RemoveTarget;
         }
 
         private void RemoveTarget(MobInfo mob)

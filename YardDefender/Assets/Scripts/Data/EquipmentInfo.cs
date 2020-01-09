@@ -31,7 +31,7 @@ namespace ErikOverflow.YardDefender
                 DataService.instance.UpdateRow<EquipmentData>(equipmentData);
             }
             weaponData = inventoryInfo.GetWeaponData(equipmentData.EquippedWeapon);
-            EventManager.Instance.PlayerEquipmentChanged();
+            EventManager.instance.PlayerEquipmentChanged();
         }
 
         public void EquipItem(ItemData itemData)
@@ -42,7 +42,7 @@ namespace ErikOverflow.YardDefender
                 equipmentData.EquippedWeapon = weaponData.Id;
             }
             DataService.instance.UpdateRow<EquipmentData>(equipmentData);
-            EventManager.Instance.PlayerEquipmentChanged();
+            EventManager.instance.PlayerEquipmentChanged();
         }
 
         public void UnEquipItem(ItemData itemData)
@@ -53,7 +53,7 @@ namespace ErikOverflow.YardDefender
                 weaponData = null;
             }
             DataService.instance.UpdateRow<EquipmentData>(equipmentData);
-            EventManager.Instance.PlayerEquipmentChanged();
+            EventManager.instance.PlayerEquipmentChanged();
         }
     }
 }

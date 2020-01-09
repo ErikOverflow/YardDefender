@@ -21,15 +21,15 @@ namespace ErikOverflow.YardDefender
         private void Awake()
         {
             activeSpawners = new HashSet<SpawnerInfo>();
-            EventManager.Instance.OnSpawnerConfigured += AddActiveSpawner;
-            EventManager.Instance.OnSpawnerDefeated += RemoveActiveSpawner;
+            EventManager.instance.OnSpawnerConfigured += AddActiveSpawner;
+            EventManager.instance.OnSpawnerDefeated += RemoveActiveSpawner;
         }
 
         private void RemoveActiveSpawner(SpawnerInfo spawner)
         {
             activeSpawners.Remove(spawner);
             if (activeSpawners.Count == 0)
-                EventManager.Instance.LevelDefeated(this);
+                EventManager.instance.LevelDefeated(this);
         }
 
         private void AddActiveSpawner(SpawnerInfo spawner)
@@ -46,8 +46,7 @@ namespace ErikOverflow.YardDefender
         {
             level = newLevel;
             currentLevel = levelTemplates.FirstOrDefault(lt => lt.levelNum == level);
-            EventManager.Instance.LevelChanged();
-            EventManager.Instance.LevelStarted();
+            EventManager.instance.LevelChanged();
         }
     }
 }

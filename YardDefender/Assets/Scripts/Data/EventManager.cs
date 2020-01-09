@@ -12,9 +12,7 @@ namespace ErikOverflow.YardDefender
          * RULE: Data is NEVER copied from one system to another.
          * Any data that is dependent on data in other scripts will be calculated on the spot or passed by reference to the source.
          */
-        static EventManager instance;
-
-        public static EventManager Instance { get => instance; }
+        public static EventManager instance;
 
         private void Awake()
         {

@@ -26,7 +26,7 @@ namespace ErikOverflow.YardDefender
         {
             itemDatas = DataService.instance.ReadRowsByGameId<ItemData>(gameInfo.SaveData.Id).ToList();
             weaponDatas = DataService.instance.ReadRowsByGameId<WeaponData>(gameInfo.SaveData.Id).ToList();
-            EventManager.Instance.InventoryChanged();
+            EventManager.instance.InventoryChanged();
         }
 
         public WeaponData GetWeaponData(int id)
@@ -47,7 +47,7 @@ namespace ErikOverflow.YardDefender
                 itemDatas.Add(itemData);
                 DataService.instance.InsertRow<ItemData>(itemData);
             }
-            EventManager.Instance.InventoryChanged();
+            EventManager.instance.InventoryChanged();
         }
     }
 }
