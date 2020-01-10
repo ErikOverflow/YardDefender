@@ -17,7 +17,7 @@ namespace ErikOverflow.YardDefender
             instance = new Dictionary<int, ItemTemplate>();
             foreach (ItemTemplate itemTemplate in itemTable.itemTemplates)
             {
-                instance.Add(itemTemplate.GetInstanceID(), itemTemplate);
+                instance.Add(itemTemplate.itemId, itemTemplate);
             }
         }
     }

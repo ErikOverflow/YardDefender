@@ -8,6 +8,8 @@ namespace ErikOverflow.YardDefender
     {
         [SerializeField] SpriteRenderer portalOverlay = null;
         [SerializeField] LayerMask cullingMask;
+        [SerializeField] Material material;
+        [SerializeField] float animationTime;
 
         Camera screenShotCamera;
 
@@ -40,14 +42,19 @@ namespace ErikOverflow.YardDefender
             RenderTexture.active = null;
             Destroy(rt);
 
-            Sprite tempSprite = Sprite.Create(screenShot, new Rect(0, 0, pixelWidth, pixelHeight), new Vector2(0.5f,0.5f), pixelHeight / 2 / screenShotCamera.orthographicSize);
+            Sprite tempSprite = Sprite.Create(screenShot, new Rect(0, 0, pixelWidth, pixelHeight), new Vector2(0.5f,0.5f), (float)pixelHeight / (2 * screenShotCamera.orthographicSize));
             portalOverlay.sprite = tempSprite;
             screenShotCamera.cullingMask = origMask;
             //re enable 
             EventManager.instance.LevelStarted();
-
-            yield return new WaitForSeconds(2);
-            portalOverlay.sprite = null;
+            float time = 0;
+            while(time < animationTime)
+            {
+                time += Time.deltaTime;
+                material.SetFloat("_ProgressAmount", time / animationTime);
+                yield return null;
+            }
+            //portalOverlay.sprite = null;
         }
     }
 }
