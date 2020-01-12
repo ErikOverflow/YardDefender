@@ -1326,7 +1326,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3383
   material: {fileID: 2100000, guid: 2be4563aaacdc43e898851b3ead60fff, type: 2}
-  animationTime: 1
+  animationTime: 3
 --- !u!1 &387592197
 GameObject:
   m_ObjectHideFlags: 0
