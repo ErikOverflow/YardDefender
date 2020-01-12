@@ -42,13 +42,13 @@ namespace ErikOverflow.YardDefender
             RenderTexture.active = null;
             Destroy(rt);
 
-            Sprite tempSprite = Sprite.Create(screenShot, new Rect(0, 0, pixelWidth, pixelHeight), new Vector2(0.5f,0.5f), (float)pixelHeight / (2 * screenShotCamera.orthographicSize));
+            Sprite tempSprite = Sprite.Create(screenShot, new Rect(0, 0, pixelWidth, pixelHeight), new Vector2(0.5f, 0.5f), (float)pixelHeight / (2 * screenShotCamera.orthographicSize));
             portalOverlay.sprite = tempSprite;
             screenShotCamera.cullingMask = origMask;
             //re enable 
             EventManager.instance.LevelStarted();
             float time = 0;
-            while(time < animationTime)
+            while (time < animationTime)
             {
                 time += Time.deltaTime;
                 material.SetFloat("_ProgressAmount", time / animationTime);
