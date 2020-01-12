@@ -60,8 +60,8 @@ namespace ErikOverflow.YardDefender
                 spawnerInfo.activeSpawnedMobs.Add(mobInfo);
                 MobMovementInfo mobMovementInfo = go.GetComponent<MobMovementInfo>();
                 mobMovementInfo.SetTarget(levelInfo.BasePosition);
-                yield return wfs;
                 EventManager.instance.MobSpawned(mobInfo);
+                yield return wfs;
             }
         }
 

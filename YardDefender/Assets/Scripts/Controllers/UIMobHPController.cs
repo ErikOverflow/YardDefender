@@ -11,7 +11,6 @@ namespace ErikOverflow.YardDefender
         [SerializeField] Slider slider = null;
         MobInfo trackedMob = null;
         Camera mainCam;
-        // Start is called before the first frame update
         void Awake()
         {
             EventManager.instance.OnMobTookDamage += UpdateHealth;
@@ -30,7 +29,12 @@ namespace ErikOverflow.YardDefender
         public void SetTrackedMob(MobInfo mobInfo)
         {
             trackedMob = mobInfo;
+            if (mobInfo.CurrentHealth <= 0)
+                MobKilled(mobInfo);
             slider.value = (float)mobInfo.CurrentHealth / mobInfo.MaxHealth;
+            Vector3 pos = trackedMob.transform.position;
+            pos.y -= 0.5f;
+            transform.position = mainCam.WorldToScreenPoint(pos);
         }
 
         private void UpdateHealth(MobInfo mobInfo)
