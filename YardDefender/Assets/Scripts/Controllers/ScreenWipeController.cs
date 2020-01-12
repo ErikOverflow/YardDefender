@@ -7,9 +7,9 @@ namespace ErikOverflow.YardDefender
     public class ScreenWipeController : MonoBehaviour
     {
         [SerializeField] SpriteRenderer portalOverlay = null;
-        [SerializeField] LayerMask cullingMask;
-        [SerializeField] Material material;
-        [SerializeField] float animationTime;
+        [SerializeField] LayerMask cullingMask = new LayerMask();
+        [SerializeField] Material material = null;
+        [SerializeField] float animationTime = 1f;
 
         Camera screenShotCamera;
 
