@@ -21,6 +21,8 @@ namespace ErikOverflow.YardDefender
         public PlayerInfo LastDamageSource { get => lastDamageSource; }
         public int Experience { get => experience; }
         public int Gold { get => gold; }
+        public int CurrentHealth { get => currentHealth; }
+        public int MaxHealth { get => maxHealth; }
 
         public void Initialize(int _maxHealth, int _experience, int _gold, ItemData _itemDrop, Sprite sprite, AnimatorOverrideController aoc)
         {
