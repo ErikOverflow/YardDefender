@@ -17,12 +17,12 @@ namespace ErikOverflow.YardDefender
         ItemData itemDrop = null;
         PlayerInfo lastDamageSource = null;
 
-        public Action OnDeath;
-
         public ItemData ItemDrop { get => itemDrop; }
         public PlayerInfo LastDamageSource { get => lastDamageSource; }
         public int Experience { get => experience; }
         public int Gold { get => gold; }
+        public int CurrentHealth { get => currentHealth; }
+        public int MaxHealth { get => maxHealth; }
 
         public void Initialize(int _maxHealth, int _experience, int _gold, ItemData _itemDrop, Sprite sprite, AnimatorOverrideController aoc)
         {
@@ -43,9 +43,10 @@ namespace ErikOverflow.YardDefender
                 return;
             currentHealth -= damageAmount;
             lastDamageSource = damageSource;
+            EventManager.instance.MobTookDamage(this);
             if(currentHealth <= 0)
             {
-                OnDeath?.Invoke();
+                EventManager.instance.MobKilled(this);
             }
         }
 

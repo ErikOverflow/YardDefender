@@ -18,7 +18,7 @@ namespace ErikOverflow.YardDefender
                 Damage = Random.Range(flatDamageMin, flatDamageMax),
                 Multiplier = Random.Range(multiplierDamageMin, multiplierDamageMax),
                 Name = name,
-                Guid = GetInstanceID()
+                Guid = itemId
             };
             return weaponData;
         }

@@ -11,55 +11,42 @@ namespace ErikOverflow.YardDefender
         [SerializeField] Transform basePosition = null;
         [SerializeField] int level = 1;
         [SerializeField] List<LevelTemplate> levelTemplates = null;
-        Dictionary<int, LevelTemplate> templateDictionary = null;
-        int maxLevel = 0;
-        bool loading = false;
+        HashSet<SpawnerInfo> activeSpawners = null;
+        LevelTemplate currentLevel = null;
 
         public Transform BasePosition { get => basePosition; }
         public int Level { get => level; }
-        public LevelTemplate LevelTemplate
+        public LevelTemplate CurrentLevel { get => currentLevel; }
+
+        private void Awake()
         {
-            get
-            {
-                LevelTemplate levelTemplate;
-                templateDictionary.TryGetValue(level, out levelTemplate);
-                return levelTemplate;
-            }
+            activeSpawners = new HashSet<SpawnerInfo>();
+            EventManager.instance.OnSpawnerConfigured += AddActiveSpawner;
+            EventManager.instance.OnSpawnerDefeated += RemoveActiveSpawner;
         }
 
-        public bool Loading { get => loading; }
-
-        public Action OnInfoChange;
-        public Action OnLevelChange;
-
-        public void Awake()
+        private void RemoveActiveSpawner(SpawnerInfo spawner)
         {
-            templateDictionary = new Dictionary<int, LevelTemplate>();
-            foreach(LevelTemplate template in levelTemplates)
-            {
-                templateDictionary.Add(template.levelNum, template);
-            }
-            maxLevel = levelTemplates.Max(lt => lt.levelNum);
+            activeSpawners.Remove(spawner);
+            if (activeSpawners.Count == 0)
+                EventManager.instance.LevelDefeated(this);
         }
 
-        public void ChangeLevel(int changeAmount)
+        private void AddActiveSpawner(SpawnerInfo spawner)
         {
-            level += changeAmount;
-            if(level > maxLevel)
-            {
-                level = maxLevel;
-            }
-            loading = true;
-            OnLevelChange?.Invoke();
-            //wait for a few seconds,then enable
-            StartCoroutine(ActivateAfterAnimation());
+            activeSpawners.Add(spawner);
         }
 
-        IEnumerator ActivateAfterAnimation()
+        private void Start()
         {
-            yield return new WaitForSeconds(3);
-            loading = false;
-            OnInfoChange?.Invoke();
+            ChangeLevel(1);
+        }
+
+        public void ChangeLevel(int newLevel)
+        {
+            level = newLevel;
+            currentLevel = levelTemplates.FirstOrDefault(lt => lt.levelNum == level);
+            EventManager.instance.LevelChanged();
         }
     }
 }

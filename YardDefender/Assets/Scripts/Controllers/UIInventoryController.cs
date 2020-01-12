@@ -12,18 +12,20 @@ namespace ErikOverflow.YardDefender
         [SerializeField] EquipmentInfo equipmentInfo = null;
         [SerializeField] GameObject inventorySlotPrefab = null;
         [SerializeField] Transform inventoryContent = null;
-
         [SerializeField] Image equippedWeaponImage = null;
         [SerializeField] TextMeshProUGUI rerollCost = null;
         [SerializeField] TextMeshProUGUI flatDamageText = null;
         [SerializeField] TextMeshProUGUI multiplierText = null;
 
-
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-            inventoryInfo.OnInfoChange += ReloadInventory;
-            equipmentInfo.OnInfoChange += ReloadEquipment;
+            EventManager.instance.OnPlayerEquipmentChanged += ReloadEquipment;
+            EventManager.instance.OnInventoryChanged += ReloadInventory;
+        }
+
+        private void Start()
+        {
             ReloadInventory();
             ReloadEquipment();
         }
@@ -49,7 +51,10 @@ namespace ErikOverflow.YardDefender
             WeaponData weaponData = equipmentInfo.WeaponData;
             if(weaponData == null)
             {
-                //Zero out fields
+                equippedWeaponImage.sprite = default;
+                rerollCost.text = "---";
+                flatDamageText.text = "---";
+                multiplierText.text = "---";
             }
             else
             {
@@ -62,7 +67,7 @@ namespace ErikOverflow.YardDefender
                 }
                 else
                 {
-                    //no reroll cost
+                    rerollCost.text = "---";
                 }
                 flatDamageText.text = weaponData.Damage.ToString();
                 multiplierText.text = weaponData.Multiplier.ToString("G4");

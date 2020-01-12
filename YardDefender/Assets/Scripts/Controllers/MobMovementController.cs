@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,26 +8,37 @@ namespace ErikOverflow.YardDefender
     public class MobMovementController : MonoBehaviour
     {
         [SerializeField] MobMovementInfo mobMovementInfo = null;
+        [SerializeField] MobInfo mobInfo = null;
         [SerializeField] Rigidbody2D rb2d = null;
 
-        Coroutine activePathingCoroutine = null;
+        Coroutine activePathing = null;
         WaitForFixedUpdate wffu = new WaitForFixedUpdate();
 
-        private void Start()
+        private void Awake()
         {
-            mobMovementInfo.OnInfoChange += StartPathing;
-            StartPathing();
+            EventManager.instance.OnMobKilled += StopPathing;
+            EventManager.instance.OnMobSpawned += StartPathing;
         }
 
-        void StartPathing()
+        private void StopPathing(MobInfo mob)
         {
-            if(activePathingCoroutine != null)
-                StopCoroutine(activePathingCoroutine);
+            if (mobInfo != mob)
+                return;
+            if (activePathing != null)
+                StopCoroutine(activePathing);
+        }
+
+        void StartPathing(MobInfo mob)
+        {
+            if (mobInfo != mob)
+                return;
             if (mobMovementInfo.Target == null)
             {
                 return;
             }
-            activePathingCoroutine = StartCoroutine(PathTowards(mobMovementInfo.Target));
+            if (activePathing != null)
+                StopCoroutine(activePathing);
+            activePathing = StartCoroutine(PathTowards(mobMovementInfo.Target));
         }
 
         IEnumerator PathTowards(Transform target)

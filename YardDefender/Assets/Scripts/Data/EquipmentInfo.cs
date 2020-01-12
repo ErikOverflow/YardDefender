@@ -12,15 +12,11 @@ namespace ErikOverflow.YardDefender
         [SerializeField] InventoryInfo inventoryInfo = null;
         [SerializeField] WeaponData weaponData = null;
 
-        public Action OnInfoChange;
-
         public EquipmentData EquipmentData { get => equipmentData; }
         public WeaponData WeaponData { get => weaponData; }
 
         private void Start()
         {
-            gameInfo.OnInfoChange += LoadWeapon;
-            inventoryInfo.OnInfoLoaded += LoadWeapon;
             LoadWeapon();
         }
 
@@ -35,7 +31,7 @@ namespace ErikOverflow.YardDefender
                 DataService.instance.UpdateRow<EquipmentData>(equipmentData);
             }
             weaponData = inventoryInfo.GetWeaponData(equipmentData.EquippedWeapon);
-            OnInfoChange?.Invoke();
+            EventManager.instance.PlayerEquipmentChanged();
         }
 
         public void EquipItem(ItemData itemData)
@@ -46,7 +42,7 @@ namespace ErikOverflow.YardDefender
                 equipmentData.EquippedWeapon = weaponData.Id;
             }
             DataService.instance.UpdateRow<EquipmentData>(equipmentData);
-            OnInfoChange?.Invoke();
+            EventManager.instance.PlayerEquipmentChanged();
         }
 
         public void UnEquipItem(ItemData itemData)
@@ -57,7 +53,7 @@ namespace ErikOverflow.YardDefender
                 weaponData = null;
             }
             DataService.instance.UpdateRow<EquipmentData>(equipmentData);
-            OnInfoChange?.Invoke();
+            EventManager.instance.PlayerEquipmentChanged();
         }
     }
 }

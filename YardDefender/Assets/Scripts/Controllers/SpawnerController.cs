@@ -6,11 +6,11 @@ namespace ErikOverflow.YardDefender
 {
     public class SpawnerController : MonoBehaviour
     {
-        [SerializeField] GameObject mobPrefab = null;
         [SerializeField] SpawnerInfo spawnerInfo = null;
         [SerializeField] LevelInfo levelInfo = null;
-        [SerializeField] float spawnDelay = 0.5f;
 
+        [SerializeField] GameObject mobPrefab = null;
+        [SerializeField] float spawnDelay = 0.5f;
         WaitForSeconds wfs = null;
         //Listen to LevelInfo to scale mobs
 
@@ -19,24 +19,26 @@ namespace ErikOverflow.YardDefender
         private void Awake()
         {
             wfs = new WaitForSeconds(spawnDelay);
+            EventManager.instance.OnLevelChanged += StopSpawning;
+            EventManager.instance.OnLevelStarted += StartSpawning;
         }
 
-        private void Start()
+        void StopSpawning()
         {
-            spawnerInfo.OnInfoChange += StartSpawning;
-            StartSpawning();
+            if(spawningCoroutine != null)
+            {
+                StopCoroutine(spawningCoroutine);
+            }
         }
 
         void StartSpawning()
         {
-            if (spawningCoroutine != null)
-                StopCoroutine(spawningCoroutine);
             spawningCoroutine = StartCoroutine(Spawning());
         }
 
         IEnumerator Spawning()
         {
-            while (spawnerInfo.Active)
+            while (spawnerInfo.MobsRemaining > 0)
             {
                 MobTemplate nextMob = spawnerInfo.NextMob();
                 GameObject go = ObjectPooler.instance.GetPooledObject(mobPrefab);
@@ -51,12 +53,14 @@ namespace ErikOverflow.YardDefender
                     mobHealth * levelInfo.Level, //Mob health
                     mobExperience * levelInfo.Level, //Mob experience dropped
                     mobGold * levelInfo.Level, //Mob gold dropped
-                    itemDrop,
+                    itemDrop, //Item the mob is holding (if exists), null if none
                     nextMob.sprite,
                     nextMob.overrideController)
                     ;
+                spawnerInfo.activeSpawnedMobs.Add(mobInfo);
                 MobMovementInfo mobMovementInfo = go.GetComponent<MobMovementInfo>();
                 mobMovementInfo.SetTarget(levelInfo.BasePosition);
+                EventManager.instance.MobSpawned(mobInfo);
                 yield return wfs;
             }
         }
@@ -82,7 +86,7 @@ namespace ErikOverflow.YardDefender
                     ItemData itemData = new ItemData
                     {
                         Name = itemTemplate.name,
-                        Guid = itemTemplate.GetInstanceID()
+                        Guid = itemTemplate.itemId
                     };
                 }
             }

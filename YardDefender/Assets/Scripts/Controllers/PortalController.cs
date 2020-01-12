@@ -8,35 +8,36 @@ namespace ErikOverflow.YardDefender
 {
     public class PortalController : MonoBehaviour
     {
-        [SerializeField] PortalInfo portalInfo = null;
         [SerializeField] LevelInfo levelInfo = null;
+        [SerializeField] PortalInfo portalInfo = null;
         [SerializeField] Button button = null;
         [SerializeField] Image image = null;
 
-        [SerializeField] Sprite activeImage = null;
-        [SerializeField] Sprite inactiveImage = null;
+        [SerializeField] Sprite activeButtonImage = null;
+        [SerializeField] Sprite inactiveButtonImage = null;
 
-        Camera mainCam = null;
-
-        private void Start()
+        
+        private void Awake()
         {
-            portalInfo.OnInfoChange += UpdatePortal;
-            mainCam = Camera.main;
-            UpdatePortal();
+            EventManager.instance.OnLevelStarted += InitializePortal;
+            EventManager.instance.OnLevelDefeated += OpenPortal;
         }
 
-        private void UpdatePortal()
+        private void InitializePortal()
         {
-            button.enabled = portalInfo.Active;
-            if (portalInfo.Active)
-                image.sprite = activeImage;
-            else
-                image.sprite = inactiveImage;
+            button.enabled = false;
+            image.sprite = inactiveButtonImage;
+        }
+
+        private void OpenPortal(LevelInfo _levelInfo)
+        {
+            button.enabled = true;
+            image.sprite = activeButtonImage;
         }
 
         public void LevelUp()
         {
-            levelInfo.ChangeLevel(portalInfo.LevelChange);
+            levelInfo.ChangeLevel(portalInfo.NextLevel);
         }
     }
 }

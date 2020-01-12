@@ -12,28 +12,27 @@ namespace ErikOverflow.YardDefender
         [SerializeField] List<Spot> path = null;
         [SerializeField] MobInfo mobInfo = null;
 
-        public Action OnInfoChange;
-
         public Transform Target { get => target; }
         public float MoveSpeed { get => moveSpeed; }
         public List<Spot> Path { get => path; set => path = value; }
 
         void Start()
         {
-            mobInfo.OnDeath += RemoveTarget;
-            OnInfoChange?.Invoke();
+            EventManager.instance.OnMobKilled += RemoveTarget;
         }
 
-        void RemoveTarget()
+        private void RemoveTarget(MobInfo mob)
         {
-            target = null;
-            OnInfoChange?.Invoke();
+            if(mob == mobInfo)
+            {
+                target = null;
+                path = null;
+            }
         }
 
         public void SetTarget(Transform newTarget)
         {
             target = newTarget;
-            OnInfoChange?.Invoke();
         }
     }
 }

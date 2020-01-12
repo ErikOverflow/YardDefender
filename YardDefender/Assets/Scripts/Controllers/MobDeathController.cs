@@ -10,30 +10,19 @@ namespace ErikOverflow.YardDefender
         [SerializeField] MobInfo mobInfo = null;
         [SerializeField] Animator animator = null;
         [SerializeField] AudioSource deathAudioSource = null;
-        [SerializeField] GameObject itemDropPrefab = null;
 
-        // Start is called before the fir st frame update
-        void Start()
+        void Awake()
         {
-            mobInfo.OnDeath += HandleDeath;
+            EventManager.instance.OnMobKilled += HandleDeath;
         }
 
-        void HandleDeath()
+        void HandleDeath(MobInfo mob)
         {
+            if (mobInfo != mob)
+                return;
             deathAudioSource.Play();
             animator.SetBool("Alive", false);
             StartCoroutine(DisableAfterAnimation());
-            mobInfo.LastDamageSource?.ChangeExperience(mobInfo.Experience);
-            mobInfo.LastDamageSource?.ChangeGold(mobInfo.Gold);
-            PortalInfo.instance.MobKilled();
-
-            if (mobInfo.ItemDrop != null)
-            {
-                GameObject go = ObjectPooler.instance.GetPooledObject(itemDropPrefab);
-                go.transform.position = transform.position;
-                ItemInfo itemInfo = go.GetComponent<ItemInfo>();
-                itemInfo.SetItem(mobInfo.ItemDrop);
-            }
         }
 
         IEnumerator DisableAfterAnimation()

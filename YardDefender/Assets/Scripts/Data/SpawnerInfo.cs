@@ -10,45 +10,58 @@ namespace ErikOverflow.YardDefender
     public class SpawnerInfo : MonoBehaviour
     {
         [SerializeField] LevelInfo levelInfo = null;
-        [SerializeField] int mobsRemaining = 0;
-        bool active = false;
+        public HashSet<MobInfo> activeSpawnedMobs = null;
+        Queue<MobTemplate> mobs;
+        MobTemplate bossMob = null;
         int totalWeight = 0;
 
-        public int MobsRemaining { get => mobsRemaining; }
-        public bool Active { get => active; }
+        public MobTemplate BossMob { get => bossMob; }
+        public int MobsRemaining { get => mobs.Count; }
 
-        public Action OnInfoChange;
-
-        private void Start()
+        private void Awake()
         {
-            
-            active = true;
-            levelInfo.OnLevelChange += ConfigureSpawner;
-            levelInfo.OnInfoChange += ConfigureSpawner;
-            ConfigureSpawner();
+            EventManager.instance.OnLevelChanged += ConfigureSpawner;
+            EventManager.instance.OnMobKilled += RemoveMobFromTracking;
+        }
+
+        private void RemoveMobFromTracking(MobInfo mob)
+        {
+            activeSpawnedMobs.Remove(mob);
+            //There are no living spawned mobs, and no mobs left to spawn
+            if(activeSpawnedMobs.Count + mobs.Count == 0)
+            {
+                EventManager.instance.SpawnerDefeated(this);
+            }
         }
 
         private void ConfigureSpawner()
         {
-            active = !levelInfo.Loading;
-            mobsRemaining = levelInfo.LevelTemplate.totalSpawns;
-            totalWeight = levelInfo.LevelTemplate.TotalWeight;
-            OnInfoChange?.Invoke();
+            mobs = new Queue<MobTemplate>();
+            totalWeight = levelInfo.CurrentLevel.TotalWeight;
+            //Go through and generate all of the current level's mob data ahead of time
+            for(int i = 0; i < levelInfo.CurrentLevel.totalSpawns; i++)
+            {
+                int selection = Random.Range(0, totalWeight);
+                foreach(WeightedMobRecord mr in levelInfo.CurrentLevel.mobs)
+                {
+                    selection -= mr.weight;
+                    if(selection < 0)
+                    {
+                        mobs.Enqueue(mr.template);
+                        break;
+                    }
+                }
+            }
+            //If there's a boss, it's the last mob
+            if(bossMob != null)
+                mobs.Enqueue(bossMob);
+            activeSpawnedMobs = new HashSet<MobInfo>();
+            EventManager.instance.SpawnerConfigured(this);
         }
 
         public MobTemplate NextMob()
         {
-            mobsRemaining--;
-            int mobSelection = Random.Range(0, totalWeight);
-            foreach (WeightedMobRecord mr in levelInfo.LevelTemplate.mobs)
-            {
-                mobSelection -= mr.weight;
-                if (mobSelection < 0)
-                {
-                    return mr.template;
-                }
-            }
-            return null;
+            return mobs.Dequeue();
         }
     }
 }

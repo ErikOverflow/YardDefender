@@ -11,16 +11,13 @@ namespace ErikOverflow.YardDefender
         [SerializeField] TextMeshProUGUI expAmountText = null;
         [SerializeField] TextMeshProUGUI levelAmountText = null;
         [SerializeField] TextMeshProUGUI attackAmountText = null;
-
         [SerializeField] PlayerInfo playerInfo = null;
-        [SerializeField] EquipmentInfo equipmentInfo = null;
+
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-            playerInfo.OnInfoChange += ReloadUI;
-            equipmentInfo.OnInfoChange += ReloadUI;
-            if(playerInfo.PlayerData != null)
-                ReloadUI();
+            EventManager.instance.OnPlayerInfoChanged += ReloadUI;
+            EventManager.instance.OnPlayerEquipmentChanged += ReloadUI;
         }
 
         // Update is called once per frame
