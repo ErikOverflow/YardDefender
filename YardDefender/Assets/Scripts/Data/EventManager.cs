@@ -113,5 +113,12 @@ namespace ErikOverflow.YardDefender
         {
             OnSpawnerDefeated?.Invoke(spawnerInfo);
         }
+
+        public event Action<MobInfo> OnMobTookDamage;
+
+        public void MobTookDamage(MobInfo mobInfo)
+        {
+            OnMobTookDamage?.Invoke(mobInfo);
+        }
     }
 }
