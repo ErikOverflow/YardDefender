@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1854163769731255099}
   - component: {fileID: 9088112239749414244}
   - component: {fileID: 339977744}
+  - component: {fileID: 174180173}
   m_Layer: 0
   m_Name: SingletonManager
   m_TagString: Untagged
@@ -88,3 +89,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemTable: {fileID: 11400000, guid: 199ad3bc0d44442499b9da36fefe5d88, type: 2}
+--- !u!114 &174180173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6161878407149375707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74b5d8972f071450aa99d926054e0861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

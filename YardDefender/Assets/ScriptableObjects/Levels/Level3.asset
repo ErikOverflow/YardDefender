@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNum: 3
   mobs:
-  - template: {fileID: 11400000, guid: f324f8e4cd6194d42a6cecbe13b36429, type: 2}
+  - template: {fileID: 11400000, guid: 8962988c8bb7e403faef7afddf2d389a, type: 2}
     weight: 1
   finalBoss: {fileID: 0}
-  totalSpawns: 15
+  totalSpawns: 10

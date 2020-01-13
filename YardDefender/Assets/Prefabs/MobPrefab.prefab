@@ -290,6 +290,7 @@ MonoBehaviour:
   mobMovementInfo: {fileID: 973166405}
   mobInfo: {fileID: 1752287315}
   rb2d: {fileID: 973166406}
+  animator: {fileID: 964647625792862807}
 --- !u!114 &-1554414564564471567
 MonoBehaviour:
   m_ObjectHideFlags: 0

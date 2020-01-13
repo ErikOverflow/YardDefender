@@ -264,24 +264,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &174180172 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6161878407149375707, guid: 938273b3cad574e28a8b24857bc35839,
-    type: 3}
-  m_PrefabInstance: {fileID: 6161878406672548429}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &174180173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174180172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74b5d8972f071450aa99d926054e0861, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &185931547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,16 +2622,43 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
+  - first: {x: 4, y: 0, z: 0}
+    second:
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 4, y: 1, z: 0}
+    second:
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 4, y: 2, z: 0}
+    second:
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 30
+  - m_RefCount: 33
     m_Data: {fileID: 11400000, guid: 1db3c68a30c82466face0ff90530e328, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 30
+  - m_RefCount: 33
     m_Data: {fileID: -4240833973965978495, guid: d9cfbd4b3fdf9c9478ee62430ba5b4c8,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 30
+  - m_RefCount: 33
     m_Data:
       e00: 1
       e01: 0
@@ -2668,7 +2677,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 30
+  - m_RefCount: 33
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2879,6 +2888,7 @@ MonoBehaviour:
   levelTemplates:
   - {fileID: 11400000, guid: 754ef8628b1554c4eba0019ec38c4a63, type: 2}
   - {fileID: 11400000, guid: 19cc17f22c84e4005a4351035418dbd6, type: 2}
+  - {fileID: 11400000, guid: ab31bc7dddd69441cbf956f01826d5b8, type: 2}
 --- !u!1 &700883836
 GameObject:
   m_ObjectHideFlags: 0
@@ -3511,7 +3521,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 930891217}
   m_HandleRect: {fileID: 930891216}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -22910,7 +22920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877472437}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.5, y: -0.5, z: 0}
+  m_LocalPosition: {x: 4.5, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 598825968}
