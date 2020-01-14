@@ -14,7 +14,7 @@ namespace ErikOverflow.YardDefender
 
         public List<ItemData> ItemDatas { get => itemDatas; }
         public List<WeaponData> WeaponDatas { get => weaponDatas; }
-        public List<ItemData> AllItemDatas { get => new List<ItemData>().Concat(itemDatas).Concat(weaponDatas).ToList(); }
+        public List<ItemData> AllItemDatas { get => itemDatas; }
 
         // Start is called before the first frame update
         void Start()
@@ -36,16 +36,17 @@ namespace ErikOverflow.YardDefender
 
         public void AddItem(ItemData itemData)
         {
+            //Insert any type of item into ItemData, assigning a primary key
             itemData.SaveId = gameInfo.SaveData.Id;
+            DataService.instance.InsertRow<ItemData>(itemData); //This should automatically assign an Id on insert.
+            itemDatas.Add(itemData);
             if (itemData is WeaponData weaponData)
             {
+                WeaponData wd = DataService.instance.CreateRow<WeaponData>();
+                weaponData.Id = wd.Id;
+                weaponData.ItemId = itemData.Id;
+                DataService.instance.UpdateRow<WeaponData>(weaponData);
                 weaponDatas.Add(weaponData);
-                DataService.instance.InsertRow<WeaponData>(weaponData);
-            }
-            else
-            {
-                itemDatas.Add(itemData);
-                DataService.instance.InsertRow<ItemData>(itemData);
             }
             EventManager.instance.InventoryChanged();
         }
