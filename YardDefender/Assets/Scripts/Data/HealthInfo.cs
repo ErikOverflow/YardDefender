@@ -15,8 +15,8 @@ namespace ErikOverflow.YardDefender
 
         public void Start()
         {
-            EventManager.instance.OnPlayerLevelChanged += LoadHealthData;
-            EventManager.instance.OnLevelStarted += ResetHealthData;
+            EventManager.Instance.OnPlayerLevelChanged += LoadHealthData;
+            EventManager.Instance.OnLevelStarted += ResetHealthData;
         }
 
         void LoadHealthData()

@@ -11,7 +11,7 @@ namespace ErikOverflow.YardDefender
 
         void Awake()
         {
-            EventManager.instance.OnMobSpawned += MobSpawned;
+            EventManager.Instance.OnMobSpawned += MobSpawned;
         }
 
         private void MobSpawned(MobInfo mobInfo)
@@ -24,7 +24,7 @@ namespace ErikOverflow.YardDefender
 
         private void OnDestroy()
         {
-            EventManager.instance.OnMobSpawned -= MobSpawned;
+            EventManager.Instance.OnMobSpawned -= MobSpawned;
         }
     }
 }

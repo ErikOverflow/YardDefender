@@ -13,8 +13,8 @@ namespace ErikOverflow.YardDefender
         Camera mainCam;
         void Awake()
         {
-            EventManager.instance.OnMobTookDamage += UpdateHealth;
-            EventManager.instance.OnMobKilled += MobKilled;
+            EventManager.Instance.OnMobTookDamage += UpdateHealth;
+            EventManager.Instance.OnMobKilled += MobKilled;
             mainCam = Camera.main;
         }
 

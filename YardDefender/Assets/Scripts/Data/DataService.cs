@@ -48,7 +48,7 @@ namespace ErikOverflow.YardDefender
 
         public void InsertRow<T>(T newData) where T:Data, new()
         {
-            _connection.Insert(newData);
+            _connection.Insert(newData, typeof(T));
         }
 
         public T ReadRowById<T>(int id) where T : Data, new()
@@ -73,7 +73,7 @@ namespace ErikOverflow.YardDefender
 
         public void UpdateRow<T>(T dataToUpdate)
         {
-            _connection.Update(dataToUpdate);
+            _connection.Update(dataToUpdate, typeof(T));
         }
 
         public void DeleteRow<T>(T dataToDelete)

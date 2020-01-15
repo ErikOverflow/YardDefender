@@ -16,7 +16,7 @@ namespace ErikOverflow.YardDefender
         private void Awake()
         {
             screenShotCamera = Camera.main;
-            EventManager.instance.OnLevelChanged += FreezeFrame;
+            EventManager.Instance.OnLevelChanged += FreezeFrame;
         }
 
         public void FreezeFrame()
@@ -46,7 +46,7 @@ namespace ErikOverflow.YardDefender
             portalOverlay.sprite = tempSprite;
             screenShotCamera.cullingMask = origMask;
             //re enable 
-            EventManager.instance.LevelStarted();
+            EventManager.Instance.LevelStarted();
             float time = 0;
             while (time < animationTime)
             {

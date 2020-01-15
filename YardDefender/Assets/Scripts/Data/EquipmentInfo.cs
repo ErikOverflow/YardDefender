@@ -8,12 +8,17 @@ namespace ErikOverflow.YardDefender
     public class EquipmentInfo : MonoBehaviour
     {
         [SerializeField] GameInfo gameInfo = null;
-        [SerializeField] EquipmentData equipmentData = null;
         [SerializeField] InventoryInfo inventoryInfo = null;
-        [SerializeField] WeaponData weaponData = null;
+        EquipmentData equipmentData = null;
+        WeaponData weaponData = null;
 
         public EquipmentData EquipmentData { get => equipmentData; }
         public WeaponData WeaponData { get => weaponData; }
+
+        private void Awake()
+        {
+            EventManager.Instance.OnItemEquipped += EquipItem;
+        }
 
         private void Start()
         {
@@ -31,29 +36,26 @@ namespace ErikOverflow.YardDefender
                 DataService.instance.UpdateRow<EquipmentData>(equipmentData);
             }
             weaponData = inventoryInfo.GetWeaponData(equipmentData.EquippedWeapon);
-            EventManager.instance.PlayerEquipmentChanged();
+            EventManager.Instance.PlayerEquipmentChanged();
         }
 
-        public void EquipItem(ItemData itemData)
+        public void EquipItem(IEquippable equippableItem)
         {
-            if(itemData is WeaponData _weaponData)
+            if (equippableItem is WeaponData _weaponData)
             {
                 weaponData = _weaponData;
                 equipmentData.EquippedWeapon = weaponData.Id;
+                DataService.instance.UpdateRow<EquipmentData>(equipmentData);
+                EventManager.Instance.PlayerEquipmentChanged();
             }
-            DataService.instance.UpdateRow<EquipmentData>(equipmentData);
-            EventManager.instance.PlayerEquipmentChanged();
         }
 
-        public void UnEquipItem(ItemData itemData)
+        public void UnEquipWeapon()
         {
-            if(itemData is WeaponData _weaponData)
-            {
-                equipmentData.EquippedWeapon = -1;
-                weaponData = null;
-            }
+            equipmentData.EquippedWeapon = -1;
+            weaponData = null;
             DataService.instance.UpdateRow<EquipmentData>(equipmentData);
-            EventManager.instance.PlayerEquipmentChanged();
+            EventManager.Instance.PlayerEquipmentChanged();
         }
     }
 }

@@ -19,8 +19,8 @@ namespace ErikOverflow.YardDefender
         private void Awake()
         {
             wfs = new WaitForSeconds(spawnDelay);
-            EventManager.instance.OnLevelChanged += StopSpawning;
-            EventManager.instance.OnLevelStarted += StartSpawning;
+            EventManager.Instance.OnLevelChanged += StopSpawning;
+            EventManager.Instance.OnLevelStarted += StartSpawning;
         }
 
         void StopSpawning()
@@ -60,7 +60,7 @@ namespace ErikOverflow.YardDefender
                 spawnerInfo.activeSpawnedMobs.Add(mobInfo);
                 MobMovementInfo mobMovementInfo = go.GetComponent<MobMovementInfo>();
                 mobMovementInfo.SetTarget(levelInfo.BasePosition);
-                EventManager.instance.MobSpawned(mobInfo);
+                EventManager.Instance.MobSpawned(mobInfo);
                 yield return wfs;
             }
         }

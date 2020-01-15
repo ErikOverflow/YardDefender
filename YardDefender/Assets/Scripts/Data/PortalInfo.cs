@@ -14,7 +14,7 @@ namespace ErikOverflow.YardDefender
 
         void Awake()
         {
-            EventManager.instance.OnLevelStarted += SetPortalDestination;
+            EventManager.Instance.OnLevelStarted += SetPortalDestination;
         }
 
         void SetPortalDestination()

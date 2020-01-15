@@ -26,7 +26,12 @@ namespace ErikOverflow.YardDefender
 
         public void UseItem()
         {
-            uIItemSlotInfo.EquipmentInfo.EquipItem(uIItemSlotInfo.ItemData);
+            EventManager.Instance.UseItem(uIItemSlotInfo.ItemData);
+        }
+
+        private void OnDestroy()
+        {
+            uIItemSlotInfo.OnInfoChanged -= UpdateSlot;
         }
     }
 }

@@ -20,8 +20,8 @@ namespace ErikOverflow.YardDefender
         // Start is called before the first frame update
         void Awake()
         {
-            EventManager.instance.OnPlayerEquipmentChanged += ReloadEquipment;
-            EventManager.instance.OnInventoryChanged += ReloadInventory;
+            EventManager.Instance.OnPlayerEquipmentChanged += ReloadEquipment;
+            EventManager.Instance.OnInventoryChanged += ReloadInventory;
         }
 
         private void Start()
@@ -36,7 +36,7 @@ namespace ErikOverflow.YardDefender
             {
                 child.gameObject.SetActive(false);
             }
-            foreach(ItemData itemData in inventoryInfo.AllItemDatas)
+            foreach(ItemData itemData in inventoryInfo.ItemDatas)
             {
                 GameObject go = ObjectPooler.instance.GetPooledObject(inventorySlotPrefab);
                 go.transform.SetParent(inventoryContent);
@@ -72,6 +72,11 @@ namespace ErikOverflow.YardDefender
                 flatDamageText.text = weaponData.Damage.ToString();
                 multiplierText.text = weaponData.Multiplier.ToString("G4");
             }
+        }
+
+        public void UnEquipWeapon()
+        {
+            equipmentInfo.UnEquipWeapon();
         }
     }
 }

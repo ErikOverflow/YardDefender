@@ -68,8 +68,9 @@ namespace ErikOverflow.YardDefender
         public int Guid { get => guid; set => guid = value; }
     }
 
+
     [Serializable]
-    public class WeaponData : ItemData
+    public class WeaponData : ItemData, IEquippable
     {
         [SerializeField] int itemId;
         [SerializeField] int damage;
@@ -90,4 +91,6 @@ namespace ErikOverflow.YardDefender
         public int MaxHealth { get => maxHealth; set => maxHealth = value; }
         public int CurrentHealth { get => currentHealth; set => currentHealth = value; }
     }
+
+    public interface IEquippable { }
 }

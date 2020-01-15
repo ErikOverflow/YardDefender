@@ -13,7 +13,7 @@ namespace ErikOverflow.YardDefender
 
         void Awake()
         {
-            EventManager.instance.OnMobKilled += HandleDeath;
+            EventManager.Instance.OnMobKilled += HandleDeath;
         }
 
         void HandleDeath(MobInfo mob)

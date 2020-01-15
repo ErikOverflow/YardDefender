@@ -12,11 +12,11 @@ namespace ErikOverflow.YardDefender
          * RULE: Data is NEVER copied from one system to another.
          * Any data that is dependent on data in other scripts will be calculated on the spot or passed by reference to the source.
          */
-        public static EventManager instance;
+        public static EventManager Instance;
 
         private void Awake()
         {
-            instance = this;
+            Instance = this;
         }
 
         public event Action OnLevelChanged;
@@ -119,6 +119,20 @@ namespace ErikOverflow.YardDefender
         public void MobTookDamage(MobInfo mobInfo)
         {
             OnMobTookDamage?.Invoke(mobInfo);
+        }
+
+        public event Action<ItemData> OnItemUsed;
+
+        public void UseItem(ItemData itemData)
+        {
+            OnItemUsed?.Invoke(itemData);
+        }
+
+        public event Action<IEquippable> OnItemEquipped;
+
+        public void EquipItem(IEquippable equippableItem)
+        {
+            OnItemEquipped?.Invoke(equippableItem);
         }
     }
 }

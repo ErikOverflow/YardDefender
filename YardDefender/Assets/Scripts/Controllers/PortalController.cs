@@ -19,8 +19,8 @@ namespace ErikOverflow.YardDefender
         
         private void Awake()
         {
-            EventManager.instance.OnLevelStarted += InitializePortal;
-            EventManager.instance.OnLevelDefeated += OpenPortal;
+            EventManager.Instance.OnLevelStarted += InitializePortal;
+            EventManager.Instance.OnLevelDefeated += OpenPortal;
         }
 
         private void InitializePortal()

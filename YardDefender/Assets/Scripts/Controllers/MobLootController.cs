@@ -11,7 +11,7 @@ namespace ErikOverflow.YardDefender
 
         private void Awake()
         {
-            EventManager.instance.OnMobKilled += DropItem;
+            EventManager.Instance.OnMobKilled += DropItem;
         }
 
         void DropItem(MobInfo mob)
